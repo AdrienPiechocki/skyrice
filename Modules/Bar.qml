@@ -34,6 +34,8 @@ Variants {
             Item{ Layout.fillWidth: true }
             Tray{ Layout.maximumWidth: items?.values.length * 30 || 30; screenX:modelData.x }
             Item{}
+            System{}
+            Item{}
             Clock{}
             Item{}
         }
