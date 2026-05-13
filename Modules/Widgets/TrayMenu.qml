@@ -43,7 +43,6 @@ LazyLoader {
                 color: "transparent"
                 ColumnLayout {
                     anchors.fill: parent
-                    anchors.centerIn: parent
                     spacing: 0
                     Repeater {
                         id: repeater
@@ -53,15 +52,17 @@ LazyLoader {
                             id: entry
                             required property var modelData
                             Layout.preferredWidth: parent.width
-                            Layout.preferredHeight: {
-                                if (modelData?.isSeparator) {
-                                return 2;
-                                } else {
-                                return 28
-                                }
-                            }
+                            Layout.preferredHeight: modelData?.isSeparator ? 18 : 24
                             color: "transparent"
-                            gradient: modelData?.isSeparator ? gradient : Gradient.Transparent
+                            Rectangle {
+                                id: separator
+                                anchors.centerIn: parent
+                                width: parent.width
+                                height: 2
+                                color: "transparent"
+                                gradient: gradient
+                                visible: modelData?.isSeparator
+                            }
                             FontLoader {
                                 id: futuraFont
                                 source: "../../Assets/Fonts/Futura Condensed Medium.ttf"
@@ -75,7 +76,7 @@ LazyLoader {
                                 font.family: futuraFont.name
                             }
                             Component.onCompleted: {
-                                window.implicitHeight = repeater.model.length * 32
+                                window.implicitHeight = repeater.model.filter(x => !x.isSeparator).length * 24 + repeater.model.filter(x => x.isSeparator).length * 18 + 60
                                 if(text.contentWidth > window.implicitWidth) {
                                     window.implicitWidth =  Math.max(150, text.contentWidth*2)
                                 }
@@ -90,8 +91,10 @@ LazyLoader {
                             MouseArea {
                                 anchors.fill: parent
                                 onClicked: {
-                                    modelData.triggered();
-                                    root.active = false;
+                                    if(!modelData?.isSeparator){
+                                        modelData.triggered();
+                                        root.active = false;
+                                    }
                                 }
                                 hoverEnabled: true
                                 onEntered: { if(!modelData?.isSeparator){entry.gradient = gradient} }
