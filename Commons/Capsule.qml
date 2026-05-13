@@ -10,6 +10,7 @@ Rectangle {
     color: "transparent"
     TapHandler { id: tapHandler }
     HoverHandler { id: hoverHandler }
+    containmentMask: shape
     property bool active: true
     Shape{
         id: shape
@@ -18,6 +19,7 @@ Rectangle {
         property int stroke: 2
         property var fill: root._color
         visible: root.active
+        containsMode: Shape.FillContains
         
         ShapePath {
             //main box outline

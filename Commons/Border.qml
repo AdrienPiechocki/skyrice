@@ -26,8 +26,7 @@ Rectangle {
             startX: 24
             startY: 21
             PathLine{ x:41; y:21}
-            PathCurve{ x: 33; y: 33}
-            PathCurve{ x: 19; y: 43}
+            PathArc { x:19; y: 43; radiusX: 35; radiusY: 35}
             PathLine{ x:19; y:31}
         }
 

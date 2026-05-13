@@ -78,7 +78,7 @@ LazyLoader {
                             Component.onCompleted: {
                                 window.implicitHeight = repeater.model.filter(x => !x.isSeparator).length * 24 + repeater.model.filter(x => x.isSeparator).length * 18 + 60
                                 if(text.contentWidth > window.implicitWidth) {
-                                    window.implicitWidth =  Math.max(150, text.contentWidth*2)
+                                    window.implicitWidth =  text.contentWidth + 50
                                 }
                             }
                             Gradient {
