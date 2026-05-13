@@ -36,8 +36,8 @@ LazyLoader {
             QsMenuOpener{ id: opener; menu: root.data; }
             Rectangle {
                 anchors.fill: parent
-                anchors.topMargin: 30
-                anchors.bottomMargin: 30
+                anchors.topMargin: 40
+                anchors.bottomMargin: 40
                 anchors.leftMargin: 25
                 anchors.rightMargin: 25
                 color: "transparent"
@@ -76,7 +76,7 @@ LazyLoader {
                                 font.family: futuraFont.name
                             }
                             Component.onCompleted: {
-                                window.implicitHeight = repeater.model.filter(x => !x.isSeparator).length * 24 + repeater.model.filter(x => x.isSeparator).length * 18 + 60
+                                window.implicitHeight = repeater.model.filter(x => !x.isSeparator).length * 24 + repeater.model.filter(x => x.isSeparator).length * 18 + 80
                                 if(text.contentWidth > window.implicitWidth) {
                                     window.implicitWidth =  text.contentWidth + 50
                                 }
