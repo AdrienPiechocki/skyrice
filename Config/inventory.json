@@ -1,36 +1,6 @@
 {
     "favorites": [
-        "bazaar",
-        "cartouches",
-        "fichiers",
-        "firefox",
-        "github desktop",
-        "godot engine",
-        "kitty",
-        "vesktop",
-        "steam",
-        "vscodium",
-        "agenda",
-        "lutris"
     ],
     "usage": {
-        "agenda": 6,
-        "aurynk": 3,
-        "bazaar": 2,
-        "btop++": 1,
-        "calculatrice": 2,
-        "cartouches": 9,
-        "firefox": 2,
-        "github desktop": 3,
-        "godot engine": 3,
-        "kitty": 1,
-        "lutris": 1,
-        "ressources": 1,
-        "retroarch": 1,
-        "steam": 8,
-        "vesktop": 10,
-        "visionneur de documents": 1,
-        "visionneur d’images": 1,
-        "vscodium": 9
     }
 }
