@@ -1,12 +1,15 @@
 import Quickshell
 import QtQuick
 import qs.Commons
+import qs.Modules.Widgets
 
 Capsule {
     id: root
     width: 50
-    _color: hoverHandler.hovered ? "#67cecece" : "#67000000" 
-    HoverHandler { id: hoverHandler }
+    TapHandler { 
+        id: tapHandler; 
+        onTapped: calendar.active = true
+    }
     FontLoader {
         id: futuraFont
         source: "../../Assets/Fonts/Futura Condensed Medium.ttf"
@@ -25,4 +28,5 @@ Capsule {
             onTriggered: clock.text = Qt.formatDateTime(new Date(), "HH:mm")
         }
     }
+    Calendar{ id: calendar; }
 }

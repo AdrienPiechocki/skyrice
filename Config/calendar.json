@@ -1,0 +1,992 @@
+{
+    "cachedCalendars": [
+        {
+            "enabled": true,
+            "name": "Agenda Nextcloud",
+            "uid": "504eefb9d5131999bc2a4393f9cfb83b936e9a85"
+        },
+        {
+            "enabled": true,
+            "name": "Anniversaires des contacts",
+            "uid": "191edcd5812ed190f6c21b842b1c9e44dff5e4f4"
+        },
+        {
+            "enabled": true,
+            "name": "Dates de naissance et anniversaires",
+            "uid": "birthdays"
+        },
+        {
+            "enabled": true,
+            "name": "Jours fériés France",
+            "uid": "ff418e69372afe0edd96c3da8ff50f5896adfe3b"
+        },
+        {
+            "enabled": true,
+            "name": "Personnel",
+            "uid": "system-calendar"
+        }
+    ],
+    "cachedEvents": [
+        {
+            "calendar": "Dates de naissance et anniversaires",
+            "calendar_uid": "birthdays",
+            "description": "",
+            "end": 392421600,
+            "location": "",
+            "start": 392335200,
+            "summary": "Date de naissance : Maman",
+            "uid": "pas-id-3831e5f0755fa94a310da4f771348f21acd61111-birthday"
+        },
+        {
+            "calendar": "Dates de naissance et anniversaires",
+            "calendar_uid": "birthdays",
+            "description": "",
+            "end": 423957600,
+            "location": "",
+            "start": 423871200,
+            "summary": "Date de naissance : Maman",
+            "uid": "pas-id-3831e5f0755fa94a310da4f771348f21acd61111-birthday"
+        },
+        {
+            "calendar": "Dates de naissance et anniversaires",
+            "calendar_uid": "birthdays",
+            "description": "",
+            "end": 455580000,
+            "location": "",
+            "start": 455493600,
+            "summary": "Date de naissance : Maman",
+            "uid": "pas-id-3831e5f0755fa94a310da4f771348f21acd61111-birthday"
+        },
+        {
+            "calendar": "Dates de naissance et anniversaires",
+            "calendar_uid": "birthdays",
+            "description": "",
+            "end": 487116000,
+            "location": "",
+            "start": 487029600,
+            "summary": "Date de naissance : Maman",
+            "uid": "pas-id-3831e5f0755fa94a310da4f771348f21acd61111-birthday"
+        },
+        {
+            "calendar": "Dates de naissance et anniversaires",
+            "calendar_uid": "birthdays",
+            "description": "",
+            "end": 518652000,
+            "location": "",
+            "start": 518565600,
+            "summary": "Date de naissance : Maman",
+            "uid": "pas-id-3831e5f0755fa94a310da4f771348f21acd61111-birthday"
+        },
+        {
+            "calendar": "Dates de naissance et anniversaires",
+            "calendar_uid": "birthdays",
+            "description": "",
+            "end": 550188000,
+            "location": "",
+            "start": 550101600,
+            "summary": "Date de naissance : Maman",
+            "uid": "pas-id-3831e5f0755fa94a310da4f771348f21acd61111-birthday"
+        },
+        {
+            "calendar": "Dates de naissance et anniversaires",
+            "calendar_uid": "birthdays",
+            "description": "",
+            "end": 581810400,
+            "location": "",
+            "start": 581724000,
+            "summary": "Date de naissance : Maman",
+            "uid": "pas-id-3831e5f0755fa94a310da4f771348f21acd61111-birthday"
+        },
+        {
+            "calendar": "Dates de naissance et anniversaires",
+            "calendar_uid": "birthdays",
+            "description": "",
+            "end": 613173600,
+            "location": "",
+            "start": 613087200,
+            "summary": "Date de naissance : Arnaud",
+            "uid": "pas-id-893eb7a08f50afeb1e03d3238905037a67b378c5-birthday"
+        },
+        {
+            "calendar": "Dates de naissance et anniversaires",
+            "calendar_uid": "birthdays",
+            "description": "",
+            "end": 613346400,
+            "location": "",
+            "start": 613260000,
+            "summary": "Date de naissance : Maman",
+            "uid": "pas-id-3831e5f0755fa94a310da4f771348f21acd61111-birthday"
+        },
+        {
+            "calendar": "Dates de naissance et anniversaires",
+            "calendar_uid": "birthdays",
+            "description": "",
+            "end": 644709600,
+            "location": "",
+            "start": 644623200,
+            "summary": "Date de naissance : Arnaud",
+            "uid": "pas-id-893eb7a08f50afeb1e03d3238905037a67b378c5-birthday"
+        },
+        {
+            "calendar": "Dates de naissance et anniversaires",
+            "calendar_uid": "birthdays",
+            "description": "",
+            "end": 644882400,
+            "location": "",
+            "start": 644796000,
+            "summary": "Date de naissance : Maman",
+            "uid": "pas-id-3831e5f0755fa94a310da4f771348f21acd61111-birthday"
+        },
+        {
+            "calendar": "Dates de naissance et anniversaires",
+            "calendar_uid": "birthdays",
+            "description": "",
+            "end": 676245600,
+            "location": "",
+            "start": 676159200,
+            "summary": "Date de naissance : Arnaud",
+            "uid": "pas-id-893eb7a08f50afeb1e03d3238905037a67b378c5-birthday"
+        },
+        {
+            "calendar": "Dates de naissance et anniversaires",
+            "calendar_uid": "birthdays",
+            "description": "",
+            "end": 676418400,
+            "location": "",
+            "start": 676332000,
+            "summary": "Date de naissance : Maman",
+            "uid": "pas-id-3831e5f0755fa94a310da4f771348f21acd61111-birthday"
+        },
+        {
+            "calendar": "Dates de naissance et anniversaires",
+            "calendar_uid": "birthdays",
+            "description": "",
+            "end": 707868000,
+            "location": "",
+            "start": 707781600,
+            "summary": "Date de naissance : Arnaud",
+            "uid": "pas-id-893eb7a08f50afeb1e03d3238905037a67b378c5-birthday"
+        },
+        {
+            "calendar": "Dates de naissance et anniversaires",
+            "calendar_uid": "birthdays",
+            "description": "",
+            "end": 708040800,
+            "location": "",
+            "start": 707954400,
+            "summary": "Date de naissance : Maman",
+            "uid": "pas-id-3831e5f0755fa94a310da4f771348f21acd61111-birthday"
+        },
+        {
+            "calendar": "Dates de naissance et anniversaires",
+            "calendar_uid": "birthdays",
+            "description": "",
+            "end": 739404000,
+            "location": "",
+            "start": 739317600,
+            "summary": "Date de naissance : Arnaud",
+            "uid": "pas-id-893eb7a08f50afeb1e03d3238905037a67b378c5-birthday"
+        },
+        {
+            "calendar": "Dates de naissance et anniversaires",
+            "calendar_uid": "birthdays",
+            "description": "",
+            "end": 739576800,
+            "location": "",
+            "start": 739490400,
+            "summary": "Date de naissance : Maman",
+            "uid": "pas-id-3831e5f0755fa94a310da4f771348f21acd61111-birthday"
+        },
+        {
+            "calendar": "Dates de naissance et anniversaires",
+            "calendar_uid": "birthdays",
+            "description": "",
+            "end": 770940000,
+            "location": "",
+            "start": 770853600,
+            "summary": "Date de naissance : Arnaud",
+            "uid": "pas-id-893eb7a08f50afeb1e03d3238905037a67b378c5-birthday"
+        },
+        {
+            "calendar": "Dates de naissance et anniversaires",
+            "calendar_uid": "birthdays",
+            "description": "",
+            "end": 771112800,
+            "location": "",
+            "start": 771026400,
+            "summary": "Date de naissance : Maman",
+            "uid": "pas-id-3831e5f0755fa94a310da4f771348f21acd61111-birthday"
+        },
+        {
+            "calendar": "Dates de naissance et anniversaires",
+            "calendar_uid": "birthdays",
+            "description": "",
+            "end": 802476000,
+            "location": "",
+            "start": 802389600,
+            "summary": "Date de naissance : Arnaud",
+            "uid": "pas-id-893eb7a08f50afeb1e03d3238905037a67b378c5-birthday"
+        },
+        {
+            "calendar": "Dates de naissance et anniversaires",
+            "calendar_uid": "birthdays",
+            "description": "",
+            "end": 802648800,
+            "location": "",
+            "start": 802562400,
+            "summary": "Date de naissance : Maman",
+            "uid": "pas-id-3831e5f0755fa94a310da4f771348f21acd61111-birthday"
+        },
+        {
+            "calendar": "Dates de naissance et anniversaires",
+            "calendar_uid": "birthdays",
+            "description": "",
+            "end": 834098400,
+            "location": "",
+            "start": 834012000,
+            "summary": "Date de naissance : Arnaud",
+            "uid": "pas-id-893eb7a08f50afeb1e03d3238905037a67b378c5-birthday"
+        },
+        {
+            "calendar": "Dates de naissance et anniversaires",
+            "calendar_uid": "birthdays",
+            "description": "",
+            "end": 834271200,
+            "location": "",
+            "start": 834184800,
+            "summary": "Date de naissance : Maman",
+            "uid": "pas-id-3831e5f0755fa94a310da4f771348f21acd61111-birthday"
+        },
+        {
+            "calendar": "Dates de naissance et anniversaires",
+            "calendar_uid": "birthdays",
+            "description": "",
+            "end": 865634400,
+            "location": "",
+            "start": 865548000,
+            "summary": "Date de naissance : Arnaud",
+            "uid": "pas-id-893eb7a08f50afeb1e03d3238905037a67b378c5-birthday"
+        },
+        {
+            "calendar": "Dates de naissance et anniversaires",
+            "calendar_uid": "birthdays",
+            "description": "",
+            "end": 865807200,
+            "location": "",
+            "start": 865720800,
+            "summary": "Date de naissance : Maman",
+            "uid": "pas-id-3831e5f0755fa94a310da4f771348f21acd61111-birthday"
+        },
+        {
+            "calendar": "Dates de naissance et anniversaires",
+            "calendar_uid": "birthdays",
+            "description": "",
+            "end": 897170400,
+            "location": "",
+            "start": 897084000,
+            "summary": "Date de naissance : Arnaud",
+            "uid": "pas-id-893eb7a08f50afeb1e03d3238905037a67b378c5-birthday"
+        },
+        {
+            "calendar": "Dates de naissance et anniversaires",
+            "calendar_uid": "birthdays",
+            "description": "",
+            "end": 897343200,
+            "location": "",
+            "start": 897256800,
+            "summary": "Date de naissance : Maman",
+            "uid": "pas-id-3831e5f0755fa94a310da4f771348f21acd61111-birthday"
+        },
+        {
+            "calendar": "Dates de naissance et anniversaires",
+            "calendar_uid": "birthdays",
+            "description": "",
+            "end": 928706400,
+            "location": "",
+            "start": 928620000,
+            "summary": "Date de naissance : Arnaud",
+            "uid": "pas-id-893eb7a08f50afeb1e03d3238905037a67b378c5-birthday"
+        },
+        {
+            "calendar": "Dates de naissance et anniversaires",
+            "calendar_uid": "birthdays",
+            "description": "",
+            "end": 928879200,
+            "location": "",
+            "start": 928792800,
+            "summary": "Date de naissance : Maman",
+            "uid": "pas-id-3831e5f0755fa94a310da4f771348f21acd61111-birthday"
+        },
+        {
+            "calendar": "Dates de naissance et anniversaires",
+            "calendar_uid": "birthdays",
+            "description": "",
+            "end": 960328800,
+            "location": "",
+            "start": 960242400,
+            "summary": "Date de naissance : Arnaud",
+            "uid": "pas-id-893eb7a08f50afeb1e03d3238905037a67b378c5-birthday"
+        },
+        {
+            "calendar": "Dates de naissance et anniversaires",
+            "calendar_uid": "birthdays",
+            "description": "",
+            "end": 960501600,
+            "location": "",
+            "start": 960415200,
+            "summary": "Date de naissance : Maman",
+            "uid": "pas-id-3831e5f0755fa94a310da4f771348f21acd61111-birthday"
+        },
+        {
+            "calendar": "Dates de naissance et anniversaires",
+            "calendar_uid": "birthdays",
+            "description": "",
+            "end": 991864800,
+            "location": "",
+            "start": 991778400,
+            "summary": "Date de naissance : Arnaud",
+            "uid": "pas-id-893eb7a08f50afeb1e03d3238905037a67b378c5-birthday"
+        },
+        {
+            "calendar": "Dates de naissance et anniversaires",
+            "calendar_uid": "birthdays",
+            "description": "",
+            "end": 992037600,
+            "location": "",
+            "start": 991951200,
+            "summary": "Date de naissance : Maman",
+            "uid": "pas-id-3831e5f0755fa94a310da4f771348f21acd61111-birthday"
+        },
+        {
+            "calendar": "Dates de naissance et anniversaires",
+            "calendar_uid": "birthdays",
+            "description": "",
+            "end": 1023400800,
+            "location": "",
+            "start": 1023314400,
+            "summary": "Date de naissance : Arnaud",
+            "uid": "pas-id-893eb7a08f50afeb1e03d3238905037a67b378c5-birthday"
+        },
+        {
+            "calendar": "Dates de naissance et anniversaires",
+            "calendar_uid": "birthdays",
+            "description": "",
+            "end": 1023573600,
+            "location": "",
+            "start": 1023487200,
+            "summary": "Date de naissance : Maman",
+            "uid": "pas-id-3831e5f0755fa94a310da4f771348f21acd61111-birthday"
+        },
+        {
+            "calendar": "Dates de naissance et anniversaires",
+            "calendar_uid": "birthdays",
+            "description": "",
+            "end": 1054936800,
+            "location": "",
+            "start": 1054850400,
+            "summary": "Date de naissance : Arnaud",
+            "uid": "pas-id-893eb7a08f50afeb1e03d3238905037a67b378c5-birthday"
+        },
+        {
+            "calendar": "Dates de naissance et anniversaires",
+            "calendar_uid": "birthdays",
+            "description": "",
+            "end": 1055109600,
+            "location": "",
+            "start": 1055023200,
+            "summary": "Date de naissance : Maman",
+            "uid": "pas-id-3831e5f0755fa94a310da4f771348f21acd61111-birthday"
+        },
+        {
+            "calendar": "Dates de naissance et anniversaires",
+            "calendar_uid": "birthdays",
+            "description": "",
+            "end": 1086559200,
+            "location": "",
+            "start": 1086472800,
+            "summary": "Date de naissance : Arnaud",
+            "uid": "pas-id-893eb7a08f50afeb1e03d3238905037a67b378c5-birthday"
+        },
+        {
+            "calendar": "Dates de naissance et anniversaires",
+            "calendar_uid": "birthdays",
+            "description": "",
+            "end": 1086732000,
+            "location": "",
+            "start": 1086645600,
+            "summary": "Date de naissance : Maman",
+            "uid": "pas-id-3831e5f0755fa94a310da4f771348f21acd61111-birthday"
+        },
+        {
+            "calendar": "Dates de naissance et anniversaires",
+            "calendar_uid": "birthdays",
+            "description": "",
+            "end": 1118095200,
+            "location": "",
+            "start": 1118008800,
+            "summary": "Date de naissance : Arnaud",
+            "uid": "pas-id-893eb7a08f50afeb1e03d3238905037a67b378c5-birthday"
+        },
+        {
+            "calendar": "Dates de naissance et anniversaires",
+            "calendar_uid": "birthdays",
+            "description": "",
+            "end": 1118268000,
+            "location": "",
+            "start": 1118181600,
+            "summary": "Date de naissance : Maman",
+            "uid": "pas-id-3831e5f0755fa94a310da4f771348f21acd61111-birthday"
+        },
+        {
+            "calendar": "Dates de naissance et anniversaires",
+            "calendar_uid": "birthdays",
+            "description": "",
+            "end": 1149631200,
+            "location": "",
+            "start": 1149544800,
+            "summary": "Date de naissance : Arnaud",
+            "uid": "pas-id-893eb7a08f50afeb1e03d3238905037a67b378c5-birthday"
+        },
+        {
+            "calendar": "Dates de naissance et anniversaires",
+            "calendar_uid": "birthdays",
+            "description": "",
+            "end": 1149804000,
+            "location": "",
+            "start": 1149717600,
+            "summary": "Date de naissance : Maman",
+            "uid": "pas-id-3831e5f0755fa94a310da4f771348f21acd61111-birthday"
+        },
+        {
+            "calendar": "Dates de naissance et anniversaires",
+            "calendar_uid": "birthdays",
+            "description": "",
+            "end": 1181167200,
+            "location": "",
+            "start": 1181080800,
+            "summary": "Date de naissance : Arnaud",
+            "uid": "pas-id-893eb7a08f50afeb1e03d3238905037a67b378c5-birthday"
+        },
+        {
+            "calendar": "Dates de naissance et anniversaires",
+            "calendar_uid": "birthdays",
+            "description": "",
+            "end": 1181340000,
+            "location": "",
+            "start": 1181253600,
+            "summary": "Date de naissance : Maman",
+            "uid": "pas-id-3831e5f0755fa94a310da4f771348f21acd61111-birthday"
+        },
+        {
+            "calendar": "Dates de naissance et anniversaires",
+            "calendar_uid": "birthdays",
+            "description": "",
+            "end": 1212789600,
+            "location": "",
+            "start": 1212703200,
+            "summary": "Date de naissance : Arnaud",
+            "uid": "pas-id-893eb7a08f50afeb1e03d3238905037a67b378c5-birthday"
+        },
+        {
+            "calendar": "Dates de naissance et anniversaires",
+            "calendar_uid": "birthdays",
+            "description": "",
+            "end": 1212962400,
+            "location": "",
+            "start": 1212876000,
+            "summary": "Date de naissance : Maman",
+            "uid": "pas-id-3831e5f0755fa94a310da4f771348f21acd61111-birthday"
+        },
+        {
+            "calendar": "Dates de naissance et anniversaires",
+            "calendar_uid": "birthdays",
+            "description": "",
+            "end": 1244325600,
+            "location": "",
+            "start": 1244239200,
+            "summary": "Date de naissance : Arnaud",
+            "uid": "pas-id-893eb7a08f50afeb1e03d3238905037a67b378c5-birthday"
+        },
+        {
+            "calendar": "Dates de naissance et anniversaires",
+            "calendar_uid": "birthdays",
+            "description": "",
+            "end": 1244498400,
+            "location": "",
+            "start": 1244412000,
+            "summary": "Date de naissance : Maman",
+            "uid": "pas-id-3831e5f0755fa94a310da4f771348f21acd61111-birthday"
+        },
+        {
+            "calendar": "Dates de naissance et anniversaires",
+            "calendar_uid": "birthdays",
+            "description": "",
+            "end": 1275861600,
+            "location": "",
+            "start": 1275775200,
+            "summary": "Date de naissance : Arnaud",
+            "uid": "pas-id-893eb7a08f50afeb1e03d3238905037a67b378c5-birthday"
+        },
+        {
+            "calendar": "Dates de naissance et anniversaires",
+            "calendar_uid": "birthdays",
+            "description": "",
+            "end": 1276034400,
+            "location": "",
+            "start": 1275948000,
+            "summary": "Date de naissance : Maman",
+            "uid": "pas-id-3831e5f0755fa94a310da4f771348f21acd61111-birthday"
+        },
+        {
+            "calendar": "Dates de naissance et anniversaires",
+            "calendar_uid": "birthdays",
+            "description": "",
+            "end": 1307397600,
+            "location": "",
+            "start": 1307311200,
+            "summary": "Date de naissance : Arnaud",
+            "uid": "pas-id-893eb7a08f50afeb1e03d3238905037a67b378c5-birthday"
+        },
+        {
+            "calendar": "Dates de naissance et anniversaires",
+            "calendar_uid": "birthdays",
+            "description": "",
+            "end": 1307570400,
+            "location": "",
+            "start": 1307484000,
+            "summary": "Date de naissance : Maman",
+            "uid": "pas-id-3831e5f0755fa94a310da4f771348f21acd61111-birthday"
+        },
+        {
+            "calendar": "Dates de naissance et anniversaires",
+            "calendar_uid": "birthdays",
+            "description": "",
+            "end": 1339020000,
+            "location": "",
+            "start": 1338933600,
+            "summary": "Date de naissance : Arnaud",
+            "uid": "pas-id-893eb7a08f50afeb1e03d3238905037a67b378c5-birthday"
+        },
+        {
+            "calendar": "Dates de naissance et anniversaires",
+            "calendar_uid": "birthdays",
+            "description": "",
+            "end": 1339192800,
+            "location": "",
+            "start": 1339106400,
+            "summary": "Date de naissance : Maman",
+            "uid": "pas-id-3831e5f0755fa94a310da4f771348f21acd61111-birthday"
+        },
+        {
+            "calendar": "Dates de naissance et anniversaires",
+            "calendar_uid": "birthdays",
+            "description": "",
+            "end": 1370556000,
+            "location": "",
+            "start": 1370469600,
+            "summary": "Date de naissance : Arnaud",
+            "uid": "pas-id-893eb7a08f50afeb1e03d3238905037a67b378c5-birthday"
+        },
+        {
+            "calendar": "Dates de naissance et anniversaires",
+            "calendar_uid": "birthdays",
+            "description": "",
+            "end": 1370728800,
+            "location": "",
+            "start": 1370642400,
+            "summary": "Date de naissance : Maman",
+            "uid": "pas-id-3831e5f0755fa94a310da4f771348f21acd61111-birthday"
+        },
+        {
+            "calendar": "Dates de naissance et anniversaires",
+            "calendar_uid": "birthdays",
+            "description": "",
+            "end": 1402092000,
+            "location": "",
+            "start": 1402005600,
+            "summary": "Date de naissance : Arnaud",
+            "uid": "pas-id-893eb7a08f50afeb1e03d3238905037a67b378c5-birthday"
+        },
+        {
+            "calendar": "Dates de naissance et anniversaires",
+            "calendar_uid": "birthdays",
+            "description": "",
+            "end": 1402264800,
+            "location": "",
+            "start": 1402178400,
+            "summary": "Date de naissance : Maman",
+            "uid": "pas-id-3831e5f0755fa94a310da4f771348f21acd61111-birthday"
+        },
+        {
+            "calendar": "Dates de naissance et anniversaires",
+            "calendar_uid": "birthdays",
+            "description": "",
+            "end": 1433628000,
+            "location": "",
+            "start": 1433541600,
+            "summary": "Date de naissance : Arnaud",
+            "uid": "pas-id-893eb7a08f50afeb1e03d3238905037a67b378c5-birthday"
+        },
+        {
+            "calendar": "Dates de naissance et anniversaires",
+            "calendar_uid": "birthdays",
+            "description": "",
+            "end": 1433800800,
+            "location": "",
+            "start": 1433714400,
+            "summary": "Date de naissance : Maman",
+            "uid": "pas-id-3831e5f0755fa94a310da4f771348f21acd61111-birthday"
+        },
+        {
+            "calendar": "Dates de naissance et anniversaires",
+            "calendar_uid": "birthdays",
+            "description": "",
+            "end": 1465250400,
+            "location": "",
+            "start": 1465164000,
+            "summary": "Date de naissance : Arnaud",
+            "uid": "pas-id-893eb7a08f50afeb1e03d3238905037a67b378c5-birthday"
+        },
+        {
+            "calendar": "Dates de naissance et anniversaires",
+            "calendar_uid": "birthdays",
+            "description": "",
+            "end": 1465423200,
+            "location": "",
+            "start": 1465336800,
+            "summary": "Date de naissance : Maman",
+            "uid": "pas-id-3831e5f0755fa94a310da4f771348f21acd61111-birthday"
+        },
+        {
+            "calendar": "Dates de naissance et anniversaires",
+            "calendar_uid": "birthdays",
+            "description": "",
+            "end": 1496786400,
+            "location": "",
+            "start": 1496700000,
+            "summary": "Date de naissance : Arnaud",
+            "uid": "pas-id-893eb7a08f50afeb1e03d3238905037a67b378c5-birthday"
+        },
+        {
+            "calendar": "Dates de naissance et anniversaires",
+            "calendar_uid": "birthdays",
+            "description": "",
+            "end": 1496959200,
+            "location": "",
+            "start": 1496872800,
+            "summary": "Date de naissance : Maman",
+            "uid": "pas-id-3831e5f0755fa94a310da4f771348f21acd61111-birthday"
+        },
+        {
+            "calendar": "Dates de naissance et anniversaires",
+            "calendar_uid": "birthdays",
+            "description": "",
+            "end": 1528322400,
+            "location": "",
+            "start": 1528236000,
+            "summary": "Date de naissance : Arnaud",
+            "uid": "pas-id-893eb7a08f50afeb1e03d3238905037a67b378c5-birthday"
+        },
+        {
+            "calendar": "Dates de naissance et anniversaires",
+            "calendar_uid": "birthdays",
+            "description": "",
+            "end": 1528495200,
+            "location": "",
+            "start": 1528408800,
+            "summary": "Date de naissance : Maman",
+            "uid": "pas-id-3831e5f0755fa94a310da4f771348f21acd61111-birthday"
+        },
+        {
+            "calendar": "Dates de naissance et anniversaires",
+            "calendar_uid": "birthdays",
+            "description": "",
+            "end": 1559858400,
+            "location": "",
+            "start": 1559772000,
+            "summary": "Date de naissance : Arnaud",
+            "uid": "pas-id-893eb7a08f50afeb1e03d3238905037a67b378c5-birthday"
+        },
+        {
+            "calendar": "Dates de naissance et anniversaires",
+            "calendar_uid": "birthdays",
+            "description": "",
+            "end": 1560031200,
+            "location": "",
+            "start": 1559944800,
+            "summary": "Date de naissance : Maman",
+            "uid": "pas-id-3831e5f0755fa94a310da4f771348f21acd61111-birthday"
+        },
+        {
+            "calendar": "Dates de naissance et anniversaires",
+            "calendar_uid": "birthdays",
+            "description": "",
+            "end": 1591480800,
+            "location": "",
+            "start": 1591394400,
+            "summary": "Date de naissance : Arnaud",
+            "uid": "pas-id-893eb7a08f50afeb1e03d3238905037a67b378c5-birthday"
+        },
+        {
+            "calendar": "Dates de naissance et anniversaires",
+            "calendar_uid": "birthdays",
+            "description": "",
+            "end": 1591653600,
+            "location": "",
+            "start": 1591567200,
+            "summary": "Date de naissance : Maman",
+            "uid": "pas-id-3831e5f0755fa94a310da4f771348f21acd61111-birthday"
+        },
+        {
+            "calendar": "Dates de naissance et anniversaires",
+            "calendar_uid": "birthdays",
+            "description": "",
+            "end": 1623016800,
+            "location": "",
+            "start": 1622930400,
+            "summary": "Date de naissance : Arnaud",
+            "uid": "pas-id-893eb7a08f50afeb1e03d3238905037a67b378c5-birthday"
+        },
+        {
+            "calendar": "Dates de naissance et anniversaires",
+            "calendar_uid": "birthdays",
+            "description": "",
+            "end": 1623189600,
+            "location": "",
+            "start": 1623103200,
+            "summary": "Date de naissance : Maman",
+            "uid": "pas-id-3831e5f0755fa94a310da4f771348f21acd61111-birthday"
+        },
+        {
+            "calendar": "Dates de naissance et anniversaires",
+            "calendar_uid": "birthdays",
+            "description": "",
+            "end": 1654552800,
+            "location": "",
+            "start": 1654466400,
+            "summary": "Date de naissance : Arnaud",
+            "uid": "pas-id-893eb7a08f50afeb1e03d3238905037a67b378c5-birthday"
+        },
+        {
+            "calendar": "Dates de naissance et anniversaires",
+            "calendar_uid": "birthdays",
+            "description": "",
+            "end": 1654725600,
+            "location": "",
+            "start": 1654639200,
+            "summary": "Date de naissance : Maman",
+            "uid": "pas-id-3831e5f0755fa94a310da4f771348f21acd61111-birthday"
+        },
+        {
+            "calendar": "Dates de naissance et anniversaires",
+            "calendar_uid": "birthdays",
+            "description": "",
+            "end": 1686088800,
+            "location": "",
+            "start": 1686002400,
+            "summary": "Date de naissance : Arnaud",
+            "uid": "pas-id-893eb7a08f50afeb1e03d3238905037a67b378c5-birthday"
+        },
+        {
+            "calendar": "Dates de naissance et anniversaires",
+            "calendar_uid": "birthdays",
+            "description": "",
+            "end": 1686261600,
+            "location": "",
+            "start": 1686175200,
+            "summary": "Date de naissance : Maman",
+            "uid": "pas-id-3831e5f0755fa94a310da4f771348f21acd61111-birthday"
+        },
+        {
+            "calendar": "Dates de naissance et anniversaires",
+            "calendar_uid": "birthdays",
+            "description": "",
+            "end": 1717711200,
+            "location": "",
+            "start": 1717624800,
+            "summary": "Date de naissance : Arnaud",
+            "uid": "pas-id-893eb7a08f50afeb1e03d3238905037a67b378c5-birthday"
+        },
+        {
+            "calendar": "Dates de naissance et anniversaires",
+            "calendar_uid": "birthdays",
+            "description": "",
+            "end": 1717884000,
+            "location": "",
+            "start": 1717797600,
+            "summary": "Date de naissance : Maman",
+            "uid": "pas-id-3831e5f0755fa94a310da4f771348f21acd61111-birthday"
+        },
+        {
+            "calendar": "Dates de naissance et anniversaires",
+            "calendar_uid": "birthdays",
+            "description": "",
+            "end": 1749247200,
+            "location": "",
+            "start": 1749160800,
+            "summary": "Date de naissance : Arnaud",
+            "uid": "pas-id-893eb7a08f50afeb1e03d3238905037a67b378c5-birthday"
+        },
+        {
+            "calendar": "Dates de naissance et anniversaires",
+            "calendar_uid": "birthdays",
+            "description": "",
+            "end": 1749420000,
+            "location": "",
+            "start": 1749333600,
+            "summary": "Date de naissance : Maman",
+            "uid": "pas-id-3831e5f0755fa94a310da4f771348f21acd61111-birthday"
+        },
+        {
+            "calendar": "Agenda Nextcloud",
+            "calendar_uid": "504eefb9d5131999bc2a4393f9cfb83b936e9a85",
+            "description": "",
+            "end": 1777413600,
+            "location": "",
+            "start": 1777327200,
+            "summary": "Actualisation France Travail",
+            "uid": "266e7e94-cf87-491d-ab27-6f7538e9fc3c"
+        },
+        {
+            "calendar": "Jours fériés France",
+            "calendar_uid": "ff418e69372afe0edd96c3da8ff50f5896adfe3b",
+            "description": "National holiday -  Les Français offrent des fleurs à leurs proches et peuvent célébrer ou faire campagne pour les droits des travailleurs le 1er mai, également connu sous le nom de fête du Travail.",
+            "end": 1777672800,
+            "location": "",
+            "start": 1777586400,
+            "summary": "Fête du travail/1er mai",
+            "uid": "2f5dd8b730849436a0c994a3c58d5afc-2026-all"
+        },
+        {
+            "calendar": "Agenda Nextcloud",
+            "calendar_uid": "504eefb9d5131999bc2a4393f9cfb83b936e9a85",
+            "description": "",
+            "end": 1778162400,
+            "location": "",
+            "start": 1778155200,
+            "summary": "Recherche Emploi",
+            "uid": "9f0887d93947e328cc193561d8ca2d48eb32f5b3"
+        },
+        {
+            "calendar": "Jours fériés France",
+            "calendar_uid": "ff418e69372afe0edd96c3da8ff50f5896adfe3b",
+            "description": "National holiday -  Le Jour de la Victoire de la Seconde Guerre mondiale marque l'anniversaire de la fin officielle de la Seconde Guerre mondiale et est un jour férié en France.",
+            "end": 1778277600,
+            "location": "",
+            "start": 1778191200,
+            "summary": "Jour de la Victoire de la Seconde Guerre mondiale",
+            "uid": "5b0edb394db534fe670c9b73b6a47b82-2026-all"
+        },
+        {
+            "calendar": "Agenda Nextcloud",
+            "calendar_uid": "504eefb9d5131999bc2a4393f9cfb83b936e9a85",
+            "description": "",
+            "end": 1778248800,
+            "location": "",
+            "start": 1778241600,
+            "summary": "Recherche Emploi",
+            "uid": "9f0887d93947e328cc193561d8ca2d48eb32f5b3"
+        },
+        {
+            "calendar": "Agenda Nextcloud",
+            "calendar_uid": "504eefb9d5131999bc2a4393f9cfb83b936e9a85",
+            "description": "",
+            "end": 1778601600,
+            "location": "",
+            "start": 1778589000,
+            "summary": "Dev Orks",
+            "uid": "fc2176365e13f6158057e0a32da00ff976434cb3"
+        },
+        {
+            "calendar": "Jours fériés France",
+            "calendar_uid": "ff418e69372afe0edd96c3da8ff50f5896adfe3b",
+            "description": "National holiday -  Le jour de l'Ascension marque le jour où Jésus est monté au ciel, selon la croyance chrétienne.",
+            "end": 1778796000,
+            "location": "",
+            "start": 1778709600,
+            "summary": "Jour de l'Ascension",
+            "uid": "c4189934186de8cbdee286e25765eacd-2026-all"
+        },
+        {
+            "calendar": "Agenda Nextcloud",
+            "calendar_uid": "504eefb9d5131999bc2a4393f9cfb83b936e9a85",
+            "description": "",
+            "end": 1779206400,
+            "location": "",
+            "start": 1779193800,
+            "summary": "Dev Orks",
+            "uid": "fc2176365e13f6158057e0a32da00ff976434cb3"
+        },
+        {
+            "calendar": "Jours fériés France",
+            "calendar_uid": "ff418e69372afe0edd96c3da8ff50f5896adfe3b",
+            "description": "National holiday -  Le lundi de Pentecôte est le lendemain du dimanche de Pentecôte. C'est un jour férié en France.",
+            "end": 1779746400,
+            "location": "",
+            "start": 1779660000,
+            "summary": "Lundi de Pentecôte",
+            "uid": "2bb90404bdf78ae55dd87c22449950dd-2026-all"
+        },
+        {
+            "calendar": "Agenda Nextcloud",
+            "calendar_uid": "504eefb9d5131999bc2a4393f9cfb83b936e9a85",
+            "description": "",
+            "end": 1779811200,
+            "location": "",
+            "start": 1779798600,
+            "summary": "Dev Orks",
+            "uid": "fc2176365e13f6158057e0a32da00ff976434cb3"
+        },
+        {
+            "calendar": "Agenda Nextcloud",
+            "calendar_uid": "504eefb9d5131999bc2a4393f9cfb83b936e9a85",
+            "description": "",
+            "end": 1780005600,
+            "location": "",
+            "start": 1779919200,
+            "summary": "Actualisation France Travail",
+            "uid": "266e7e94-cf87-491d-ab27-6f7538e9fc3c"
+        },
+        {
+            "calendar": "Agenda Nextcloud",
+            "calendar_uid": "504eefb9d5131999bc2a4393f9cfb83b936e9a85",
+            "description": "",
+            "end": 1780416000,
+            "location": "",
+            "start": 1780403400,
+            "summary": "Dev Orks",
+            "uid": "fc2176365e13f6158057e0a32da00ff976434cb3"
+        },
+        {
+            "calendar": "Dates de naissance et anniversaires",
+            "calendar_uid": "birthdays",
+            "description": "",
+            "end": 1780783200,
+            "location": "",
+            "start": 1780696800,
+            "summary": "Date de naissance : Arnaud",
+            "uid": "pas-id-893eb7a08f50afeb1e03d3238905037a67b378c5-birthday"
+        },
+        {
+            "calendar": "Dates de naissance et anniversaires",
+            "calendar_uid": "birthdays",
+            "description": "",
+            "end": 1780956000,
+            "location": "",
+            "start": 1780869600,
+            "summary": "Date de naissance : Maman",
+            "uid": "pas-id-3831e5f0755fa94a310da4f771348f21acd61111-birthday"
+        },
+        {
+            "calendar": "Agenda Nextcloud",
+            "calendar_uid": "504eefb9d5131999bc2a4393f9cfb83b936e9a85",
+            "description": "",
+            "end": 1781020800,
+            "location": "",
+            "start": 1781008200,
+            "summary": "Dev Orks",
+            "uid": "fc2176365e13f6158057e0a32da00ff976434cb3"
+        }
+    ],
+    "lastUpdate": "2026-05-14T22:53:21.942Z"
+}
