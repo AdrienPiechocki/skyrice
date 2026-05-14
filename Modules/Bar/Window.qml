@@ -1,6 +1,7 @@
 import Quickshell
 import Quickshell.Niri
 import QtQuick
+import QtQuick.Layouts
 import qs.Commons
 
 Capsule {
@@ -19,49 +20,55 @@ Capsule {
             }
         }
     }
-
-    Image {
-        fillMode: Image.PreserveAspectFit
-        height: 20
-        y: 5
-        x: 1
-        opacity: Niri.focusedWindow ? DesktopEntries.applications.values.filter(a => a.name.toLowerCase().match(Niri.focusedWindow ? Niri.focusedWindow?.appId.toLowerCase():""))[0]?.icon ? 1 : 0 : 0
-        source: Quickshell.iconPath(DesktopEntries.applications.values.filter(a => a.name.toLowerCase().match(Niri.focusedWindow ? Niri.focusedWindow?.appId.toLowerCase():""))[0]?.icon)
-    }
-    Rectangle{
-        anchors.right: parent.right
-        anchors.top: parent.top
-        anchors.bottom: parent.bottom
-        width: parent.width - 22
-        color: "transparent"
-        clip: true
-        FontLoader {
-            id: futuraFont
-            source: "../../Assets/Fonts/Futura Condensed Medium.ttf"
+    RowLayout {
+        anchors.fill: parent
+        spacing: 0
+        Image {
+            Layout.fillWidth: true
+            Layout.fillHeight: true
+            fillMode: Image.PreserveAspectFit
+            Layout.maximumWidth: 20 * opacity 
+            opacity: Niri.focusedWindow ? DesktopEntries.applications.values.filter(a => a.name.toLowerCase().match(Niri.focusedWindow ? Niri.focusedWindow?.appId.toLowerCase():""))[0]?.icon ? 1 : 0 : 0
+            source: Quickshell.iconPath(DesktopEntries.applications.values.filter(a => a.name.toLowerCase().match(Niri.focusedWindow ? Niri.focusedWindow?.appId.toLowerCase():""))[0]?.icon) || undefined
         }
-        Text {
-            id: window
-            horizontalAlignment: window.contentWidth > window.width ? Text.AlignLeft : Text.AlignHCenter
-            property int speed: window.contentWidth * 30
-            font.family: futuraFont.name
-            font.pointSize: 14
-            style: Text.Outline
-            color: '#cecece'
-            width: parent.width
-            x: 0
-            y: 2.5
-            text: Niri.focusedWindow?.title || ""
-            SequentialAnimation on x {
-                id: scrollAnim
-                running: hoverHandler.hovered ? window.contentWidth > window.width : false
-                NumberAnimation { 
-                    to: -window.contentWidth 
-                    duration: window.speed
+        Rectangle{
+            Layout.fillWidth: true
+            Layout.fillHeight: true
+            anchors.right: parent.right
+            anchors.top: parent.top
+            anchors.bottom: parent.bottom
+            width: parent.width - 22
+            color: "transparent"
+            clip: true
+            FontLoader {
+                id: futuraFont
+                source: "../../Assets/Fonts/Futura Condensed Medium.ttf"
+            }
+            Text {
+                id: window
+                horizontalAlignment: window.contentWidth > window.width ? Text.AlignLeft : Text.AlignHCenter
+                property int speed: window.contentWidth * 30
+                font.family: futuraFont.name
+                font.pointSize: 14
+                style: Text.Outline
+                color: '#cecece'
+                width: parent.width
+                x: 0
+                y: 2.5
+                text: Niri.focusedWindow?.title || ""
+                SequentialAnimation on x {
+                    id: scrollAnim
+                    running: hoverHandler.hovered ? window.contentWidth > window.width : false
+                    NumberAnimation { 
+                        to: -window.contentWidth 
+                        duration: window.speed
+                    }
+                    onFinished: {window.x = 200; restart()}
                 }
-                onFinished: {window.x = 200; restart()}
             }
         }
     }
+    
     Connections {
         target: Niri
         function onWindowsUpdated() {
