@@ -14,7 +14,6 @@ Capsule {
     readonly property real percentage: Battery.percentage
     readonly property bool isLow: percentage <= 25 / 100
     readonly property bool isCritical: percentage <= 10 / 100
-    Component.onCompleted: print(UPowerDeviceState.Charging)
     FontLoader {
         id: futuraFont
         source: "../../Assets/Fonts/Futura Condensed Medium.ttf"
