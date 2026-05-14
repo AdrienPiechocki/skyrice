@@ -4,6 +4,7 @@ import Quickshell
 import Quickshell.Wayland
 import Quickshell.Io
 import qs.Commons
+import qs.Modules
 
 LazyLoader {
     id: root
@@ -145,7 +146,8 @@ LazyLoader {
                         MouseArea {
                             anchors.fill: parent
                             onClicked: {
-                                print("lock")
+                                lockscreen.active = true
+                                window.visible = false
                             }
                             hoverEnabled: true
                             onEntered: parent.gradient = gradient
@@ -211,7 +213,7 @@ LazyLoader {
                         Process {
                             id: rebootProcess
                             running: false
-                            command: [ "sh", "-c", "reboot now" ]
+                            command: [ "sh", "-c", "reboot" ]
                         }
                         Timer {
                             id: rebootTimer
@@ -288,5 +290,6 @@ LazyLoader {
             anchors.fill: parent
             onClicked: root.active = false
         }
+        LockScreen{ id: lockscreen; onLockedChanged: root.active = false }
     }
 }
