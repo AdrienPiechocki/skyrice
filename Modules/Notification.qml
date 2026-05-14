@@ -114,7 +114,7 @@ PanelWindow {
                 MouseArea {
                     anchors.fill: parent
                     onClicked: {
-                        root.notifs.splice(root.notifs.indexOf(modelData), 1)
+                        root.notifs.splice(modelData.idx, 1)
                         root.implicitHeight = 125 * root.notifs.length
                         repeater.model = root.notifs
                     }
