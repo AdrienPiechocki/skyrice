@@ -50,7 +50,7 @@ PanelWindow {
                 implicitHeight: 125
                 y: 45 + 125 * repeater.model.indexOf(modelData)
                 color: "transparent"
-                Background{ width: popup.width; height: popup.height; stroke: 2; borderColor: modelData.urgency > 1 ? "orange" : "#cecece"}
+                Background{ width: popup.width; height: popup.height; stroke: 2; fillColor: "black"; borderColor: modelData.urgency > 1 ? "orange" : "#cecece"}
                 FontLoader {
                     id: futuraFont
                     source: "../Assets/Fonts/Futura Condensed Medium.ttf"
