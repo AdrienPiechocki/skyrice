@@ -59,7 +59,7 @@ LazyLoader {
                     x: surface.width/2 - surface.width/16
                     y: surface.height/1.5
                     width: surface.width/8
-                    _color: "#67000000" 
+                    _color: '#b0000000'
                     Rectangle {
                         anchors.fill: parent
                         anchors.leftMargin: 10
