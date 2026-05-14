@@ -35,11 +35,7 @@ PanelWindow {
             "text": n.summary || "",
             "appName": n.appName || n.desktopEntry || "",
             "urgency": n.urgency < 0 || n.urgency > 2 ? 1 : n.urgency,
-            "timestamp": time,
-            "actionsJson": JSON.stringify((n.actions || []).map(a => ({
-                "text": (a.text || "").trim() || "Action",
-                "identifier": a.identifier || ""
-                })))
+            "timestamp": time
             };
         }
     }
