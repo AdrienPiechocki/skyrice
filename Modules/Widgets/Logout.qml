@@ -94,7 +94,7 @@ LazyLoader {
                         Process {
                             id: logoutProcess
                             running: false
-                            command: [ "sh", "-c", "niri msg action quit" ]
+                            command: [ "sh", "-c", "niri msg action quit -s" ]
                         }
                         MouseArea {
                             anchors.fill: parent
