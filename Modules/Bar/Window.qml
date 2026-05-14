@@ -34,9 +34,7 @@ Capsule {
         Rectangle{
             Layout.fillWidth: true
             Layout.fillHeight: true
-            anchors.right: parent.right
-            anchors.top: parent.top
-            anchors.bottom: parent.bottom
+            Layout.alignment: Qt.AlignRight
             width: parent.width - 22
             color: "transparent"
             clip: true

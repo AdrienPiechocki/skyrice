@@ -74,6 +74,7 @@ LazyLoader {
                                 text: modelData?.text
                                 font.pointSize: 14
                                 font.family: futuraFont.name
+                                style: Text.Outline
                             }
                             Component.onCompleted: {
                                 window.implicitHeight = repeater.model.filter(x => !x.isSeparator).length * 24 + repeater.model.filter(x => x.isSeparator).length * 18 + 80
