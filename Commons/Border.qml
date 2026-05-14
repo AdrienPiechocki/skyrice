@@ -8,9 +8,10 @@ Rectangle {
     color: "transparent"
     property int size: 100
     property int stroke: 1
+    property color borderColor: "#cecece"
     Shape{
         ShapePath {
-            strokeColor: "#cecece"
+            strokeColor: root.borderColor
             strokeWidth: root.stroke
             fillColor: "transparent"
             startX: 11
@@ -20,7 +21,7 @@ Rectangle {
         }
 
         ShapePath {
-            strokeColor: "#cecece"
+            strokeColor: root.borderColor
             strokeWidth: root.stroke
             fillColor: "transparent"
             startX: 24
@@ -31,7 +32,7 @@ Rectangle {
         }
 
         ShapePath {
-            strokeColor: "#cecece"
+            strokeColor: root.borderColor
             strokeWidth: root.stroke
             fillColor: "transparent"
             startX: 19
@@ -41,7 +42,7 @@ Rectangle {
         }
 
         ShapePath {
-            strokeColor: "#cecece"
+            strokeColor: root.borderColor
             strokeWidth: root.stroke
             fillColor: "transparent"
             startX: 27
@@ -51,7 +52,7 @@ Rectangle {
         }
 
         ShapePath {
-            strokeColor: "#cecece"
+            strokeColor: root.borderColor
             strokeWidth: root.stroke
             fillColor: "transparent"
             startX: 7

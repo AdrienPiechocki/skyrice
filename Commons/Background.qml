@@ -8,12 +8,14 @@ Rectangle {
     width: 400
     color: "transparent"
     property int stroke: 2
+    property color fillColor: "black"
+    property color borderColor: "#cecece"
     Shape {
         id: background
         ShapePath {
-            strokeColor: "black"
+            strokeColor: root.fillColor
             strokeWidth: root.stroke
-            fillColor: "black"
+            fillColor: root.fillColor
             startX: 3
             startY: 3
             PathLine{ x:30; y:3}
@@ -22,9 +24,9 @@ Rectangle {
             PathLine{ x:3; y:3}
         }
         ShapePath {
-            strokeColor: "black"
+            strokeColor: root.fillColor
             strokeWidth: root.stroke
-            fillColor: "black"
+            fillColor: root.fillColor
             startX: root.width-30
             startY: 3
             PathLine{ x:root.width-3; y:3}
@@ -33,9 +35,9 @@ Rectangle {
             PathLine{ x:root.width-30; y:3}
         }
         ShapePath {
-            strokeColor: "black"
+            strokeColor: root.fillColor
             strokeWidth: root.stroke
-            fillColor: "black"
+            fillColor: root.fillColor
             startX: root.width-30
             startY: root.height-30
             PathLine{ x:root.width-3; y:root.height-30}
@@ -44,9 +46,9 @@ Rectangle {
             PathLine{ x:root.width-30; y:root.height-30}
         }
         ShapePath {
-            strokeColor: "black"
+            strokeColor: root.fillColor
             strokeWidth: root.stroke
-            fillColor: "black"
+            fillColor: root.fillColor
             startX: 3
             startY: root.height-30
             PathLine{ x:30; y:root.height-30}
@@ -55,9 +57,9 @@ Rectangle {
             PathLine{ x:3; y:root.height-30}
         }
         ShapePath {
-            strokeColor: "black"
+            strokeColor: root.fillColor
             strokeWidth: Math.pow(root.stroke, 2)
-            fillColor: "black"
+            fillColor: root.fillColor
             startX: 10
             startY: 10
             PathLine{ x:root.width-10; y:10}
@@ -66,8 +68,8 @@ Rectangle {
             PathLine{ x:10; y:10}
         }
     }
-    Border{ size: root.height; stroke: root.stroke; }
-    Border{ size: root.width; rotation: 90; x: root.width; stroke: root.stroke; }
-    Border{ size: root.height; rotation: 180; x: root.width; y:root.height; stroke: root.stroke; }
-    Border{ size: root.width; rotation: 270; y:root.height; stroke: root.stroke; }
+    Border{ size: root.height; stroke: root.stroke; borderColor:root.borderColor; }
+    Border{ size: root.width; rotation: 90; x: root.width; stroke: root.stroke; borderColor:root.borderColor; }
+    Border{ size: root.height; rotation: 180; x: root.width; y:root.height; stroke: root.stroke; borderColor:root.borderColor; }
+    Border{ size: root.width; rotation: 270; y:root.height; stroke: root.stroke; borderColor:root.borderColor; }
 }
