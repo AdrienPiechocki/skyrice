@@ -6,4 +6,5 @@ import qs.Modules
 ShellRoot {
     Wallpaper{}
     Bar{}
+    Notification{}
 }
