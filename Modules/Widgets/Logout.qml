@@ -5,6 +5,7 @@ import Quickshell.Wayland
 import Quickshell.Io
 import qs.Commons
 import qs.Modules
+import qs.Services
 
 LazyLoader {
     id: root
@@ -290,6 +291,14 @@ LazyLoader {
             anchors.fill: parent
             onClicked: root.active = false
         }
-        LockScreen{ id: lockscreen; onLockedChanged: root.active = false }
+
+        LockContext {
+            id: lockContext
+            onUnlocked: {
+                lockscreen.locked = false;
+            }
+        }
+
+        LockScreen{ id: lockscreen; context: lockContext; onLockedChanged: root.active = false }
     }
 }
