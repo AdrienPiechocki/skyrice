@@ -13,52 +13,60 @@ Rectangle {
     Shape {
         id: background
         ShapePath {
-            strokeColor: root.fillColor
+            strokeColor: "transparent"
             strokeWidth: root.stroke
             fillColor: root.fillColor
             startX: 3
             startY: 3
             PathLine{ x:30; y:3}
-            PathLine{ x:30; y:30}
+            PathLine{ x:30; y:10}
+            PathLine{ x:10; y:10}
+            PathLine{ x:10; y:30}
             PathLine{ x:3; y:30}
             PathLine{ x:3; y:3}
         }
         ShapePath {
-            strokeColor: root.fillColor
+            strokeColor: "transparent"
             strokeWidth: root.stroke
             fillColor: root.fillColor
             startX: root.width-30
             startY: 3
             PathLine{ x:root.width-3; y:3}
             PathLine{ x:root.width-3; y:30}
-            PathLine{ x:root.width-30; y:30}
+            PathLine{ x:root.width-10; y:30}
+            PathLine{ x:root.width-10; y:10}
+            PathLine{ x:root.width-30; y:10}
             PathLine{ x:root.width-30; y:3}
         }
         ShapePath {
-            strokeColor: root.fillColor
+            strokeColor: "transparent"
             strokeWidth: root.stroke
             fillColor: root.fillColor
-            startX: root.width-30
+            startX: root.width-10
             startY: root.height-30
             PathLine{ x:root.width-3; y:root.height-30}
             PathLine{ x:root.width-3; y:root.height-3}
             PathLine{ x:root.width-30; y:root.height-3}
-            PathLine{ x:root.width-30; y:root.height-30}
+            PathLine{ x:root.width-30; y:root.height-10}
+            PathLine{ x:root.width-10; y:root.height-10}
+            PathLine{ x:root.width-10; y:root.height-30}
         }
         ShapePath {
-            strokeColor: root.fillColor
+            strokeColor: "transparent"
             strokeWidth: root.stroke
             fillColor: root.fillColor
             startX: 3
             startY: root.height-30
-            PathLine{ x:30; y:root.height-30}
+            PathLine{ x:10; y:root.height-30}
+            PathLine{ x:10; y:root.height-10}
+            PathLine{ x:30; y:root.height-10}
             PathLine{ x:30; y:root.height-3}
             PathLine{ x:3; y:root.height-3}
             PathLine{ x:3; y:root.height-30}
         }
         ShapePath {
-            strokeColor: root.fillColor
-            strokeWidth: Math.pow(root.stroke, 2)
+            strokeColor: "transparent"
+            strokeWidth: root.stroke
             fillColor: root.fillColor
             startX: 10
             startY: 10
