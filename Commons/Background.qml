@@ -8,7 +8,7 @@ Rectangle {
     width: 400
     color: "transparent"
     property int stroke: 2
-    property color fillColor: "black"
+    property color fillColor: "#67000000"
     property color borderColor: "#cecece"
     Shape {
         id: background
