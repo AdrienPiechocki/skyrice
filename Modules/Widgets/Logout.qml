@@ -27,11 +27,17 @@ LazyLoader {
             margins.top: Screen.height/2 - height/2
             exclusionMode: ExclusionMode.Ignore
             WlrLayershell.layer: WlrLayer.Overlay
+            WlrLayershell.keyboardFocus: WlrKeyboardFocus.Exclusive
             implicitHeight: 400
             implicitWidth: 250
             color: "transparent"
             property int time: 5
             property string text: ""
+            Item {
+                anchors.fill: parent
+                focus: true
+                Keys.onEscapePressed: root.active = false
+            }
             Background{ width: parent.width; height: parent.height; stroke: 2}
             Rectangle {
                 anchors.fill: parent
