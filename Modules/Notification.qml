@@ -32,7 +32,8 @@ PanelWindow {
 
             return {
             "id": n.id,
-            "text": n.summary || "",
+            "summary": n.summary || "",
+            "body": n.body || "",
             "appName": n.appName || n.desktopEntry || "",
             "urgency": n.urgency < 0 || n.urgency > 2 ? 1 : n.urgency,
             "timestamp": time
@@ -73,6 +74,15 @@ PanelWindow {
                     font.pointSize: 12
                     style: Text.Outline
                 }
+                Text {
+                    x: parent.width /2 - contentWidth/2
+                    y: contentHeight
+                    color: "white"
+                    text: modelData.body ? modelData.summary : ""
+                    font.family: futuraFont.name
+                    font.pointSize: 12
+                    style: Text.Outline
+                }
                 Rectangle {
                     anchors.top: parent.top
                     anchors.topMargin: 35
@@ -88,7 +98,7 @@ PanelWindow {
                         horizontalAlignment: Text.AlignHCenter
                         verticalAlignment: Text.AlignVCenter
                         color: "white"
-                        text: modelData.text
+                        text: modelData.body ? modelData.body : modelData.summary
                         font.family: futuraFont.name
                         font.pointSize: 18
                         style: Text.Outline
