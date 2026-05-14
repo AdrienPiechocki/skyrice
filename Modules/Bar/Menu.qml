@@ -18,6 +18,12 @@ Capsule {
         id: tapHandler; 
         onTapped: inventory.active = true
     }
+    
+    TapHandler {
+        acceptedButtons: Qt.RightButton
+        onTapped: logout.active = true
+    }
 
     Launcher{ id: inventory; screenX: root.screenX; _width:Screen.width/3; _height:Screen.height}
+    Logout{ id: logout; }
 }

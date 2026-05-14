@@ -56,7 +56,7 @@ PanelWindow {
                     source: "../Assets/Fonts/Futura Condensed Medium.ttf"
                 }
                 Text {
-                    x: contentWidth
+                    x: Math.max(contentWidth, 50)
                     y: contentHeight
                     color: "white"
                     text: modelData.appName
