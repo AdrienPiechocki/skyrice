@@ -6,10 +6,18 @@ import qs.Modules.Widgets
 Capsule {
     id: root
     width: 50
+    _color: tapHandler.pressed || rightTapHandler.pressed ? '#b6ffffff' : hoverHandler.hovered ? "#67cecece" : "#67000000" 
+
     TapHandler { 
         id: tapHandler; 
         onTapped: calendar.active = true
     }
+    TapHandler {
+        id: rightTapHandler;
+        acceptedButtons: Qt.RightButton
+        onTapped: weather.active = true
+    }
+    HoverHandler { id: hoverHandler }
     FontLoader {
         id: futuraFont
         source: "../../Assets/Fonts/Futura Condensed Medium.ttf"
@@ -29,4 +37,5 @@ Capsule {
         }
     }
     Calendar{ id: calendar; }
+    Weather{ id: weather; }
 }
