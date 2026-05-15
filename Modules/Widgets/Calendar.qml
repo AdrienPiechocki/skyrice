@@ -192,7 +192,6 @@ LazyLoader {
                 Keys.onReturnPressed: {
                     Quickshell.execDetached(["gnome-calendar", "--date", info.dateWithSlashes]);
                 }
-
             }
             Background{ width: parent.width; height: parent.height; stroke: 2}
             Rectangle {
