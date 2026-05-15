@@ -100,7 +100,7 @@ Capsule {
                         text: Updates.count
                         font.family: futuraFont.name
                         font.pointSize: 12
-                        onTextChanged: cout.visible = Updates.count > 0
+                        onTextChanged: count.visible = Updates.count > 0
                     }
                 }
             }
