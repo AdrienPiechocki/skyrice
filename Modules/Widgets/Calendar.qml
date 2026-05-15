@@ -54,7 +54,7 @@ LazyLoader {
                     id: gradient
                     orientation: Gradient.Horizontal
                     GradientStop { position: 0; color: "transparent" }
-                    GradientStop { position: 0.5; color: "#84cecece" }
+                    GradientStop { position: 0.5; color: "#42cecece" }
                     GradientStop { position: 1; color: "transparent" }
                 }
                 ColumnLayout {
