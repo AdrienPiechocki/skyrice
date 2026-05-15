@@ -27,7 +27,6 @@ Singleton {
         stdout: StdioCollector {
             onStreamFinished: {
                 updateCount.running = true
-                count.visible = count.count > 0
                 root.run = false
             }
         }

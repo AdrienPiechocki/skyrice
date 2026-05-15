@@ -264,9 +264,9 @@ LazyLoader {
                                     onClicked: {
                                         list.navigateToPreviousMonth()
                                         for (let i = 0; i < days.model.length; i++) {
-                                            if (i == 0) {
-                                                days.itemAt(0).selected = 0
-                                                days.itemAt(0).color = "#cececece"
+                                            if (i == days.model.filter(d => d.day == 1)[0].idx) {
+                                                days.itemAt(days.model.filter(d => d.day == 1)[0].idx).selected = days.model.filter(d => d.day == 1)[0].idx
+                                                days.itemAt(days.model.filter(d => d.day == 1)[0].idx).color = "#cececece"
                                             }
                                             else {
                                                 days.itemAt(i).selected = -1
@@ -329,9 +329,9 @@ LazyLoader {
                                     onClicked: {
                                         list.navigateToNextMonth()
                                         for (let i = 0; i < days.model.length; i++) {
-                                            if (i == 0) {
-                                                days.itemAt(0).selected = 0
-                                                days.itemAt(0).color = "#cececece"
+                                            if (i == days.model.filter(d => d.day == 1)[0].idx) {
+                                                days.itemAt(days.model.filter(d => d.day == 1)[0].idx).selected = days.model.filter(d => d.day == 1)[0].idx
+                                                days.itemAt(days.model.filter(d => d.day == 1)[0].idx).color = "#cececece"
                                             }
                                             else {
                                                 days.itemAt(i).selected = -1
