@@ -117,7 +117,6 @@ ProgressBar {
         font: root.font
         text: root.text
         color: textColor
-        opacity: 0.75
         width: root.width
         height: root.height
         verticalAlignment: Text.AlignVCenter

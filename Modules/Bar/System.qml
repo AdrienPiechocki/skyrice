@@ -22,15 +22,64 @@ Capsule {
     width: 150
     RowLayout{
         anchors.fill: parent
-        spacing: 5
+        spacing: 0
+
+        Capsule {
+            id: resources
+            active: false
+            color: resourcesHoverHandler.hovered ? "#67cecece" : "#67000000"
+            HoverHandler { id: resourcesHoverHandler; }
+            Layout.maximumWidth: 35
+            Layout.maximumHeight: 22
+            Layout.alignment: Qt.AlignHCenter
+            Text {
+                anchors.centerIn: parent
+                color: "#cecece"
+                text: ""
+                font.family: futuraFont.name
+                font.pointSize: 12
+            }
+        }
+        Capsule {
+            id: update
+            active: false
+            color: updateHoverHandler.hovered ? "#67cecece" : "#67000000"
+            HoverHandler { id: updateHoverHandler; }
+            Layout.maximumWidth: 35
+            Layout.maximumHeight: 22
+            Layout.alignment: Qt.AlignHCenter
+            Text {
+                anchors.centerIn: parent
+                color: "#cecece"
+                text: ""
+                font.family: futuraFont.name
+                font.pointSize: 12
+            }
+        }
+        Capsule {
+            id: settings
+            active: false
+            color: settingsHoverHandler.hovered ? "#67cecece" : "#67000000"
+            HoverHandler { id: settingsHoverHandler; }
+            Layout.maximumWidth: 35
+            Layout.maximumHeight: 22
+            Layout.alignment: Qt.AlignHCenter
+            Text {
+                anchors.centerIn: parent
+                color: "#cecece"
+                text: ""
+                font.family: futuraFont.name
+                font.pointSize: 12
+            }
+        }
         Capsule{
             id: battery
             active: false
-            color: hoverHandler.hovered ? "#67cecece" : "#67000000"
-            HoverHandler { id: hoverHandler; }
+            color: batteryHoverHandler.hovered ? "#67cecece" : "#67000000"
+            HoverHandler { id: batteryHoverHandler; }
             Layout.maximumWidth: 35
             Layout.maximumHeight: 22
-            Layout.alignment: Qt.AlignRight
+            Layout.alignment: Qt.AlignHCenter
             ProgressBarText {
                 id: batteryProgress
                 anchors {
@@ -40,7 +89,7 @@ Capsule {
                 valueBarWidth: icon.bodyWidth
                 valueBarHeight: icon.bodyHeight
                 value: percentage
-                text: Math.round(value * 100)
+                text: `${Math.round(value * 100)}`
                 shimmer: isCharging
                 pulse: isCharging
                 highlightColor: (() => {
@@ -50,7 +99,7 @@ Capsule {
                     if (isLow && !isCharging) {
                         return "orange";
                     }
-                    return "green";
+                    return "#9d9d9d";
                 })()
                 font.family: futuraFont.name
                 font.bold: true
@@ -78,8 +127,8 @@ Capsule {
             BatteryIcon {
                 id: icon
                 anchors.centerIn: parent
-                size: 22
-                iconColor: "green"
+                size: 24
+                iconColor: '#9d9d9d'
             }
         }
     }

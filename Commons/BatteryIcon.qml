@@ -10,8 +10,6 @@ Item {
     readonly property real bodyWidth: body.width
     readonly property real bodyHeight: body.height
     readonly property real bodyRadius: body.radius
-
-    state: "horizontal"
     width: size
     height: size * 0.6
 
@@ -21,67 +19,22 @@ Item {
         border.color: root.iconColor
         border.width: root.borderWidth
         radius: root.size * 0.1
+        width: root.width * 0.9
+        height: root.height
+        anchors.left: parent.left
+        anchors.right: nub.left
+        anchors.verticalCenter: parent.verticalCenter
     }
 
     Rectangle {
         id: nub
         color: root.iconColor
         radius: 0
+        anchors.right: parent.right
+        anchors.verticalCenter: parent.verticalCenter
+        width: root.size * 0.1
+        height: root.size * 0.2
+        topRightRadius: root.size * 0.1
+        bottomRightRadius: root.size * 0.1
     }
-
-    states: [
-        State {
-            name: "horizontal"
-            AnchorChanges {
-                target: body
-                anchors.left: parent.left
-                anchors.right: nub.left
-                anchors.verticalCenter: parent.verticalCenter
-            }
-            AnchorChanges {
-                target: nub
-                anchors.right: parent.right
-                anchors.verticalCenter: parent.verticalCenter
-            }
-            PropertyChanges {
-                target: body
-                width: root.width * 0.9
-                height: root.height
-            }
-            PropertyChanges {
-                target: nub
-                width: root.size * 0.1
-                height: root.size * 0.2
-                topRightRadius: root.size * 0.1
-                bottomRightRadius: root.size * 0.1
-            }
-        },
-        State {
-            name: "vertical"
-            AnchorChanges {
-                target: body
-                anchors.left: parent.left
-                anchors.right: parent.right
-                anchors.top: nub.bottom
-                anchors.bottom: parent.bottom
-            }
-            AnchorChanges {
-                target: nub
-                anchors.top: parent.top
-                anchors.horizontalCenter: parent.horizontalCenter
-            }
-            PropertyChanges {
-                target: body
-                width: root.width
-                height: root.height * 0.9
-            }
-            PropertyChanges {
-                target: nub
-                width: root.size * 0.2
-                height: root.size * 0.1
-                topLeftRadius: root.size * 0.1
-                topRightRadius: root.size * 0.1
-            }
-        }
-    ]
 }
