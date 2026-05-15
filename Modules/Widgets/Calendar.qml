@@ -29,7 +29,7 @@ LazyLoader {
             exclusionMode: ExclusionMode.Ignore
             WlrLayershell.layer: WlrLayer.Overlay
             WlrLayershell.keyboardFocus: WlrKeyboardFocus.Exclusive
-            implicitHeight: 500
+            implicitHeight: 600
             implicitWidth: 400
             color: "transparent"
             Item {
@@ -54,7 +54,7 @@ LazyLoader {
                     id: gradient
                     orientation: Gradient.Horizontal
                     GradientStop { position: 0; color: "transparent" }
-                    GradientStop { position: 0.5; color: "#67cecece" }
+                    GradientStop { position: 0.5; color: "#84cecece" }
                     GradientStop { position: 1; color: "transparent" }
                 }
                 ColumnLayout {
@@ -86,7 +86,7 @@ LazyLoader {
                     }
                     Rectangle {
                         Layout.fillWidth: true
-                        Layout.preferredHeight: 20
+                        Layout.preferredHeight: 40
                         color: "transparent"
                         RowLayout {
                             anchors.fill: parent
@@ -98,7 +98,7 @@ LazyLoader {
                                 radius: 10
                                 Text {
                                     anchors.centerIn: parent
-                                    text: "prev"
+                                    text: ""
                                     color: "white"
                                     font.pointSize: 11
                                 }
@@ -106,7 +106,7 @@ LazyLoader {
                                     anchors.fill: parent
                                     onClicked: list.navigateToPreviousMonth()
                                     hoverEnabled: true
-                                    onEntered: parent.color = "#67cecece"
+                                    onEntered: parent.color = "#84cecece"
                                     onExited: parent.color = "#42cecece"
                                 }
                             }
@@ -118,7 +118,7 @@ LazyLoader {
                                 radius: 10
                                 Text {
                                     anchors.centerIn: parent
-                                    text: "now"
+                                    text: ""
                                     color: "white"
                                     font.pointSize: 11
                                 }
@@ -127,10 +127,19 @@ LazyLoader {
                                     onClicked: {
                                         list.calendarMonth = list.now.getMonth();
                                         list.calendarYear = list.now.getFullYear();
+                                        for (let i = 0; i < days.model.length; i++) {
+                                            if (days.itemAt(i).today) {
+                                                days.itemAt(i).selected = i
+                                                days.itemAt(i).color = "#cececece"
+                                            }
+                                            else {
+                                                days.itemAt(i).color ="#42cecece"
+                                            }
+                                        }
                                         CalendarService.loadEvents();
                                     }
                                     hoverEnabled: true
-                                    onEntered: parent.color = "#67cecece"
+                                    onEntered: parent.color = "#84cecece"
                                     onExited: parent.color = "#42cecece"
                                 }
                             }
@@ -142,7 +151,7 @@ LazyLoader {
                                 radius: 10
                                 Text {
                                     anchors.centerIn: parent
-                                    text: "next"
+                                    text: ""
                                     color: "white"
                                     font.pointSize: 11
                                 }
@@ -150,7 +159,7 @@ LazyLoader {
                                     anchors.fill: parent
                                     onClicked: list.navigateToNextMonth()
                                     hoverEnabled: true
-                                    onEntered: parent.color = "#67cecece"
+                                    onEntered: parent.color = "#84cecece"
                                     onExited: parent.color = "#42cecece"
                                 }
                             }
@@ -158,8 +167,117 @@ LazyLoader {
                     }
                     Rectangle {
                         Layout.fillWidth: true
-                        Layout.preferredHeight: 20
+                        Layout.preferredHeight: 50
                         color: "transparent"
+                        ColumnLayout {
+                            anchors.fill: parent
+                            spacing: 0
+                            Rectangle {
+                                Layout.fillWidth: true
+                                Layout.preferredHeight: 25
+                                color: "transparent"
+                                Text {
+                                    readonly property list<string> months: ["January", "February", "March", "April", "May", "June", "Jully", "August", "September", "October", "November", "December"]
+                                    anchors.centerIn: parent
+                                    text: `${months[list.calendarMonth]} ${list.calendarYear}`
+                                    color: "#cecece"
+                                    font.pointSize: 12
+                                }
+                            }
+                            Rectangle {
+                                Layout.fillWidth: true
+                                Layout.preferredHeight: 25
+                                color: "transparent"
+                                RowLayout {
+                                    anchors.fill: parent
+                                    spacing: 0
+                                    Rectangle {
+                                        Layout.alignment: Qt.AlignHCenter
+                                        width: 25
+                                        height: 25
+                                        color: "transparent"
+                                        Text {
+                                            anchors.centerIn: parent
+                                            text: "Mon"
+                                            color: "#cecece"
+                                            font.pointSize: 12
+                                        }
+                                    }
+                                    Rectangle {
+                                        Layout.alignment: Qt.AlignHCenter
+                                        width: 25
+                                        height: 25
+                                        color: "transparent"
+                                        Text {
+                                            anchors.centerIn: parent
+                                            text: "Tue"
+                                            color: "#cecece"
+                                            font.pointSize: 12
+                                        }
+                                    }
+                                    Rectangle {
+                                        Layout.alignment: Qt.AlignHCenter
+                                        width: 25
+                                        height: 25
+                                        color: "transparent"
+                                        Text {
+                                            anchors.centerIn: parent
+                                            text: "Wed"
+                                            color: "#cecece"
+                                            font.pointSize: 12
+                                        }
+                                    }
+                                    Rectangle {
+                                        Layout.alignment: Qt.AlignHCenter
+                                        width: 25
+                                        height: 25
+                                        color: "transparent"
+                                        Text {
+                                            anchors.centerIn: parent
+                                            text: "Thu"
+                                            color: "#cecece"
+                                            font.pointSize: 12
+                                        }
+                                    }
+                                    Rectangle {
+                                        Layout.alignment: Qt.AlignHCenter
+                                        width: 25
+                                        height: 25
+                                        color: "transparent"
+                                        Text {
+                                            anchors.centerIn: parent
+                                            text: "Fri"
+                                            color: "#cecece"
+                                            font.pointSize: 12
+                                        }
+                                    }
+                                    Rectangle {
+                                        Layout.alignment: Qt.AlignHCenter
+                                        width: 25
+                                        height: 25
+                                        color: "transparent"
+                                        Text {
+                                            anchors.centerIn: parent
+                                            text: "Sat"
+                                            color: "#cecece"
+                                            font.pointSize: 12
+                                        }
+                                    }
+                                    Rectangle {
+                                        Layout.alignment: Qt.AlignHCenter
+                                        width: 25
+                                        height: 25
+                                        color: "transparent"
+                                        Text {
+                                            anchors.centerIn: parent
+                                            text: "Sun"
+                                            color: "#cecece"
+                                            font.pointSize: 12
+                                        }
+                                    }
+                                }
+                            }
+                        }
                     }
                     Rectangle {
                         id: list
@@ -328,18 +446,33 @@ LazyLoader {
                             }
 
                             Repeater {
+                                id: days
                                 model: grid.daysModel
 
                                 Item {
+                                    id: day
                                     Layout.fillWidth: true
                                     Layout.fillHeight: true
-
+                                    property int selected: modelData.today ? index : -1
+                                    property color color: selected == index ? "#cececece" : modelData.today ? "#84cecece" : "#42cecece"
+                                    property bool today: modelData.today
+                                    onSelectedChanged: {
+                                        if (selected == index) {
+                                            const dateWithSlashes = `${modelData.day.toString().padStart(2, '0')}/${(modelData.month + 1).toString().padStart(2, '0')}/${modelData.year.toString().substring(2)}`;
+                                            info.dateWithSlashes = dateWithSlashes
+                                            const weekDays = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
+                                            const months = ["January", "February", "March", "April", "May", "June", "Jully", "August", "September", "October", "November", "December"]
+                                            title.text = `${weekDays[index%7]}, ${modelData.day.toString().padStart(2, '0')} ${months[modelData.month]} ${modelData.year.toString()}`
+                                            let events = list.getEventsForDate(modelData.year, modelData.month, modelData.day)
+                                            description.model = events
+                                        }
+                                    }
                                     Rectangle {
                                         width: 40
                                         height: 40
                                         anchors.centerIn: parent
                                         radius: 10
-                                        color: modelData.today ? "#67cecece" : "#42cecece"
+                                        color: day.color
 
                                         Text {
                                             anchors.centerIn: parent
@@ -347,12 +480,11 @@ LazyLoader {
                                             color: {
                                             if (modelData.today)
                                                 return "#ffffff";
-                                            if (modelData.currentMonth)
-                                                return '#cecece';
                                             return "#cecece";
                                             }
-                                            opacity: modelData.currentMonth ? 1.0 : 0.4
+                                            opacity: modelData.currentMonth ? 1.0 : 0.5
                                             font.pointSize: 12
+                                            style: Text.Outline
                                         }
 
                                         // Event indicator dots
@@ -379,14 +511,16 @@ LazyLoader {
                                             anchors.fill: parent
                                             acceptedButtons: Qt.LeftButton | Qt.RightButton
                                             onClicked: (mouse)=> {
-                                                const dateWithSlashes = `${modelData.day.toString().padStart(2, '0')}/${(modelData.month + 1).toString().padStart(2, '0')}/${modelData.year.toString().substring(2)}`;
-                                                info.dateWithSlashes = dateWithSlashes
-                                                let events = list.getEventsForDate(modelData.year, modelData.month, modelData.day)
-                                                description.model = events
+                                                for (let i = 0; i < days.model.length; i++) {
+                                                    days.itemAt(i).selected = -1
+                                                    days.itemAt(i).color = days.itemAt(i).today ? "#84cecece" : "#42cecece"
+                                                }
+                                                day.selected = index
+                                                day.color = day.selected == index ? "#cececece" : modelData.today ? "#84cecece" : "#42cecece"
                                             }
                                             hoverEnabled: true
-                                            onEntered: parent.color = "#cececece"
-                                            onExited: parent.color = modelData.today ? "#67cecece" : "#42cecece"
+                                            onEntered: day.color = "#cececece"
+                                            onExited: day.color = day.selected == index ? "#cececece" : modelData.today ? "#84cecece" : "#42cecece"
                                         }
                                     }
                                 }
@@ -411,29 +545,51 @@ LazyLoader {
                         color: "transparent"
                         clip: true
                         property var dateWithSlashes
-                        GridLayout {
+                        ColumnLayout {
                             anchors.fill: parent
-                            columns: 3
-                            rowSpacing: 0
-                            Repeater {
-                                id: description
-                                model: 0
-                                Rectangle {
-                                    Layout.fillWidth: true
-                                    Layout.preferredWidth: parent.width/3
-                                    Layout.preferredHeight: parent.height/3
-                                    Layout.alignment: Qt.AlignHCenter
-                                    clip: true
-                                    color: "transparent"
-                                    Text {
-                                        anchors.fill: parent
-                                        anchors.centerIn: parent
-                                        horizontalAlignment: Text.AlignHCenter
-                                        color: "white"
-                                        font.family: futuraFont.name
-                                        font.pointSize: 14
-                                        text: modelData.summary
-                                        elide: Text.ElideRight
+                            spacing: 0
+                            Rectangle {
+                                Layout.fillWidth: true
+                                Layout.fillHeight: true
+                                color: "transparent"
+                                Text {
+                                    id: title
+                                    anchors.centerIn: parent
+                                    text: ""
+                                    color: "white"
+                                    font.family: futuraFont.name
+                                    font.pointSize: 18
+                                }
+                            }
+                            Rectangle {
+                                Layout.fillWidth: true
+                                Layout.fillHeight: true
+                                color: "transparent"
+                                GridLayout {
+                                    anchors.fill: parent
+                                    columns: 3
+                                    rowSpacing: 0
+                                    Repeater {
+                                        id: description
+                                        model: 0
+                                        Rectangle {
+                                            Layout.fillWidth: true
+                                            Layout.preferredWidth: parent.width/3
+                                            Layout.preferredHeight: parent.height/3
+                                            Layout.alignment: Qt.AlignHCenter
+                                            clip: true
+                                            color: "transparent"
+                                            Text {
+                                                anchors.fill: parent
+                                                anchors.centerIn: parent
+                                                horizontalAlignment: Text.AlignHCenter
+                                                color: "white"
+                                                font.family: futuraFont.name
+                                                font.pointSize: 14
+                                                text: modelData.summary
+                                                elide: Text.ElideRight
+                                            }
+                                        }
                                     }
                                 }
                             }
@@ -444,8 +600,8 @@ LazyLoader {
                                 Quickshell.execDetached(["gnome-calendar", "--date", info.dateWithSlashes]);
                             }
                             hoverEnabled: true
-                            onEntered: parent.gradient = description.model.length > 0 ? gradient : Gradient.Transparent
-                            onExited: parent.gradient = Gradient.Transparent
+                            onEntered: info.gradient = gradient
+                            onExited: info.gradient = Gradient.Transparent
                         }
                     }
                 }
