@@ -186,12 +186,19 @@ LazyLoader {
                             onClicked: {
                                 rebootTimer.stop()
                                 shutdownTimer.stop()
-                                logoutTimer.start()
-                                window.time = 5
-                                window.text = "Logging out"
-                                info.text = `${window.text} in ${window.time}`
-                                timer.start()
-                                info.canCancel = true
+                                if (logoutTimer.running) {
+                                    logoutTimer.stop()
+                                    logoutProcess.running = true
+                                }
+                                else {
+                                    logoutTimer.stop()
+                                    logoutTimer.start()
+                                    window.time = 5
+                                    window.text = "Logging out"
+                                    info.text = `${window.text} in ${window.time}`
+                                    timer.start()
+                                    info.canCancel = true
+                                }
                             }
                             hoverEnabled: true
                             onEntered: parent.gradient = gradient
@@ -229,12 +236,19 @@ LazyLoader {
                             onClicked: {
                                 logoutTimer.stop()
                                 shutdownTimer.stop()
-                                rebootTimer.start()
-                                window.time = 5
-                                window.text = "Rebooting"
-                                info.text = `${window.text} in ${window.time}`
-                                timer.start()
-                                info.canCancel = true
+                                if (rebootTimer.running) {
+                                    rebootTimer.stop()
+                                    rebootProcess.running = true
+                                }
+                                else {
+                                    rebootTimer.stop()
+                                    rebootTimer.start()
+                                    window.time = 5
+                                    window.text = "Rebooting"
+                                    info.text = `${window.text} in ${window.time}`
+                                    timer.start()
+                                    info.canCancel = true
+                                }
                             }
                             hoverEnabled: true
                             onEntered: parent.gradient = gradient
@@ -272,12 +286,19 @@ LazyLoader {
                             onClicked: {
                                 logoutTimer.stop()
                                 rebootTimer.stop()
-                                shutdownTimer.start()
-                                window.time = 5
-                                window.text = "Shutting down"
-                                info.text = `${window.text} in ${window.time}`
-                                timer.start()
-                                info.canCancel = true
+                                if (shutdownTimer.running) {
+                                    shutdownTimer.stop()
+                                    shutdownProcess.running = true
+                                }
+                                else {
+                                    shutdownTimer.stop()
+                                    shutdownTimer.start()
+                                    window.time = 5
+                                    window.text = "Shutting down"
+                                    info.text = `${window.text} in ${window.time}`
+                                    timer.start()
+                                    info.canCancel = true
+                                }
                             }
                             hoverEnabled: true
                             onEntered: parent.gradient = gradient
