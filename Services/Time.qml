@@ -94,7 +94,7 @@ Singleton {
     // getMonth() is zero-based, so we add 1
     const month = root.months[date.getMonth()];
     const day = String(date.getDate()).padStart(2, '0');
-    const m_day = root.days[date.getDay()];
+    const m_day = root.days[date.getDay()-1];
 
     const hours = String(date.getHours()).padStart(2, '0');
     const minutes = String(date.getMinutes()).padStart(2, '0');
