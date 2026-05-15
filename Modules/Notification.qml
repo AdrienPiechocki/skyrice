@@ -51,6 +51,7 @@ PanelWindow {
                 implicitHeight: 125
                 y: 45 + 125 * repeater.model.indexOf(modelData)
                 color: "transparent"
+                property var textWidth: 0
                 Background{ width: popup.width; height: popup.height; stroke: 2; fillColor: "black"; borderColor: modelData.urgency > 1 ? "orange" : "#cecece"}
                 FontLoader {
                     id: futuraFont
@@ -103,26 +104,37 @@ PanelWindow {
                         font.pointSize: 18
                         style: Text.Outline
                         wrapMode: Text.WordWrap
-                        Component.onCompleted: elide = contentHeight > parent.height || contentWidth > parent.width ? Text.ElideRight : Text.ElideNone
+                        Component.onCompleted: {
+                            elide = contentHeight > parent.height || contentWidth > parent.width ? Text.ElideRight : Text.ElideNone
+                            popup.textWidth = text.contentWidth
+                            cooldown.interval = 4000 + popup.textWidth
+                            cooldown.start()
+                        }
                     }
                 }
 
                 Timer {
-                    running: true
-                    interval: 1000 + text.contentWidth * 20
+                    id: cooldown
+                    running: false
                     onTriggered: {
-                        root.notifs.splice(modelData.idx, 1)
-                        root.implicitHeight = 125 * root.notifs.length
-                        repeater.model = root.notifs
+                        const idx = root.notifs.findIndex(n => n.id === modelData.id)
+                        if (idx !== -1) {
+                            root.notifs.splice(idx, 1)
+                            root.implicitHeight = 125 * root.notifs.length
+                            repeater.model = root.notifs
+                        }
                     }
                 }
 
                 MouseArea {
                     anchors.fill: parent
                     onClicked: {
-                        root.notifs.splice(modelData.idx, 1)
-                        root.implicitHeight = 125 * root.notifs.length
-                        repeater.model = root.notifs
+                        const idx = root.notifs.findIndex(n => n.id === modelData.id)
+                        if (idx !== -1) {
+                            root.notifs.splice(idx, 1)
+                            root.implicitHeight = 125 * root.notifs.length
+                            repeater.model = root.notifs
+                        }
                     }
                 }
             }
