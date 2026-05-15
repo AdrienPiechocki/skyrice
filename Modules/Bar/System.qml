@@ -83,7 +83,10 @@ Capsule {
                 running: false
                 command: [ "kitty", "-e", root.updatePath]
                 stdout: StdioCollector {
-                    onStreamFinished: updateCount.running = true
+                    onStreamFinished: {
+                        updateCount.running = true
+                        count.visible = countText.text > 0
+                    }
                 }
             }
             Timer {

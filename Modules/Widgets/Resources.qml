@@ -1,14 +1,17 @@
 import QtQuick
 import QtQuick.Layouts
 import Quickshell
+import Quickshell.Io
 import Quickshell.Wayland
 import qs.Commons
+import qs.Services
 
 LazyLoader {
     id: root
     active: false
     property int popupX: 0
     property int popupY: 0
+    readonly property var gpuUsagePath: Quickshell.shellDir + "/Scripts/gpu_usage.sh" 
     PanelWindow {
         id: menu
 
@@ -28,10 +31,27 @@ LazyLoader {
             margins.top: root.popupY
             exclusionMode: ExclusionMode.Ignore
             WlrLayershell.layer: WlrLayer.Overlay
-            implicitHeight: 250
-            implicitWidth: 250
+            implicitHeight: 225
+            implicitWidth: 225
             color: "transparent"
             
+            Process {
+                id: gpuUsage
+                running: true
+                command: [ "sh", "-c", root.gpuUsagePath ]
+                stdout: StdioCollector {
+                    onStreamFinished: gpuText.usage = text
+                }
+            }
+            Timer {
+                running: true
+                interval: 2500
+                repeat: true
+                triggeredOnStart: true
+                onTriggered: {
+                    gpuUsage.running = true
+                }
+            }
             
             FontLoader {
                 id: futuraFont
@@ -48,19 +68,23 @@ LazyLoader {
                 color: "transparent"
                 ColumnLayout {
                     anchors.fill: parent
+                    spacing: 0
                     Rectangle {
                         Layout.fillWidth: true
                         Layout.fillHeight: true
                         color: "transparent"
                         ColumnLayout {
                             anchors.fill: parent
+                            spacing: 0
                             Rectangle {
                                 Layout.fillWidth: true
                                 Layout.fillHeight: true
                                 color: "transparent"
                                 Text {
+                                    id: gpuText
+                                    property int usage: 0
                                     anchors.centerIn: parent
-                                    text: "GPU - 0%"
+                                    text: `GPU - ${usage}%`
                                     color: "white"
                                     font.family: futuraFont.name
                                     font.pointSize: 14
@@ -76,8 +100,12 @@ LazyLoader {
                                     _color: '#67184a13' 
                                     height: 20
                                     Rectangle {
-                                        anchors.fill: parent
+                                        anchors.centerIn: parent
+                                        height: parent.height
+                                        width: parent.width - gpuText.usage
                                         color: '#166f1a'
+                                        border.width: 2
+                                        border.color: "#67184a13"
                                     }
                                 }
                             }
@@ -89,13 +117,15 @@ LazyLoader {
                         color: "transparent"
                         ColumnLayout {
                             anchors.fill: parent
+                            spacing: 0
                             Rectangle {
                                 Layout.fillWidth: true
                                 Layout.fillHeight: true
                                 color: "transparent"
                                 Text {
+                                    id: cpuText
                                     anchors.centerIn: parent
-                                    text: "CPU - 0%"
+                                    text: `CPU - ${Math.round(CPU.overallUsage * 100)}%`
                                     color: "white"
                                     font.family: futuraFont.name
                                     font.pointSize: 14
@@ -111,8 +141,12 @@ LazyLoader {
                                     _color: '#674a1313' 
                                     height: 20
                                     Rectangle {
-                                        anchors.fill: parent
+                                        anchors.centerIn: parent
+                                        height: parent.height
+                                        width: parent.width - Math.round(CPU.overallUsage * 100)
                                         color: '#6f1616'
+                                        border.width: 2
+                                        border.color: "#674a1313"
                                     }
                                 }
                             }
@@ -124,13 +158,15 @@ LazyLoader {
                         color: "transparent"
                         ColumnLayout {
                             anchors.fill: parent
+                            spacing: 0
                             Rectangle {
                                 Layout.fillWidth: true
                                 Layout.fillHeight: true
                                 color: "transparent"
                                 Text {
+                                    id: ramText
                                     anchors.centerIn: parent
-                                    text: "RAM - 0%"
+                                    text: `RAM - ${Math.round(RAM.used / RAM.total * 100) || 0}%`
                                     color: "white"
                                     font.family: futuraFont.name
                                     font.pointSize: 14
@@ -146,8 +182,12 @@ LazyLoader {
                                     _color: '#6713314a' 
                                     height: 20
                                     Rectangle {
-                                        anchors.fill: parent
+                                        anchors.centerIn: parent
+                                        height: parent.height
+                                        width: parent.width - (Math.round(RAM.used / RAM.total * 100)||0)
                                         color: '#16476f'
+                                        border.width: 2
+                                        border.color: "#6713314a"
                                     }
                                 }
                             }
