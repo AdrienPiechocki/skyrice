@@ -32,10 +32,167 @@ LazyLoader {
             implicitHeight: 600
             implicitWidth: 400
             color: "transparent"
+            Component.onCompleted: {
+                for (let i = 0; i < days.model.length; i++) {
+                    if (days.itemAt(i).today) {
+                        days.itemAt(i).selected = i
+                        days.itemAt(i).color = "#cececece"
+                    }
+                }
+                CalendarService.loadEvents();
+            }
             Item {
                 anchors.fill: parent
                 focus: true
                 Keys.onEscapePressed: root.active = false
+                Keys.onTabPressed: {
+                    list.navigateToNextMonth()
+                    for (let i = 0; i < days.model.length; i++) {
+                        if (i == days.model.filter(d => d.day == 1)[0].idx) {
+                            days.itemAt(days.model.filter(d => d.day == 1)[0].idx).selected = days.model.filter(d => d.day == 1)[0].idx
+                            days.itemAt(days.model.filter(d => d.day == 1)[0].idx).color = "#cececece"
+                        }
+                        else {
+                            days.itemAt(i).selected = -1
+                            days.itemAt(i).color = days.itemAt(i).today ? "#84cecece" : "#42cecece"
+                        }
+                    }
+                }
+                Keys.onBacktabPressed: {
+                    list.navigateToPreviousMonth()
+                    for (let i = 0; i < days.model.length; i++) {
+                        if (i == days.model.filter(d => d.day == 1)[0].idx) {
+                            days.itemAt(days.model.filter(d => d.day == 1)[0].idx).selected = days.model.filter(d => d.day == 1)[0].idx
+                            days.itemAt(days.model.filter(d => d.day == 1)[0].idx).color = "#cececece"
+                        }
+                        else {
+                            days.itemAt(i).selected = -1
+                            days.itemAt(i).color = days.itemAt(i).today ? "#84cecece" : "#42cecece"
+                        }
+                    }
+                }
+                Keys.onSpacePressed: {
+                    list.calendarMonth = list.now.getMonth();
+                    list.calendarYear = list.now.getFullYear();
+                    for (let i = 0; i < days.model.length; i++) {
+                        if (days.itemAt(i).today) {
+                            days.itemAt(i).selected = i
+                            days.itemAt(i).color = "#cececece"
+                        }
+                        else {
+                            days.itemAt(i).selected = -1
+                            days.itemAt(i).color = days.itemAt(i).today ? "#84cecece" : "#42cecece"
+                        }
+                    }
+                }
+                Keys.onDownPressed: {
+                    for (let i = 0; i < days.model.length; i++) {
+                        if (days.itemAt(i).selected == i) {
+                            if (i+7 > days.model.length-1 && i > days.model.length-15) {
+                                list.navigateToNextMonth()
+                                days.itemAt(i).selected = -1
+                                days.itemAt(i).color = days.itemAt(i).today ? "#84cecece" : "#42cecece"
+                                days.itemAt(i%7 +7).selected = i%7 +7
+                                days.itemAt(i%7 +7).color = "#cececece"
+                            }
+                            else if (i+7 > days.model.length-1 || days.itemAt(i+7).dayNumber < days.itemAt(i).dayNumber) {
+                                list.navigateToNextMonth()
+                                days.itemAt(i).selected = -1
+                                days.itemAt(i).color = days.itemAt(i).today ? "#84cecece" : "#42cecece"
+                                days.itemAt(i%7).selected = i%7
+                                days.itemAt(i%7).color = "#cececece"
+                            }
+                            else {
+                                days.itemAt(i).selected = -1
+                                days.itemAt(i).color = days.itemAt(i).today ? "#84cecece" : "#42cecece"
+                                days.itemAt(i+7).selected = i+7
+                                days.itemAt(i+7).color = "#cececece"
+                            }
+                            break
+                        }
+                    }
+                }
+                Keys.onUpPressed: {
+                    for (let i = 0; i < days.model.length; i++) {
+                        if (days.itemAt(i).selected == i) {
+                            if (i-7 < 0 && i < 14) {
+                                list.navigateToPreviousMonth()
+                                days.itemAt(i).selected = -1
+                                days.itemAt(i).color = days.itemAt(i).today ? "#84cecece" : "#42cecece"
+                                days.itemAt(days.model.length-1 - (7-i%7-1) -7).selected = days.model.length-1 - (7-i%7-1) -7
+                                days.itemAt(days.model.length-1 - (7-i%7-1) -7).color = "#cececece"
+                            }
+                            else if (i-7 < 0 || days.itemAt(i-7).dayNumber > days.itemAt(i).dayNumber) {
+                                list.navigateToPreviousMonth()
+                                days.itemAt(i).selected = -1
+                                days.itemAt(i).color = days.itemAt(i).today ? "#84cecece" : "#42cecece"
+                                days.itemAt(days.model.length-1 - (7-i%7-1)).selected = days.model.length-1 - (7-i%7-1)
+                                days.itemAt(days.model.length-1 - (7-i%7-1)).color = "#cececece"
+                            }
+                            else {
+                                days.itemAt(i).selected = -1
+                                days.itemAt(i).color = days.itemAt(i).today ? "#84cecece" : "#42cecece"
+                                days.itemAt(i-7).selected = i-7
+                                days.itemAt(i-7).color = "#cececece"
+                            }
+                            break
+                        }
+                    }
+                }
+                Keys.onLeftPressed: {
+                    for (let i = 0; i < days.model.length; i++) {
+                        if (days.itemAt(i).selected == i) {
+                            if (i-1 < 0) {
+                                list.navigateToPreviousMonth()
+                                days.itemAt(i).selected = -1
+                                days.itemAt(i).color = days.itemAt(i).today ? "#84cecece" : "#42cecece"
+                                days.itemAt(days.model.length-1).selected = days.model.length-1
+                                days.itemAt(days.model.length-1).color = "#cececece"
+                            }
+                            else if (i < 7 && days.itemAt(i-1).dayNumber > days.itemAt(i).dayNumber) {
+                                list.navigateToPreviousMonth()
+                                days.itemAt(i).selected = -1
+                                days.itemAt(i).color = days.itemAt(i).today ? "#84cecece" : "#42cecece"
+                                days.itemAt(days.model.length-1 - (7-i%7-1) -1).selected = days.model.length-1 - (7-i%7-1) -1
+                                days.itemAt(days.model.length-1 - (7-i%7-1) -1).color = "#cececece"
+                            }
+                            else {
+                                days.itemAt(i).selected = -1
+                                days.itemAt(i).color = days.itemAt(i).today ? "#84cecece" : "#42cecece"
+                                days.itemAt(i-1).selected = i-1
+                                days.itemAt(i-1).color = "#cececece"
+                            }
+                            break
+                        }
+                    }
+                }
+                Keys.onRightPressed: {
+                    for (let i = 0; i < days.model.length; i++) {
+                        if (days.itemAt(i).selected == i) {
+                            days.itemAt(i).selected = -1
+                            days.itemAt(i).color = days.itemAt(i).today ? "#84cecece" : "#42cecece"
+                            if ( i+1 > days.model.length-1 ) {
+                                list.navigateToNextMonth()
+                                days.itemAt(0).selected = 0
+                                days.itemAt(0).color = "#cececece"
+                            }
+                            else if (i > 6 && days.itemAt(i+1).dayNumber < days.itemAt(i).dayNumber) {
+                                list.navigateToNextMonth()
+                                days.itemAt(i%7 +1).selected = i%7 +1
+                                days.itemAt(i%7 +1).color = "#cececece"
+                            }
+                            else {
+                                days.itemAt(i+1).selected = i+1
+                                days.itemAt(i+1).color = "#cececece"
+                            }
+                            break
+                        }
+                    }
+                }
+                Keys.onReturnPressed: {
+                    
+                }
+
             }
             Background{ width: parent.width; height: parent.height; stroke: 2}
             Rectangle {
@@ -104,7 +261,19 @@ LazyLoader {
                                 }
                                 MouseArea {
                                     anchors.fill: parent
-                                    onClicked: list.navigateToPreviousMonth()
+                                    onClicked: {
+                                        list.navigateToPreviousMonth()
+                                        for (let i = 0; i < days.model.length; i++) {
+                                            if (i == 0) {
+                                                days.itemAt(0).selected = 0
+                                                days.itemAt(0).color = "#cececece"
+                                            }
+                                            else {
+                                                days.itemAt(i).selected = -1
+                                                days.itemAt(i).color = days.itemAt(i).today ? "#84cecece" : "#42cecece"
+                                            }
+                                        }
+                                    }
                                     hoverEnabled: true
                                     onEntered: parent.color = "#84cecece"
                                     onExited: parent.color = "#42cecece"
@@ -133,7 +302,7 @@ LazyLoader {
                                                 days.itemAt(i).color = "#cececece"
                                             }
                                             else {
-                                                days.itemAt(i).color ="#42cecece"
+                                                days.itemAt(i).color =days.itemAt(i).today ? "#84cecece" : "#42cecece"
                                             }
                                         }
                                         CalendarService.loadEvents();
@@ -157,7 +326,19 @@ LazyLoader {
                                 }
                                 MouseArea {
                                     anchors.fill: parent
-                                    onClicked: list.navigateToNextMonth()
+                                    onClicked: {
+                                        list.navigateToNextMonth()
+                                        for (let i = 0; i < days.model.length; i++) {
+                                            if (i == 0) {
+                                                days.itemAt(0).selected = 0
+                                                days.itemAt(0).color = "#cececece"
+                                            }
+                                            else {
+                                                days.itemAt(i).selected = -1
+                                                days.itemAt(i).color = days.itemAt(i).today ? "#84cecece" : "#42cecece"
+                                            }
+                                        }
+                                    }
                                     hoverEnabled: true
                                     onEntered: parent.color = "#84cecece"
                                     onExited: parent.color = "#42cecece"
@@ -407,15 +588,18 @@ LazyLoader {
                                 // Previous month days
                                 const prevMonth = new Date(year, month, 0);
                                 const prevMonthDays = prevMonth.getDate();
+                                let index = 0
                                 for (var i = daysBefore - 1; i >= 0; i--) {
                                     const day = prevMonthDays - i;
                                     days.push({
+                                                "idx": index,
                                                 "day": day,
                                                 "month": month - 1,
                                                 "year": month === 0 ? year - 1 : year,
                                                 "today": false,
                                                 "currentMonth": false
                                             });
+                                    index ++
                                 }
 
                                 // Current month days
@@ -423,23 +607,27 @@ LazyLoader {
                                     const date = new Date(year, month, day);
                                     const isToday = date.getFullYear() === today.getFullYear() && date.getMonth() === today.getMonth() && date.getDate() === today.getDate();
                                     days.push({
+                                                "idx": index,
                                                 "day": day,
                                                 "month": month,
                                                 "year": year,
                                                 "today": isToday,
                                                 "currentMonth": true
                                             });
+                                    index ++
                                 }
 
                                 // Next month days
                                 for (var i = 1; i <= daysAfter; i++) {
                                     days.push({
+                                                "idx": index,
                                                 "day": i,
                                                 "month": month + 1,
                                                 "year": month === 11 ? year + 1 : year,
                                                 "today": false,
                                                 "currentMonth": false
                                             });
+                                    index ++
                                 }
 
                                 return days;
@@ -453,7 +641,8 @@ LazyLoader {
                                     id: day
                                     Layout.fillWidth: true
                                     Layout.fillHeight: true
-                                    property int selected: modelData.today ? index : -1
+                                    property int dayNumber: modelData.day
+                                    property int selected: -1
                                     property color color: selected == index ? "#cececece" : modelData.today ? "#84cecece" : "#42cecece"
                                     property bool today: modelData.today
                                     onSelectedChanged: {
