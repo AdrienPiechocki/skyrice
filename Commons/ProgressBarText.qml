@@ -13,6 +13,7 @@ ProgressBar {
     property color highlightColor: "gray"
     property color trackColor: "red"
     property color textColor: "white"
+    property var textOutline: Text.Outline
     property string text
     property bool shimmer: false
     property bool pulse: false
@@ -121,6 +122,6 @@ ProgressBar {
         height: root.height
         verticalAlignment: Text.AlignVCenter
         horizontalAlignment: Text.AlignHCenter
-        style: Text.Outline
+        style: root.textOutline
     }
 }

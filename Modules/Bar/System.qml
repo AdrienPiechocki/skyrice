@@ -177,12 +177,13 @@ Capsule {
                     if (isLow && !isCharging) {
                         return "orange";
                     }
-                    return "#9d9d9d";
+                    return '#9eb1b8';
                 })()
                 font.family: futuraFont.name
                 font.bold: true
                 font.pixelSize: 14
-                textColor: "white"
+                textColor: batteryHoverHandler.hovered ? "white" : "transparent"
+                textOutline: batteryHoverHandler.hovered ? Text.Outline : Text.Normal
 
                 // Clip the progress bar within the borders of the battery icon body
                 layer.enabled: true
