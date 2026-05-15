@@ -35,10 +35,67 @@ LazyLoader {
             color: "transparent"
             property int time: 5
             property string text: ""
+            property int focusedIndex: -1
+            property list<string> options: ["lock", "logout", "reboot", "shutdown"]
             Item {
                 anchors.fill: parent
                 focus: true
-                Keys.onEscapePressed: root.active = false
+                Keys.onEscapePressed: {
+                    if(logoutTimer.running || rebootTimer.running || shutdownTimer.running) {
+                        logoutTimer.stop()
+                        rebootTimer.stop()
+                        shutdownTimer.stop()
+                        timer.stop()
+                        info.text = "Chose an option"
+                        info.canCancel = false
+                    }
+                    else {
+                        root.active = false
+                    }
+                }
+                Keys.onDownPressed: {
+                    if (window.focusedIndex < 0) {
+                        window.focusedIndex = 0
+                    }
+                    else {
+                        if (window.focusedIndex+1 > 3) {
+                            window.focusedIndex = 0
+                        }
+                        else {
+                            window.focusedIndex ++
+                        }
+                    }
+                    for (let i = 0; i < window.options.length; i++) {
+                        layout.children.filter(c => c.objectName == window.options[i])[0].focused = false
+                        layout.children.filter(c => c.objectName == window.options[i])[0].gradient = Gradient.Transparent
+                    }
+                    layout.children.filter(c => c.objectName == window.options[window.focusedIndex])[0].focused = true
+                    layout.children.filter(c => c.objectName == window.options[window.focusedIndex])[0].gradient = gradient
+                }
+                Keys.onUpPressed: {
+                    if (window.focusedIndex < 0) {
+                        window.focusedIndex = 3
+                    }
+                    else {
+                        if (window.focusedIndex-1 < 0) {
+                            window.focusedIndex = 3
+                        }
+                        else {
+                            window.focusedIndex --
+                        }
+                    }
+                    for (let i = 0; i < window.options.length; i++) {
+                        layout.children.filter(c => c.objectName == window.options[i])[0].focused = false
+                        layout.children.filter(c => c.objectName == window.options[i])[0].gradient = Gradient.Transparent
+                    }
+                    layout.children.filter(c => c.objectName == window.options[window.focusedIndex])[0].focused = true
+                    layout.children.filter(c => c.objectName == window.options[window.focusedIndex])[0].gradient = gradient
+                }
+                Keys.onReturnPressed: {
+                    if (window.focusedIndex >= 0) {
+                        layout.children.filter(c => c.objectName == window.options[window.focusedIndex])[0].execute()
+                    }
+                }
             }
             Background{ width: parent.width; height: parent.height; stroke: 2}
             Rectangle {
@@ -79,6 +136,7 @@ LazyLoader {
                 }
 
                 ColumnLayout {
+                    id: layout
                     anchors.fill: parent
                     spacing: 0
 
@@ -133,9 +191,16 @@ LazyLoader {
                     }
                     Rectangle {
                         id: lock
+                        objectName: "lock"
+                        property bool focused: false
                         Layout.preferredWidth: parent.width
                         Layout.preferredHeight: parent.height/5
                         color: "transparent"
+                        gradient: focused ? gradient : Gradient.Transparent
+                        function execute() {
+                            lockscreen.active = true
+                            window.visible = false
+                        }
                         Text {
                             anchors.centerIn: parent
                             color: "white"
@@ -146,20 +211,37 @@ LazyLoader {
                         }
                         MouseArea {
                             anchors.fill: parent
-                            onClicked: {
-                                lockscreen.active = true
-                                window.visible = false
-                            }
+                            onClicked: lock.excecute()
                             hoverEnabled: true
                             onEntered: parent.gradient = gradient
-                            onExited: parent.gradient = Gradient.Transparent
+                            onExited: parent.gradient = focused ? gradient : Gradient.Transparent
                         }
                     }
                     Rectangle {
                         id: logout
+                        objectName: "logout"
+                        property bool focused: false
                         Layout.preferredWidth: parent.width
                         Layout.preferredHeight: parent.height/5
                         color: "transparent"
+                        gradient: focused ? gradient : Gradient.Transparent
+                        function execute() {
+                            rebootTimer.stop()
+                            shutdownTimer.stop()
+                            if (logoutTimer.running) {
+                                logoutTimer.stop()
+                                logoutProcess.running = true
+                            }
+                            else {
+                                logoutTimer.stop()
+                                logoutTimer.start()
+                                window.time = 5
+                                window.text = "Logging out"
+                                info.text = `${window.text} in ${window.time}`
+                                timer.start()
+                                info.canCancel = true
+                            }
+                        }
                         Text {
                             anchors.centerIn: parent
                             color: "white"
@@ -183,33 +265,37 @@ LazyLoader {
                         }
                         MouseArea {
                             anchors.fill: parent
-                            onClicked: {
-                                rebootTimer.stop()
-                                shutdownTimer.stop()
-                                if (logoutTimer.running) {
-                                    logoutTimer.stop()
-                                    logoutProcess.running = true
-                                }
-                                else {
-                                    logoutTimer.stop()
-                                    logoutTimer.start()
-                                    window.time = 5
-                                    window.text = "Logging out"
-                                    info.text = `${window.text} in ${window.time}`
-                                    timer.start()
-                                    info.canCancel = true
-                                }
-                            }
+                            onClicked: logout.excecute()
                             hoverEnabled: true
                             onEntered: parent.gradient = gradient
-                            onExited: parent.gradient = Gradient.Transparent
+                            onExited: parent.gradient = focused ? gradient : Gradient.Transparent
                         }
                     }
                     Rectangle {
                         id: reboot
+                        objectName: "reboot"
+                        property bool focused: false
                         Layout.preferredWidth: parent.width
                         Layout.preferredHeight: parent.height/5
                         color: "transparent"
+                        gradient: focused ? gradient : Gradient.Transparent
+                        function execute() {
+                            logoutTimer.stop()
+                            shutdownTimer.stop()
+                            if (rebootTimer.running) {
+                                rebootTimer.stop()
+                                rebootProcess.running = true
+                            }
+                            else {
+                                rebootTimer.stop()
+                                rebootTimer.start()
+                                window.time = 5
+                                window.text = "Rebooting"
+                                info.text = `${window.text} in ${window.time}`
+                                timer.start()
+                                info.canCancel = true
+                            }
+                        }
                         Text {
                             anchors.centerIn: parent
                             color: "white"
@@ -233,33 +319,37 @@ LazyLoader {
                         }
                         MouseArea {
                             anchors.fill: parent
-                            onClicked: {
-                                logoutTimer.stop()
-                                shutdownTimer.stop()
-                                if (rebootTimer.running) {
-                                    rebootTimer.stop()
-                                    rebootProcess.running = true
-                                }
-                                else {
-                                    rebootTimer.stop()
-                                    rebootTimer.start()
-                                    window.time = 5
-                                    window.text = "Rebooting"
-                                    info.text = `${window.text} in ${window.time}`
-                                    timer.start()
-                                    info.canCancel = true
-                                }
-                            }
+                            onClicked: reboot.excecute()
                             hoverEnabled: true
                             onEntered: parent.gradient = gradient
-                            onExited: parent.gradient = Gradient.Transparent
+                            onExited: parent.gradient = focused ? gradient : Gradient.Transparent
                         }
                     }
                     Rectangle {
                         id: shutdown
+                        objectName: "shutdown"
+                        property bool focused: false
                         Layout.preferredWidth: parent.width
                         Layout.preferredHeight: parent.height/5
                         color: "transparent"
+                        gradient: focused ? gradient : Gradient.Transparent
+                        function excecute() {
+                            logoutTimer.stop()
+                            rebootTimer.stop()
+                            if (shutdownTimer.running) {
+                                shutdownTimer.stop()
+                                shutdownProcess.running = true
+                            }
+                            else {
+                                shutdownTimer.stop()
+                                shutdownTimer.start()
+                                window.time = 5
+                                window.text = "Shutting down"
+                                info.text = `${window.text} in ${window.time}`
+                                timer.start()
+                                info.canCancel = true
+                            }
+                        }
                         Text {
                             anchors.centerIn: parent
                             color: "white"
@@ -283,26 +373,10 @@ LazyLoader {
                         }
                         MouseArea {
                             anchors.fill: parent
-                            onClicked: {
-                                logoutTimer.stop()
-                                rebootTimer.stop()
-                                if (shutdownTimer.running) {
-                                    shutdownTimer.stop()
-                                    shutdownProcess.running = true
-                                }
-                                else {
-                                    shutdownTimer.stop()
-                                    shutdownTimer.start()
-                                    window.time = 5
-                                    window.text = "Shutting down"
-                                    info.text = `${window.text} in ${window.time}`
-                                    timer.start()
-                                    info.canCancel = true
-                                }
-                            }
+                            onClicked: shutdown.excecute()
                             hoverEnabled: true
                             onEntered: parent.gradient = gradient
-                            onExited: parent.gradient = Gradient.Transparent
+                            onExited: parent.gradient = focused ? gradient : Gradient.Transparent
                         }
                     }
                 }
