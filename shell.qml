@@ -10,9 +10,9 @@ ShellRoot {
     Wallpaper{}
     Bar{}
     Notification{}
-    // Process {
-    //     id: weatherProc
-    //     running: true
-    //     command: [ "python3", root.weatherScriptPath ]
-    // }
+    Process {
+        id: weatherProc
+        running: true
+        command: [ "python3", root.weatherScriptPath ]
+    }
 }
