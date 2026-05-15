@@ -16,8 +16,6 @@ Capsule {
     readonly property real percentage: Battery.percentage
     readonly property bool isLow: percentage <= 25 / 100
     readonly property bool isCritical: percentage <= 10 / 100
-    readonly property var updateCountPath: Quickshell.shellDir + "/Scripts/update-count.sh" 
-    readonly property var updatePath: Quickshell.shellDir + "/Scripts/update.sh" 
 
     property int posX: 0
     property int posY: 0
@@ -73,31 +71,7 @@ Capsule {
             Layout.maximumWidth: 35
             Layout.maximumHeight: 22
             Layout.alignment: Qt.AlignHCenter
-            Process {
-                id: updateCount
-                running: true
-                command: [ "sh", "-c", root.updateCountPath]
-                stdout: StdioCollector {
-                    onStreamFinished: countText.text = text
-                }
-            }
-            Process {
-                id: updateInstall
-                running: false
-                command: [ "kitty", "-e", root.updatePath]
-                stdout: StdioCollector {
-                    onStreamFinished: {
-                        updateCount.running = true
-                        count.visible = countText.text > 0
-                    }
-                }
-            }
-            Timer {
-                running: true
-                interval: 300000
-                repeat: true
-                onTriggered: updateCount.running = true
-            }
+
             RowLayout {
                 anchors.fill: parent
                 spacing: 0
@@ -115,7 +89,7 @@ Capsule {
                 }
                 Rectangle {
                     id: count
-                    visible: countText.text > 0
+                    visible: Updates.count > 0
                     Layout.fillWidth: true
                     Layout.fillHeight: true
                     color: "transparent"
@@ -123,7 +97,7 @@ Capsule {
                         id: countText
                         anchors.centerIn: parent
                         color: "#cecece"
-                        text: ""
+                        text: Updates.count
                         font.family: futuraFont.name
                         font.pointSize: 12
                     }
@@ -131,10 +105,10 @@ Capsule {
             }
             MouseArea {
                 anchors.fill: parent
-                onClicked: updateInstall.running = true
+                onClicked: Updates.run = true
                 hoverEnabled: true
                 onEntered: count.visible = true
-                onExited: count.visible = countText.text > 0
+                onExited: count.visible = Updates.count > 0
             }
         }
         Capsule {
