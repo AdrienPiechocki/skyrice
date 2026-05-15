@@ -23,7 +23,7 @@ LazyLoader {
         color: "transparent"
         PanelWindow {
             id: window
-            anchors.right: parent.left
+            anchors.right: parent.right
             anchors.top: parent.top
             margins.top: 40
             exclusionMode: ExclusionMode.Ignore

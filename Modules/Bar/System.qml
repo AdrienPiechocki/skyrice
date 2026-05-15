@@ -5,6 +5,7 @@ import Quickshell
 import Quickshell.Io
 import Quickshell.Services.UPower
 import qs.Commons
+import qs.Modules.Widgets
 import qs.Services
 
 Capsule {
@@ -17,6 +18,16 @@ Capsule {
     readonly property bool isCritical: percentage <= 10 / 100
     readonly property var updateCountPath: Quickshell.shellDir + "/Scripts/update-count.sh" 
     readonly property var updatePath: Quickshell.shellDir + "/Scripts/update.sh" 
+
+    property int posX: 0
+    property int posY: 0
+    property int screenX: 0
+
+    function updatePos(x, y) {
+        posX = x
+        posY = y
+    }
+
     FontLoader {
         id: futuraFont
         source: "../../Assets/Fonts/Futura Condensed Medium.ttf"
@@ -41,6 +52,14 @@ Capsule {
                 text: ""
                 font.family: futuraFont.name
                 font.pointSize: 12
+            }
+            MouseArea {
+                anchors.fill: parent
+                onClicked: {
+                    var screenPos = parent.mapToGlobal(0, 0);
+                    root.updatePos(screenPos.x - root.screenX, screenPos.y + root.height);
+                    resourcesMenu.active = !resourcesMenu.active;
+                }
             }
         }
         Capsule {
@@ -188,4 +207,5 @@ Capsule {
             }
         }
     }
+    Resources{ id: resourcesMenu; popupX: root.posX; popupY: root.posY; }
 }
