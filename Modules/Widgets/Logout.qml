@@ -214,7 +214,7 @@ LazyLoader {
                             onClicked: lock.excecute()
                             hoverEnabled: true
                             onEntered: parent.gradient = gradient
-                            onExited: parent.gradient = focused ? gradient : Gradient.Transparent
+                            onExited: parent.gradient = parent.focused ? gradient : Gradient.Transparent
                         }
                     }
                     Rectangle {
@@ -268,7 +268,7 @@ LazyLoader {
                             onClicked: logout.excecute()
                             hoverEnabled: true
                             onEntered: parent.gradient = gradient
-                            onExited: parent.gradient = focused ? gradient : Gradient.Transparent
+                            onExited: parent.gradient = parent.focused ? gradient : Gradient.Transparent
                         }
                     }
                     Rectangle {
@@ -322,7 +322,7 @@ LazyLoader {
                             onClicked: reboot.excecute()
                             hoverEnabled: true
                             onEntered: parent.gradient = gradient
-                            onExited: parent.gradient = focused ? gradient : Gradient.Transparent
+                            onExited: parent.gradient = parent.focused ? gradient : Gradient.Transparent
                         }
                     }
                     Rectangle {
@@ -376,7 +376,7 @@ LazyLoader {
                             onClicked: shutdown.excecute()
                             hoverEnabled: true
                             onEntered: parent.gradient = gradient
-                            onExited: parent.gradient = focused ? gradient : Gradient.Transparent
+                            onExited: parent.gradient = parent.focused ? gradient : Gradient.Transparent
                         }
                     }
                 }
