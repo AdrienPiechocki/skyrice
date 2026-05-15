@@ -345,22 +345,15 @@ class OpenMeteoClient:
 
 def weather_code_to_text(code):
     mapping = {
-        0: "clear sky",
-        1: "mainly clear",
-        2: "partly cloudy",
-        3: "overcast",
-        45: "fog",
-        48: "freezing fog",
-        51: "light drizzle",
-        53: "drizzle",
-        61: "light rain",
-        63: "moderate rain",
-        65: "heavy rain",
-        71: "light snow",
-        80: "showers",
-        95: "thunderstorm"
+        0: 10,
+        3: 0,
+        45: 4,
+        51: 7,
+        71: 8,
+        80: 7,
+        95: 6
     }
-    return mapping.get(code, "variable conditions")
+    return mapping.get(code, 0)
 
 
 # =========================
