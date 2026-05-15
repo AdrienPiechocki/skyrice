@@ -27,7 +27,7 @@ Rectangle {
         ShapePath {
             strokeColor: "white"
             strokeWidth: shape.stroke/2
-            fillColor: '#4a1313'
+            fillColor: '#674a1313'
             PathLine { x: shape._width + shape._width * 5/100; y: 0 }
             PathLine { x: shape._width; y: shape._height }
             PathLine { x: 0; y: shape._height }
