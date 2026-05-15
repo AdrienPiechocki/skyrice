@@ -190,7 +190,7 @@ LazyLoader {
                     }
                 }
                 Keys.onReturnPressed: {
-                    
+                    Quickshell.execDetached(["gnome-calendar", "--date", info.dateWithSlashes]);
                 }
 
             }
