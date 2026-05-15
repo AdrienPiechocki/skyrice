@@ -2,6 +2,7 @@ import QtQuick
 import QtQuick.Layouts
 import Qt5Compat.GraphicalEffects
 import Quickshell
+import Quickshell.Io
 import Quickshell.Services.UPower
 import qs.Commons
 import qs.Services
@@ -14,6 +15,8 @@ Capsule {
     readonly property real percentage: Battery.percentage
     readonly property bool isLow: percentage <= 25 / 100
     readonly property bool isCritical: percentage <= 10 / 100
+    readonly property var updateCountPath: Quickshell.shellDir + "/Scripts/update-count.sh" 
+    readonly property var updatePath: Quickshell.shellDir + "/Scripts/update.sh" 
     FontLoader {
         id: futuraFont
         source: "../../Assets/Fonts/Futura Condensed Medium.ttf"
@@ -48,12 +51,65 @@ Capsule {
             Layout.maximumWidth: 35
             Layout.maximumHeight: 22
             Layout.alignment: Qt.AlignHCenter
-            Text {
-                anchors.centerIn: parent
-                color: "#cecece"
-                text: ""
-                font.family: futuraFont.name
-                font.pointSize: 12
+            Process {
+                id: updateCount
+                running: true
+                command: [ "sh", "-c", root.updateCountPath]
+                stdout: StdioCollector {
+                    onStreamFinished: countText.text = text
+                }
+            }
+            Process {
+                id: updateInstall
+                running: false
+                command: [ "kitty", "-e", root.updatePath]
+                stdout: StdioCollector {
+                    onStreamFinished: updateCount.running = true
+                }
+            }
+            Timer {
+                running: true
+                interval: 300000
+                repeat: true
+                onTriggered: updateCount.running = true
+            }
+            RowLayout {
+                anchors.fill: parent
+                spacing: 0
+                Rectangle {
+                    Layout.fillWidth: true
+                    Layout.fillHeight: true
+                    color: "transparent"
+                    Text {
+                        anchors.centerIn: parent
+                        color: "#cecece"
+                        text: ""
+                        font.family: futuraFont.name
+                        font.pointSize: 12
+                    }
+                }
+                Rectangle {
+                    id: count
+                    visible: countText.text > 0
+                    Layout.fillWidth: true
+                    Layout.fillHeight: true
+                    color: "transparent"
+                    Text {
+                        id: countText
+                        anchors.centerIn: parent
+                        color: "#cecece"
+                        text: ""
+                        font.family: futuraFont.name
+                        font.pointSize: 12
+                    }
+                }
+            }
+            MouseArea {
+                anchors.fill: parent
+                onClicked: updateInstall.running = true
+                hoverEnabled: true
+                onEntered: count.visible = true
+                onExited: count.visible = countText.text > 0
             }
         }
         Capsule {
