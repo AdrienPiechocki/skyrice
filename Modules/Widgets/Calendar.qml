@@ -39,7 +39,12 @@ LazyLoader {
                         days.itemAt(i).color = "#cececece"
                     }
                 }
-                CalendarService.loadEvents();
+                const now = new Date();
+                const monthStart = new Date(list.calendarYear, list.calendarMonth, 1);
+                const monthEnd = new Date(list.calendarYear, list.calendarMonth + 1, 0);
+                const daysBehind = Math.max(0, Math.ceil((now - monthStart) / (24 * 60 * 60 * 1000)));
+                const daysAhead = Math.max(0, Math.ceil((monthEnd - now) / (24 * 60 * 60 * 1000)));
+                CalendarService.loadEvents(daysAhead + 30, daysBehind + 30);
             }
             Item {
                 anchors.fill: parent
@@ -304,7 +309,12 @@ LazyLoader {
                                                 days.itemAt(i).color =days.itemAt(i).today ? "#84cecece" : "#42cecece"
                                             }
                                         }
-                                        CalendarService.loadEvents();
+                                        const now = new Date();
+                                        const monthStart = new Date(list.calendarYear, list.calendarMonth, 1);
+                                        const monthEnd = new Date(list.calendarYear, list.calendarMonth + 1, 0);
+                                        const daysBehind = Math.max(0, Math.ceil((now - monthStart) / (24 * 60 * 60 * 1000)));
+                                        const daysAhead = Math.max(0, Math.ceil((monthEnd - now) / (24 * 60 * 60 * 1000)));
+                                        CalendarService.loadEvents(daysAhead + 30, daysBehind + 30);
                                     }
                                     hoverEnabled: true
                                     onEntered: parent.color = "#84cecece"
@@ -464,10 +474,6 @@ LazyLoader {
                         Layout.fillWidth: true
                         Layout.preferredHeight: 250
                         color: "transparent"
-                        Component.onCompleted: {
-                            CalendarService.loadEvents()
-                            CalendarService.loadCachedEvents()
-                        }
                         readonly property var now: Time.now
                         property int calendarMonth: now.getMonth()
                         property int calendarYear: now.getFullYear()
@@ -661,6 +667,7 @@ LazyLoader {
                                         anchors.centerIn: parent
                                         radius: 10
                                         color: day.color
+                                        opacity: modelData.currentMonth ? 1.0 : 0.5
 
                                         Text {
                                             anchors.centerIn: parent
