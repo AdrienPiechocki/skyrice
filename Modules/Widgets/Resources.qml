@@ -12,6 +12,7 @@ LazyLoader {
     property int popupX: 0
     property int popupY: 0
     readonly property var gpuUsagePath: Quickshell.shellDir + "/Scripts/gpu_usage.sh" 
+    property int gpuUsage: 0
     PanelWindow {
         id: menu
 
@@ -40,7 +41,10 @@ LazyLoader {
                 running: true
                 command: [ "sh", "-c", root.gpuUsagePath ]
                 stdout: StdioCollector {
-                    onStreamFinished: gpuText.usage = text
+                    onStreamFinished: {
+                        gpuText.usage = text
+                        root.gpuUsage = text
+                    }
                 }
             }
             Timer {
@@ -75,7 +79,7 @@ LazyLoader {
                         color: "transparent"
                         ColumnLayout {
                             anchors.fill: parent
-                            spacing: 0
+                            spacing: -5
                             Rectangle {
                                 Layout.fillWidth: true
                                 Layout.fillHeight: true
@@ -98,7 +102,7 @@ LazyLoader {
                                 Capsule {
                                     anchors.centerIn: parent
                                     _color: '#67184a13' 
-                                    height: 20
+                                    height: 16
                                     Rectangle {
                                         anchors.centerIn: parent
                                         height: parent.height
@@ -117,7 +121,7 @@ LazyLoader {
                         color: "transparent"
                         ColumnLayout {
                             anchors.fill: parent
-                            spacing: 0
+                            spacing: -5
                             Rectangle {
                                 Layout.fillWidth: true
                                 Layout.fillHeight: true
@@ -139,7 +143,7 @@ LazyLoader {
                                 Capsule {
                                     anchors.centerIn: parent
                                     _color: '#674a1313' 
-                                    height: 20
+                                    height: 16
                                     Rectangle {
                                         anchors.centerIn: parent
                                         height: parent.height
@@ -158,7 +162,7 @@ LazyLoader {
                         color: "transparent"
                         ColumnLayout {
                             anchors.fill: parent
-                            spacing: 0
+                            spacing: -5
                             Rectangle {
                                 Layout.fillWidth: true
                                 Layout.fillHeight: true
@@ -180,7 +184,7 @@ LazyLoader {
                                 Capsule {
                                     anchors.centerIn: parent
                                     _color: '#6713314a' 
-                                    height: 20
+                                    height: 16
                                     Rectangle {
                                         anchors.centerIn: parent
                                         height: parent.height

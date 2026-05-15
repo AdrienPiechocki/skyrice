@@ -48,7 +48,7 @@ Capsule {
             Layout.alignment: Qt.AlignHCenter
             Text {
                 property var cpuUsage: Math.round(CPU.overallUsage * 100)
-                property var gpuUsage: resourcesMenu.gpuText.usage
+                property var gpuUsage: resourcesMenu.gpuUsage
                 property var ramUsage: (Math.round(RAM.used / RAM.total * 100)||0)
                 anchors.centerIn: parent
                 color: (cpuUsage > 80 || gpuUsage > 80 || ramUsage > 80) ? "red" : (cpuUsage > 60 || gpuUsage > 60 || ramUsage > 60)  ? "orange" : "#cecece"
@@ -212,7 +212,16 @@ Capsule {
                 size: 24
                 iconColor: '#9d9d9d'
             }
+            MouseArea {
+                anchors.fill: parent
+                onClicked: {
+                    var screenPos = parent.mapToGlobal(0, 0);
+                    root.updatePos(screenPos.x - root.screenX, screenPos.y + root.height);
+                    batteryMenu.active = !batteryMenu.active;
+                }
+            }
         }
     }
     Resources{ id: resourcesMenu; popupX: root.posX; popupY: root.posY; }
+    Power{ id: batteryMenu; popupX: root.posX; popupY: root.posY; }
 }
