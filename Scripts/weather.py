@@ -371,7 +371,7 @@ client = OpenMeteoClient()
 w = client.get_weather_by_city(data["city"], data["country"])
 
 m_date = datetime.now()
-data["last-update"] = f"{m_date.strftime("%Y-%m-%d %H:%M")}"
+data["last-update"] = f"{m_date.strftime('%Y-%m-%d %H:%M')}"
 
 currentTemperature = w.current.temperature
 currentConditions = weather_code_to_text(w.current.weathercode)
