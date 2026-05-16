@@ -1,7 +1,8 @@
 import Quickshell
+import Quickshell.Wayland
+import Quickshell.Io
 import QtQuick
 import QtQuick.Controls
-import Quickshell.Wayland
 import qs.Commons
 import qs.Services
 
@@ -74,17 +75,35 @@ LazyLoader {
                 }
 
                 Capsule{ 
+                    id: password
                     x: surface.width/2 - surface.width/16
                     y: surface.height/1.5
                     width: surface.width/8
+                    property int failedTimes: 0
                     _color: '#b0000000'
+                    Connections {
+                        target: root.context
+                        function onShowFailureChanged() {
+                            if(root.context.showFailure) {
+                                if(password.failedTimes > 3) {
+                                    logoutProc.running == true
+                                }
+                                else {
+                                    password.failedTimes ++ 
+                                }
+                            }
+                        }
+                    }
+                    Process {
+                        id: logoutProc
+                        running: false
+                        command: ["sh", "-c", "niri msg action quit -s"]
+                    }
                     Rectangle {
                         anchors.fill: parent
-                        anchors.leftMargin: 10
                         color: "transparent"
                         clip: true
                         TextField {
-                            id: input
                             anchors.fill: parent
                             horizontalAlignment: Text.AlignHCenter
                             verticalAlignment: Text.AlignVCenter
@@ -93,7 +112,7 @@ LazyLoader {
                             selectByMouse: true
                             focus: true
                             placeholderTextColor: "#cecece"
-                            color: "white"
+                            color: root.context.showFailure ? "red" : "white"
                             font.family: futuraFont.name
                             font.pixelSize: 24
                             text: ""
