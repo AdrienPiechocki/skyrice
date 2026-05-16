@@ -132,8 +132,8 @@ LazyLoader {
                                             }
                                             valueBarWidth: icon.bodyWidth
                                             valueBarHeight: icon.bodyHeight
-                                            value: modelData.battery * 100
-                                            text: `${Math.round(value * 100)}`
+                                            value: modelData.battery
+                                            text: `${value * 100}`
                                             shimmer: isCharging
                                             pulse: isCharging
                                             highlightColor: (() => {
