@@ -3,12 +3,12 @@ import QtQuick.Layouts
 import Quickshell
 import Quickshell.Io
 import Quickshell.Services.Pipewire
-
+import qs.Commons
 Scope {
 	id: root
 	property var brightness: 0
 	property var maxBrightness: 0
-
+	property bool flag: false
 	Timer {
 		running: true
 		interval: 250
@@ -53,6 +53,7 @@ Scope {
                 }
 
                 root.brightness = roundTo(text/root.maxBrightness, 2) * 100
+				root.flag = true
             }
         }
     }
@@ -72,8 +73,10 @@ Scope {
 	}
 
 	onBrightnessChanged: {
-		root.shouldShowOsdBrightness = true;
-		hideTimer.restart();
+		if(flag) {
+			root.shouldShowOsdBrightness = true;
+			hideTimer.restart();
+		}
 	}
 	property bool shouldShowOsdVolume: false
 	property bool shouldShowOsdBrightness: false
@@ -106,10 +109,10 @@ Scope {
 			// An empty click mask prevents the window from blocking mouse events.
 			mask: Region {}
 
-			Rectangle {
+			Capsule {
 				anchors.fill: parent
-				radius: height / 2
-				color: "#80000000"
+				anchors.leftMargin: 50
+				anchors.rightMargin: 50
 
 				RowLayout {
 					anchors {
@@ -165,10 +168,10 @@ Scope {
 			// An empty click mask prevents the window from blocking mouse events.
 			mask: Region {}
 
-			Rectangle {
+			Capsule {
 				anchors.fill: parent
-				radius: height / 2
-				color: "#80000000"
+				anchors.leftMargin: 50
+				anchors.rightMargin: 50
 
 				RowLayout {
 					anchors {
