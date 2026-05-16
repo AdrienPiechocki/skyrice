@@ -85,8 +85,8 @@ LazyLoader {
                         target: root.context
                         function onShowFailureChanged() {
                             if(root.context.showFailure) {
-                                if(password.failedTimes > 3) {
-                                    logoutProc.running == true
+                                if(password.failedTimes >= 3) {
+                                    logoutProc.running = true
                                 }
                                 else {
                                     password.failedTimes ++ 
