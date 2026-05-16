@@ -572,8 +572,6 @@ LazyLoader {
                         HoverHandler { id: starHover }
                         MouseArea {
                             anchors.fill: parent
-                            hoverEnabled: true
-                            onEntered: inventory.focusedAppIndex = index
                             onClicked: {
                                 if (inventory.favorites.includes(modelData.name.toLowerCase())) {
                                     let i = inventory.favorites.indexOf(modelData.name.toLowerCase())
