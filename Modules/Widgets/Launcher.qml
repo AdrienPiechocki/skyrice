@@ -529,8 +529,6 @@ LazyLoader {
                     HoverHandler { id: itemHover }
                     MouseArea {
                         anchors.fill: parent
-                        hoverEnabled: true
-                        onEntered: inventory.focusedAppIndex = index
                         onClicked: {
                             modelData.execute()
                             let newUsage = JSON.parse(JSON.stringify(inventory.usage))
