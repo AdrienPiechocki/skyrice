@@ -36,6 +36,7 @@ Item {
                 "appName": n.appName || n.desktopEntry || "",
                 "urgency": n.urgency < 0 || n.urgency > 2 ? 1 : n.urgency,
                 "timestamp": time,
+                "expireTimeout": n.expireTimeout,
                 "image": image
             };
         }
@@ -87,32 +88,108 @@ Item {
                             id: futuraFont
                             source: "../Assets/Fonts/Futura Condensed Medium.ttf"
                         }
-                        Text {
-                            x: Math.max(contentWidth, 50)
-                            y: contentHeight
-                            color: "white"
-                            text: modelData.appName
-                            font.family: futuraFont.name
-                            font.pointSize: 12
-                            style: Text.Outline
-                        }
-                        Text {
-                            x: parent.width - 50 - contentWidth
-                            y: contentHeight
-                            color: "white"
-                            text: modelData.timestamp
-                            font.family: futuraFont.name
-                            font.pointSize: 12
-                            style: Text.Outline
-                        }
-                        Text {
-                            x: parent.width /2 - contentWidth/2
-                            y: contentHeight
-                            color: "white"
-                            text: modelData.body ? modelData.summary : ""
-                            font.family: futuraFont.name
-                            font.pointSize: 12
-                            style: Text.Outline
+                        ColumnLayout {
+                            anchors.fill: parent
+                            Rectangle {
+                                Layout.fillWidth: true
+                                Layout.fillHeight: true
+                                color: "transparent"
+                                RowLayout {
+                                    anchors.fill: parent
+                                    Rectangle {
+                                        width: 60
+                                        anchors.left: parent.left
+                                        anchors.leftMargin: 40
+                                        Layout.fillHeight: true
+                                        color: "transparent"
+                                        Text {
+                                            anchors.fill: parent
+                                            horizontalAlignment: Text.AlignHCenter
+                                            verticalAlignment: Text.AlignVCenter
+                                            color: "white"
+                                            text: modelData.appName
+                                            font.family: futuraFont.name
+                                            font.pointSize: 12
+                                            style: Text.Outline
+                                            Component.onCompleted: {
+                                                elide = contentHeight > parent.height || contentWidth > parent.width ? Text.ElideRight : Text.ElideNone
+                                            }
+                                        }
+                                    }
+                                    Rectangle {
+                                        anchors.centerIn: parent
+                                        width: 150
+                                        Layout.fillHeight: true
+                                        color: "transparent"
+                                        Text {
+                                            anchors.fill: parent
+                                            horizontalAlignment: Text.AlignHCenter
+                                            verticalAlignment: Text.AlignVCenter
+                                            color: "white"
+                                            text: modelData.body ? modelData.summary : ""
+                                            font.family: futuraFont.name
+                                            font.pointSize: 12
+                                            style: Text.Outline
+                                            Component.onCompleted: {
+                                                elide = contentHeight > parent.height || contentWidth > parent.width ? Text.ElideRight : Text.ElideNone
+                                            }
+                                        }
+                                    }
+                                    Rectangle {
+                                        width: 60
+                                        anchors.right: parent.right
+                                        anchors.rightMargin: 40
+                                        Layout.fillHeight: true
+                                        color: "transparent"
+                                        Text {
+                                            anchors.fill: parent
+                                            horizontalAlignment: Text.AlignHCenter
+                                            verticalAlignment: Text.AlignVCenter
+                                            color: "white"
+                                            text: modelData.timestamp
+                                            font.family: futuraFont.name
+                                            font.pointSize: 12
+                                            style: Text.Outline
+                                            Component.onCompleted: {
+                                                elide = contentHeight > parent.height || contentWidth > parent.width ? Text.ElideRight : Text.ElideNone
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                            Rectangle {
+                                width: 220
+                                Layout.fillHeight: true
+                                anchors.bottom: parent.bottom
+                                anchors.bottomMargin: 20
+                                anchors.left: parent.left
+                                anchors.leftMargin: 75
+                                color: "transparent"
+                                clip: true
+                                Text {
+                                    id: text
+                                    anchors.fill: parent
+                                    horizontalAlignment: Text.AlignHCenter
+                                    verticalAlignment: Text.AlignVCenter
+                                    color: "white"
+                                    text: modelData.body ? modelData.body : modelData.summary
+                                    font.family: futuraFont.name
+                                    font.pointSize: 14
+                                    style: Text.Outline
+                                    wrapMode: Text.WordWrap
+                                    Component.onCompleted: {
+                                        elide = contentHeight > parent.height || contentWidth > parent.width ? Text.ElideRight : Text.ElideNone
+                                        popup.textWidth = text.contentWidth
+                                        if(modelData.expireTimeout){
+                                            cooldown.interval = modelData.expireTimeout
+                                        }
+                                        else {
+                                            cooldown.interval = 5000 + popup.textWidth
+                                        }
+                                        cooldown.start()
+                                    }
+                                }
+                            }
                         }
                         Rectangle {
                             anchors.left: parent.left
@@ -129,34 +206,6 @@ Item {
                                 anchors.fill: parent
                                 height: 50
                                 source: modelData.image
-                            }
-                        }
-                        Rectangle {
-                            anchors.top: parent.top
-                            anchors.topMargin: 35
-                            anchors.left: parent.left
-                            anchors.leftMargin: 75
-                            width: 225
-                            height: 62.5
-                            color: "transparent"
-                            clip: true
-                            Text {
-                                id: text
-                                anchors.fill: parent
-                                horizontalAlignment: Text.AlignHCenter
-                                verticalAlignment: Text.AlignVCenter
-                                color: "white"
-                                text: modelData.body ? modelData.body : modelData.summary
-                                font.family: futuraFont.name
-                                font.pointSize: 14
-                                style: Text.Outline
-                                wrapMode: Text.WordWrap
-                                Component.onCompleted: {
-                                    elide = contentHeight > parent.height || contentWidth > parent.width ? Text.ElideRight : Text.ElideNone
-                                    popup.textWidth = text.contentWidth
-                                    cooldown.interval = 5000 + popup.textWidth
-                                    cooldown.start()
-                                }
                             }
                         }
 
