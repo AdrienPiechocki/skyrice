@@ -93,8 +93,9 @@ LazyLoader {
                 Keys.onDownPressed: {
                     for (let i = 0; i < days.model.length; i++) {
                         if (days.itemAt(i).selected == i) {
-                            if (i+7 > days.model.length-1 && i > days.model.length-15) {
-                                if(i > days.model.length-8) {
+                            if (i+7 > days.model.length-1) {
+                                if(i > days.model.length-8 && days.itemAt(i-1).color == days.itemAt(i-1).today ? "#84cecece" : "#42cecece") {
+                                    print(days.itemAt(i).dayNumber)
                                     list.navigateToNextMonth()
                                     days.itemAt(i).selected = -1
                                     days.itemAt(i).color = days.itemAt(i).today ? "#84cecece" : "#42cecece"
@@ -102,6 +103,7 @@ LazyLoader {
                                     days.itemAt(i%7).color = "#cececece"
                                 }
                                 else {
+                                    print("la")
                                     list.navigateToNextMonth()
                                     days.itemAt(i).selected = -1
                                     days.itemAt(i).color = days.itemAt(i).today ? "#84cecece" : "#42cecece"
@@ -129,8 +131,8 @@ LazyLoader {
                 Keys.onUpPressed: {
                     for (let i = 0; i < days.model.length; i++) {
                         if (days.itemAt(i).selected == i) {
-                            if (i-7 < 0 && i < 14) {
-                                if(i < 7){
+                            if (i-7 < 0) {
+                                if(i < 7 && days.itemAt(i+1).color == days.itemAt(i+1).today ? "#84cecece" : "#42cecece"){
                                     list.navigateToPreviousMonth()
                                     days.itemAt(i).selected = -1
                                     days.itemAt(i).color = days.itemAt(i).today ? "#84cecece" : "#42cecece"
