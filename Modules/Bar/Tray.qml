@@ -11,7 +11,7 @@ Capsule {
     property int posX: 0
     property int posY: 0
     property int screenX: 0
-
+    width: SystemTray.items.length * 20
     function updatePos(x, y) {
         posX = x
         posY = y
@@ -25,7 +25,7 @@ Capsule {
     active: items.values.length > 0
     RowLayout {
         anchors.fill: parent
-        spacing: 5
+        spacing: 0
         Repeater {
             model: root.items
             Capsule {
@@ -43,8 +43,8 @@ Capsule {
                 }
                 HoverHandler { id: hoverHandler; }
                 Layout.alignment: Qt.AlignHCenter
-                Layout.maximumWidth: 22
-                Layout.maximumHeight: 22
+                Layout.maximumWidth: 20
+                Layout.maximumHeight: 20
                 Image {
                     id: logo
                     fillMode: Image.PreserveAspectFit
