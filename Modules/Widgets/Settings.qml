@@ -34,7 +34,7 @@ LazyLoader {
             margins.top: root.popupY
             exclusionMode: ExclusionMode.Ignore
             WlrLayershell.layer: WlrLayer.Overlay
-            implicitHeight: 300
+            implicitHeight: 225
             implicitWidth: 300
             color: "transparent"
             
@@ -181,9 +181,10 @@ LazyLoader {
                                         Capsule {
                                             id: network
                                             anchors.centerIn: parent
-                                            property bool current: true
+                                            property bool current: false
                                             color: tapHandler_network.pressed ? '#b6ffffff' : hoverHandler_network.hovered ? "#67cecece" : current ? "#1f1f1f" : "#67181818" 
                                             TapHandler { id: tapHandler_network; onTapped: {
+                                                    window.implicitHeight = 300
                                                     Networking.devices.values[0].scannerEnabled = true;
                                                     repeater.model = Networking.devices.values[0].networks
                                                     network.current = true
@@ -210,6 +211,7 @@ LazyLoader {
                                             property bool current: false
                                             color: tapHandler_bluetooth.pressed ? '#b6ffffff' : hoverHandler_bluetooth.hovered ? "#67cecece" : current ? '#1f1f1f' : "#67181818" 
                                             TapHandler { id: tapHandler_bluetooth; onTapped: {
+                                                    window.implicitHeight = 300
                                                     repeater.model = Bluetooth.devices.values
                                                     network.current = false
                                                     bluetooth.current = true
@@ -236,7 +238,7 @@ LazyLoader {
                                     columns: 3
                                     Repeater {
                                         id: repeater
-                                        model: Networking.devices.values[0].networks
+                                        model: 0
                                         Rectangle {
                                             Layout.fillWidth: true
                                             Layout.fillHeight: true
