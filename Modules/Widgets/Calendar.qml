@@ -94,11 +94,20 @@ LazyLoader {
                     for (let i = 0; i < days.model.length; i++) {
                         if (days.itemAt(i).selected == i) {
                             if (i+7 > days.model.length-1 && i > days.model.length-15) {
-                                list.navigateToNextMonth()
-                                days.itemAt(i).selected = -1
-                                days.itemAt(i).color = days.itemAt(i).today ? "#84cecece" : "#42cecece"
-                                days.itemAt(i%7 +7).selected = i%7 +7
-                                days.itemAt(i%7 +7).color = "#cececece"
+                                if(i > days.model.length-8) {
+                                    list.navigateToNextMonth()
+                                    days.itemAt(i).selected = -1
+                                    days.itemAt(i).color = days.itemAt(i).today ? "#84cecece" : "#42cecece"
+                                    days.itemAt(i%7).selected = i%7
+                                    days.itemAt(i%7).color = "#cececece"
+                                }
+                                else {
+                                    list.navigateToNextMonth()
+                                    days.itemAt(i).selected = -1
+                                    days.itemAt(i).color = days.itemAt(i).today ? "#84cecece" : "#42cecece"
+                                    days.itemAt(i%7 +7).selected = i%7 +7
+                                    days.itemAt(i%7 +7).color = "#cececece"
+                                }
                             }
                             else if (i+7 > days.model.length-1 || days.itemAt(i+7).dayNumber < days.itemAt(i).dayNumber) {
                                 list.navigateToNextMonth()
@@ -121,11 +130,20 @@ LazyLoader {
                     for (let i = 0; i < days.model.length; i++) {
                         if (days.itemAt(i).selected == i) {
                             if (i-7 < 0 && i < 14) {
-                                list.navigateToPreviousMonth()
-                                days.itemAt(i).selected = -1
-                                days.itemAt(i).color = days.itemAt(i).today ? "#84cecece" : "#42cecece"
-                                days.itemAt(days.model.length-1 - (7-i%7-1) -7).selected = days.model.length-1 - (7-i%7-1) -7
-                                days.itemAt(days.model.length-1 - (7-i%7-1) -7).color = "#cececece"
+                                if(i < 7){
+                                    list.navigateToPreviousMonth()
+                                    days.itemAt(i).selected = -1
+                                    days.itemAt(i).color = days.itemAt(i).today ? "#84cecece" : "#42cecece"
+                                    days.itemAt(days.model.length-1 - (7-i%7-1)).selected = days.model.length-1 - (7-i%7-1)
+                                    days.itemAt(days.model.length-1 - (7-i%7-1)).color = "#cececece"
+                                }
+                                else {
+                                    list.navigateToPreviousMonth()
+                                    days.itemAt(i).selected = -1
+                                    days.itemAt(i).color = days.itemAt(i).today ? "#84cecece" : "#42cecece"
+                                    days.itemAt(days.model.length-1 - (7-i%7-1) -7).selected = days.model.length-1 - (7-i%7-1) -7
+                                    days.itemAt(days.model.length-1 - (7-i%7-1) -7).color = "#cececece"
+                                }
                             }
                             else if (i-7 < 0 || days.itemAt(i-7).dayNumber > days.itemAt(i).dayNumber) {
                                 list.navigateToPreviousMonth()
