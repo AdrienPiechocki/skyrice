@@ -36,8 +36,7 @@ LazyLoader {
             WlrLayershell.layer: WlrLayer.Overlay
             implicitHeight: 225
             implicitWidth: 300
-            color: "transparent"
-            Component.onCompleted: print(Bluetooth.devices.values, Networking.devices.values[0].networks)            
+            color: "transparent"       
             FontLoader {
                 id: futuraFont
                 source: "../../Assets/Fonts/Futura Condensed Medium.ttf"
@@ -84,7 +83,7 @@ LazyLoader {
                             from: 0
                             value: 0.5
                             to: 1
-                            stepSize: 0.05
+                            stepSize: 0.01
                             snapMode: Slider.SnapAlways
                             Component.onCompleted: value = Pipewire.defaultAudioSink.audio.volume
                             onValueChanged: Pipewire.defaultAudioSink.audio.volume = value
@@ -116,7 +115,25 @@ LazyLoader {
                             command: ["brightnessctl", "get"]
                             stdout: StdioCollector {
                                 onStreamFinished: {
-                                    brightness.brightness = text/brightness.max * 100
+                                    function roundTo(n, digits) {
+                                        var negative = false;
+                                        if (digits === undefined) {
+                                            digits = 0;
+                                        }
+                                        if (n < 0) {
+                                            negative = true;
+                                            n = n * -1;
+                                        }
+                                        var multiplicator = Math.pow(10, digits);
+                                        n = parseFloat((n * multiplicator).toFixed(11));
+                                        n = (Math.round(n) / multiplicator).toFixed(digits);
+                                        if (negative) {
+                                            n = (n * -1).toFixed(digits);
+                                        }
+                                        return n;
+                                    }
+
+                                    brightness.brightness = roundTo(text/brightness.max, 2) * 100
                                     brightnessSlider.value = brightness.brightness
                                     brightness.flag = true
                                 }
@@ -143,7 +160,7 @@ LazyLoader {
                             from: 0
                             value: 50
                             to: 100
-                            stepSize: 5
+                            stepSize: 1
                             snapMode: Slider.SnapAlways
                             onValueChanged: { 
                                 if(brightness.flag) {brightness.brightness = value; setBrightness.running = true} 

@@ -10,4 +10,6 @@ ShellRoot {
     Notification{}
     WeatherBackend{}
     Idle{}
+    IPC{}
+    OSD{}
 }
