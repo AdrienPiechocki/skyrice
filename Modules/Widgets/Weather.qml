@@ -33,23 +33,6 @@ LazyLoader {
             implicitWidth: 400
             color: "transparent"
             
-            Process {
-                id: weatherProc
-                running: false
-                command: [ "python3", root.weatherScriptPath ]
-                stdout: StdioCollector {
-                    onStreamFinished: {
-                        configFile.reload()
-                    }
-                }
-            }
-            Timer {
-                running: true
-                interval: 3600000
-                repeat: true
-                onTriggered: weatherProc.running = true
-            }
-
             FontLoader {
                 id: futuraFont
                 source: "../../Assets/Fonts/Futura Condensed Medium.ttf"
