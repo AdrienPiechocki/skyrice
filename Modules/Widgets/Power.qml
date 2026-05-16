@@ -43,6 +43,14 @@ LazyLoader {
                 source: "../../Assets/Fonts/Futura Condensed Medium.ttf"
             }
 
+            Gradient {
+                id: gradient
+                orientation: Gradient.Horizontal
+                GradientStop { position: 0; color: "transparent" }
+                GradientStop { position: 0.5; color: "#42cecece" }
+                GradientStop { position: 1; color: "transparent" }
+            }
+
             Background{ width: parent.width; height: parent.height; stroke: 2}
             Rectangle {
                 anchors.fill: parent
@@ -55,15 +63,21 @@ LazyLoader {
                     anchors.fill: parent
                     spacing: 0
                     Rectangle {
-                        Layout.fillHeight: true
+                        Layout.fillWidth: true
+                        height: 10
+                        color: "transparent"
+                    }
+                    Rectangle {
+                        height: 50
                         Layout.fillWidth: true
                         color: "transparent"
                         property list<string> profiles: ["power-saver", "balanced", "performance"]
                         Text {
                             x: parent.width/2 - contentWidth/2
-                            y: 0
+                            y: -5
                             color: "white"
                             text: "Profile: " + parent.profiles[PowerProfiles.profile]
+                            font.family: futuraFont.name
                         }
                         Slider {
                             anchors.centerIn: parent
@@ -74,6 +88,17 @@ LazyLoader {
                             snapMode: Slider.SnapAlways
                             Component.onCompleted: value = PowerProfiles.profile
                             onValueChanged: PowerProfiles.profile = value
+                        }
+                    }
+                    Rectangle {
+                        Layout.fillWidth: true
+                        Layout.preferredHeight: 5
+                        color: "transparent"
+                        Rectangle {
+                            anchors.centerIn: parent
+                            width: parent.width
+                            height: 2
+                            gradient: gradient
                         }
                     }
                     Rectangle {

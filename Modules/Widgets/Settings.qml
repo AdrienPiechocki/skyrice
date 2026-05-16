@@ -43,6 +43,14 @@ LazyLoader {
                 source: "../../Assets/Fonts/Futura Condensed Medium.ttf"
             }
 
+            Gradient {
+                id: gradient
+                orientation: Gradient.Horizontal
+                GradientStop { position: 0; color: "transparent" }
+                GradientStop { position: 0.5; color: "#42cecece" }
+                GradientStop { position: 1; color: "transparent" }
+            }
+
             Background{ width: parent.width; height: parent.height; stroke: 2}
             Rectangle {
                 anchors.fill: parent
@@ -142,6 +150,18 @@ LazyLoader {
                             }
                         }
                     }
+
+                    Rectangle {
+                        Layout.fillWidth: true
+                        Layout.preferredHeight: 5
+                        color: "transparent"
+                        Rectangle {
+                            anchors.centerIn: parent
+                            width: parent.width
+                            height: 2
+                            gradient: gradient
+                        }
+                    }
                     Rectangle {
                         Layout.fillWidth: true
                         Layout.fillHeight: true
@@ -159,9 +179,16 @@ LazyLoader {
                                         Layout.fillHeight: true
                                         color: "transparent"
                                         Capsule {
+                                            id: network
                                             anchors.centerIn: parent
-                                            color: tapHandler_network.pressed ? '#b6ffffff' : hoverHandler_network.hovered ? "#67cecece" : "#67181818" 
-                                            TapHandler { id: tapHandler_network }
+                                            property bool current: true
+                                            color: tapHandler_network.pressed ? '#b6ffffff' : hoverHandler_network.hovered ? "#67cecece" : current ? "#1f1f1f" : "#67181818" 
+                                            TapHandler { id: tapHandler_network; onTapped: {
+                                                    Networking.devices.values[0].scannerEnabled = true;
+                                                    repeater.model = Networking.devices.values[0].networks
+                                                    network.current = true
+                                                    bluetooth.current = false
+                                                } }
                                             HoverHandler { id: hoverHandler_network }
                                             active: false
                                             Text {
@@ -171,13 +198,6 @@ LazyLoader {
                                                 font.family: futuraFont.name
                                                 font.pointSize: 12
                                             }
-                                            MouseArea {
-                                                anchors.fill: parent
-                                                onClicked: {
-                                                    Networking.devices.values[0].scannerEnabled = true;
-                                                    repeater.model = Networking.devices.values[0].networks
-                                                }
-                                            }
                                         }
                                     }
                                     Rectangle {
@@ -185,9 +205,15 @@ LazyLoader {
                                         Layout.fillHeight: true
                                         color: "transparent"
                                         Capsule {
+                                            id: bluetooth
                                             anchors.centerIn: parent
-                                            color: tapHandler_bluetooth.pressed ? '#b6ffffff' : hoverHandler_bluetooth.hovered ? "#67cecece" : "#67181818" 
-                                            TapHandler { id: tapHandler_bluetooth }
+                                            property bool current: false
+                                            color: tapHandler_bluetooth.pressed ? '#b6ffffff' : hoverHandler_bluetooth.hovered ? "#67cecece" : current ? '#1f1f1f' : "#67181818" 
+                                            TapHandler { id: tapHandler_bluetooth; onTapped: {
+                                                    repeater.model = Bluetooth.devices.values
+                                                    network.current = false
+                                                    bluetooth.current = true
+                                                } }
                                             HoverHandler { id: hoverHandler_bluetooth }
                                             active: false
                                             Text {
@@ -196,12 +222,6 @@ LazyLoader {
                                                 text: "bluetooth"
                                                 font.family: futuraFont.name
                                                 font.pointSize: 12
-                                            }
-                                            MouseArea {
-                                                anchors.fill: parent
-                                                onClicked: {
-                                                    repeater.model = Bluetooth.devices.values
-                                                }
                                             }
                                         }
                                     }
