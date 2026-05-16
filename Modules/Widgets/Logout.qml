@@ -211,7 +211,7 @@ LazyLoader {
                         }
                         MouseArea {
                             anchors.fill: parent
-                            onClicked: lock.excecute()
+                            onClicked: lock.execute()
                             hoverEnabled: true
                             onEntered: parent.gradient = gradient
                             onExited: parent.gradient = parent.focused ? gradient : Gradient.Transparent

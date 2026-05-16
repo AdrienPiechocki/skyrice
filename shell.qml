@@ -9,4 +9,5 @@ ShellRoot {
     Bar{}
     Notification{}
     WeatherBackend{}
+    Idle{}
 }
