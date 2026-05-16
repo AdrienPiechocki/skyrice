@@ -319,7 +319,7 @@ LazyLoader {
                         }
                         MouseArea {
                             anchors.fill: parent
-                            onClicked: reboot.excecute()
+                            onClicked: reboot.execute()
                             hoverEnabled: true
                             onEntered: parent.gradient = gradient
                             onExited: parent.gradient = parent.focused ? gradient : Gradient.Transparent
@@ -333,7 +333,7 @@ LazyLoader {
                         Layout.preferredHeight: parent.height/5
                         color: "transparent"
                         gradient: focused ? gradient : Gradient.Transparent
-                        function excecute() {
+                        function execute() {
                             logoutTimer.stop()
                             rebootTimer.stop()
                             if (shutdownTimer.running) {
@@ -373,7 +373,7 @@ LazyLoader {
                         }
                         MouseArea {
                             anchors.fill: parent
-                            onClicked: shutdown.excecute()
+                            onClicked: shutdown.execute()
                             hoverEnabled: true
                             onEntered: parent.gradient = gradient
                             onExited: parent.gradient = parent.focused ? gradient : Gradient.Transparent
