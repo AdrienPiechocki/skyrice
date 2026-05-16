@@ -35,34 +35,6 @@ Capsule {
     RowLayout{
         anchors.fill: parent
         spacing: 0
-
-        Capsule {
-            id: resources
-            active: false
-            color: resourcesHoverHandler.hovered ? "#67cecece" : "#67000000"
-            HoverHandler { id: resourcesHoverHandler; }
-            Layout.maximumWidth: 35
-            Layout.maximumHeight: 22
-            Layout.alignment: Qt.AlignHCenter
-            Text {
-                property var cpuUsage: Math.round(CPU.overallUsage * 100)
-                property var gpuUsage: resourcesMenu.gpuUsage
-                property var ramUsage: (Math.round(RAM.used / RAM.total * 100)||0)
-                anchors.centerIn: parent
-                color: (cpuUsage > 80 || gpuUsage > 80 || ramUsage > 80) ? "red" : (cpuUsage > 60 || gpuUsage > 60 || ramUsage > 60)  ? "orange" : "#cecece"
-                text: ""
-                font.family: futuraFont.name
-                font.pointSize: 12
-            }
-            MouseArea {
-                anchors.fill: parent
-                onClicked: {
-                    var screenPos = parent.mapToGlobal(0, 0);
-                    root.updatePos(screenPos.x - root.screenX, screenPos.y + root.height);
-                    resourcesMenu.active = !resourcesMenu.active;
-                }
-            }
-        }
         Capsule {
             id: update
             active: false
@@ -110,6 +82,33 @@ Capsule {
                 hoverEnabled: true
                 onEntered: count.visible = true
                 onExited: count.visible = Updates.count > 0
+            }
+        }
+        Capsule {
+            id: resources
+            active: false
+            color: resourcesHoverHandler.hovered ? "#67cecece" : "#67000000"
+            HoverHandler { id: resourcesHoverHandler; }
+            Layout.maximumWidth: 35
+            Layout.maximumHeight: 22
+            Layout.alignment: Qt.AlignHCenter
+            Text {
+                property var cpuUsage: Math.round(CPU.overallUsage * 100)
+                property var gpuUsage: resourcesMenu.gpuUsage
+                property var ramUsage: (Math.round(RAM.used / RAM.total * 100)||0)
+                anchors.centerIn: parent
+                color: (cpuUsage > 80 || gpuUsage > 80 || ramUsage > 80) ? "red" : (cpuUsage > 60 || gpuUsage > 60 || ramUsage > 60)  ? "orange" : "#cecece"
+                text: ""
+                font.family: futuraFont.name
+                font.pointSize: 12
+            }
+            MouseArea {
+                anchors.fill: parent
+                onClicked: {
+                    var screenPos = parent.mapToGlobal(0, 0);
+                    root.updatePos(screenPos.x - root.screenX, screenPos.y + root.height);
+                    resourcesMenu.active = !resourcesMenu.active;
+                }
             }
         }
         Capsule {
@@ -210,14 +209,27 @@ Capsule {
     IpcHandler {
         target: "resources"
         function toggle() { 
+            batteryMenu.active = false
+            settingsMenu.active = false
             var screenPos = resources.mapToGlobal(0, 0);
             root.updatePos(screenPos.x - root.screenX, screenPos.y + root.height);
             resourcesMenu.active = !resourcesMenu.active
         }
     }
     IpcHandler {
+        target: "update"
+        function run() {
+            resourcesMenu.active = false
+            batteryMenu.active = false
+            settingsMenu.active = false
+            Updates.run = true
+        }
+    }
+    IpcHandler {
         target: "settings"
         function toggle() {
+            resourcesMenu.active = false
+            batteryMenu.active = false
             var screenPos = settings.mapToGlobal(0, 0);
             root.updatePos(screenPos.x - root.screenX, screenPos.y + root.height);
             settingsMenu.active = !settingsMenu.active
@@ -226,6 +238,8 @@ Capsule {
     IpcHandler {
         target: "battery"
         function toggle() {
+            resourcesMenu.active = false
+            settingsMenu.active = false
             var screenPos = battery.mapToGlobal(0, 0);
             root.updatePos(screenPos.x - root.screenX, screenPos.y + root.height);
             batteryMenu.active = !batteryMenu.active

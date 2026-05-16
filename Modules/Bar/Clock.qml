@@ -40,11 +40,11 @@ Capsule {
 
     IpcHandler {
         target: "calendar"
-        function toggle() { calendar.active = !calendar.active }
+        function toggle() { weather.active = false; calendar.active = !calendar.active }
     }
     IpcHandler {
         target: "weather"
-        function toggle() { weather.active = !weather.active }
+        function toggle() { calendar.active = false; weather.active = !weather.active }
     }
 
     Calendar{ id: calendar; }

@@ -30,11 +30,11 @@ Capsule {
 
     IpcHandler {
         target: "inventory"
-        function toggle() { inventory.active = !inventory.active }
+        function toggle() { logout.active = false; inventory.active = !inventory.active }
     }
     IpcHandler {
         target: "logout"
-        function toggle() { logout.active = !logout.active }
+        function toggle() { inventory.active = false; logout.active = !logout.active }
     }
 
     Launcher{ id: inventory; screenX: root.screenX; _width:Screen.width/3; _height:Screen.height}
