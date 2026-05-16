@@ -1,4 +1,5 @@
 import Quickshell
+import Quickshell.Io
 import QtQuick
 import qs.Commons
 import qs.Modules.Widgets
@@ -36,6 +37,16 @@ Capsule {
             onTriggered: clock.text = Qt.formatDateTime(new Date(), "HH:mm")
         }
     }
+
+    IpcHandler {
+        target: "calendar"
+        function toggle() { calendar.active = !calendar.active }
+    }
+    IpcHandler {
+        target: "weather"
+        function toggle() { weather.active = !weather.active }
+    }
+
     Calendar{ id: calendar; }
     Weather{ id: weather; }
 }

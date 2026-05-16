@@ -1,4 +1,5 @@
 import Quickshell
+import Quickshell.Io
 import QtQuick
 import qs.Commons
 import qs.Modules.Widgets
@@ -26,6 +27,15 @@ Capsule {
         onTapped: logout.active = true
     }
     HoverHandler { id: hoverHandler }
+
+    IpcHandler {
+        target: "inventory"
+        function toggle() { inventory.active = !inventory.active }
+    }
+    IpcHandler {
+        target: "logout"
+        function toggle() { logout.active = !logout.active }
+    }
 
     Launcher{ id: inventory; screenX: root.screenX; _width:Screen.width/3; _height:Screen.height}
     Logout{ id: logout; }
