@@ -37,7 +37,7 @@ LazyLoader {
             implicitHeight: 225
             implicitWidth: 300
             color: "transparent"
-            
+            Component.onCompleted: print(Bluetooth.devices.values, Networking.devices.values[0].networks)            
             FontLoader {
                 id: futuraFont
                 source: "../../Assets/Fonts/Futura Condensed Medium.ttf"
@@ -84,7 +84,7 @@ LazyLoader {
                             from: 0
                             value: 0.5
                             to: 1
-                            stepSize: 0.01
+                            stepSize: 0.05
                             snapMode: Slider.SnapAlways
                             Component.onCompleted: value = Pipewire.defaultAudioSink.audio.volume
                             onValueChanged: Pipewire.defaultAudioSink.audio.volume = value
@@ -143,7 +143,7 @@ LazyLoader {
                             from: 0
                             value: 50
                             to: 100
-                            stepSize: 10
+                            stepSize: 5
                             snapMode: Slider.SnapAlways
                             onValueChanged: { 
                                 if(brightness.flag) {brightness.brightness = value; setBrightness.running = true} 
