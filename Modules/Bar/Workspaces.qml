@@ -80,6 +80,17 @@ Capsule {
                             bold: isActive
                         }
                     }
+                    MouseArea {
+                        anchors.fill: parent
+                        onWheel: (event)=> {
+                            if(event.angleDelta.y > 0) {
+                                Niri.dispatch(["focus-column-left"]);
+                            }
+                            else {
+                                Niri.dispatch(["focus-column-right"]);
+                            }
+                        }
+                    }
                 }
             }
         }
