@@ -91,25 +91,18 @@ LazyLoader {
                     }
                 }
                 Keys.onDownPressed: {
+                    let isSharedLine = false
+                    for (let j = days.model.length-1; j > days.model.length-8; j--) {
+                        if(!days.itemAt(j).currentMonth) { isSharedLine = true }
+                    }
                     for (let i = 0; i < days.model.length; i++) {
                         if (days.itemAt(i).selected == i) {
-                            if (i+7 > days.model.length-1) {
-                                if(i > days.model.length-8 && days.itemAt(i-1).color == days.itemAt(i-1).today ? "#84cecece" : "#42cecece") {
-                                    print(days.itemAt(i).dayNumber)
-                                    list.navigateToNextMonth()
-                                    days.itemAt(i).selected = -1
-                                    days.itemAt(i).color = days.itemAt(i).today ? "#84cecece" : "#42cecece"
-                                    days.itemAt(i%7).selected = i%7
-                                    days.itemAt(i%7).color = "#cececece"
-                                }
-                                else {
-                                    print("la")
-                                    list.navigateToNextMonth()
-                                    days.itemAt(i).selected = -1
-                                    days.itemAt(i).color = days.itemAt(i).today ? "#84cecece" : "#42cecece"
-                                    days.itemAt(i%7 +7).selected = i%7 +7
-                                    days.itemAt(i%7 +7).color = "#cececece"
-                                }
+                            if (i+7 > days.model.length-1 && i > days.model.length-8 && isSharedLine) {
+                                list.navigateToNextMonth()
+                                days.itemAt(i).selected = -1
+                                days.itemAt(i).color = days.itemAt(i).today ? "#84cecece" : "#42cecece"
+                                days.itemAt(i%7 +7).selected = i%7 +7
+                                days.itemAt(i%7 +7).color = "#cececece"
                             }
                             else if (i+7 > days.model.length-1 || days.itemAt(i+7).dayNumber < days.itemAt(i).dayNumber) {
                                 list.navigateToNextMonth()
@@ -129,23 +122,18 @@ LazyLoader {
                     }
                 }
                 Keys.onUpPressed: {
+                    let isSharedLine = false
+                    for (let j = 0; j < 7; j++) {
+                        if(!days.itemAt(j).currentMonth) { isSharedLine = true }
+                    }
                     for (let i = 0; i < days.model.length; i++) {
                         if (days.itemAt(i).selected == i) {
-                            if (i-7 < 0) {
-                                if(i < 7 && days.itemAt(i+1).color == days.itemAt(i+1).today ? "#84cecece" : "#42cecece"){
-                                    list.navigateToPreviousMonth()
-                                    days.itemAt(i).selected = -1
-                                    days.itemAt(i).color = days.itemAt(i).today ? "#84cecece" : "#42cecece"
-                                    days.itemAt(days.model.length-1 - (7-i%7-1)).selected = days.model.length-1 - (7-i%7-1)
-                                    days.itemAt(days.model.length-1 - (7-i%7-1)).color = "#cececece"
-                                }
-                                else {
-                                    list.navigateToPreviousMonth()
-                                    days.itemAt(i).selected = -1
-                                    days.itemAt(i).color = days.itemAt(i).today ? "#84cecece" : "#42cecece"
-                                    days.itemAt(days.model.length-1 - (7-i%7-1) -7).selected = days.model.length-1 - (7-i%7-1) -7
-                                    days.itemAt(days.model.length-1 - (7-i%7-1) -7).color = "#cececece"
-                                }
+                            if (i-7 < 0 && i < 7 && isSharedLine) {
+                                list.navigateToPreviousMonth()
+                                days.itemAt(i).selected = -1
+                                days.itemAt(i).color = days.itemAt(i).today ? "#84cecece" : "#42cecece"
+                                days.itemAt(days.model.length-1 - (7-i%7-1) -7).selected = days.model.length-1 - (7-i%7-1) -7
+                                days.itemAt(days.model.length-1 - (7-i%7-1) -7).color = "#cececece"
                             }
                             else if (i-7 < 0 || days.itemAt(i-7).dayNumber > days.itemAt(i).dayNumber) {
                                 list.navigateToPreviousMonth()
@@ -670,6 +658,7 @@ LazyLoader {
                                     property int selected: -1
                                     property color color: selected == index ? "#cececece" : modelData.today ? "#84cecece" : "#42cecece"
                                     property bool today: modelData.today
+                                    property bool currentMonth: modelData.currentMonth
                                     onSelectedChanged: {
                                         if (selected == index) {
                                             const dateWithSlashes = `${modelData.day.toString().padStart(2, '0')}/${(modelData.month + 1).toString().padStart(2, '0')}/${modelData.year.toString().substring(2)}`;
