@@ -380,7 +380,7 @@ LazyLoader {
                         Layout.fillHeight: true
                         color: "transparent"
                         property bool reverse: false
-                        property bool active: true
+                        property bool active: false
                         Text {
                             anchors.centerIn: parent
                             text: "Name"
@@ -419,7 +419,7 @@ LazyLoader {
                         Layout.fillHeight: true
                         color: "transparent"
                         property bool reverse: false
-                        property bool active: false
+                        property bool active: true
                         Text {
                             anchors.centerIn: parent
                             text: "Most Used"
