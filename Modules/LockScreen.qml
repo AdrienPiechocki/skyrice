@@ -29,11 +29,13 @@ LazyLoader {
                 Label {
                     id: clock
                     property var date: new Date()
+                    readonly property list<string> days: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
+                    readonly property list<string> months: ["January", "February", "March", "April", "May", "June", "Jully", "August", "September", "October", "November", "December"]
                     color: "#cecece"
                     style: Text.Outline
                     font.family: futuraFont.name
                     anchors.centerIn: parent
-
+                    horizontalAlignment: Text.AlignHCenter
                     // The native font renderer tends to look nicer at large sizes.
                     renderType: Text.NativeRendering
                     font.pointSize: 80
@@ -44,15 +46,31 @@ LazyLoader {
                         repeat: true
                         interval: 1000
 
-                        onTriggered: clock.date = new Date();
+                        onTriggered: {
+                            clock.date = new Date();
+                        }
+                    }
+
+                    function getFullDate(date) {
+                        if (!date) {
+                            date = new Date();
+                        }
+                        const year = date.getFullYear();
+
+                        // getMonth() is zero-based, so we add 1
+                        const month = clock.months[date.getMonth()];
+                        const day = String(date.getDate()).padStart(2, '0');
+                        const m_day = clock.days[date.getDay()-1];
+
+                        const hours = String(date.getHours()).padStart(2, '0');
+                        const minutes = String(date.getMinutes()).padStart(2, '0');
+                        const seconds = String(date.getSeconds()).padStart(2, '0');
+
+                        return `${m_day},\n${month} ${day} ${year}\n${hours}:${minutes}:${seconds}\n`;
                     }
 
                     // updated when the date changes
-                    text: {
-                        const hours = this.date.getHours().toString().padStart(2, '0');
-                        const minutes = this.date.getMinutes().toString().padStart(2, '0');
-                        return `${hours}:${minutes}`;
-                    }
+                    text: clock.getFullDate(date)
                 }
 
                 Capsule{ 
