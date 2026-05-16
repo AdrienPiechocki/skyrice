@@ -113,6 +113,8 @@ Scope {
 				anchors.fill: parent
 				anchors.leftMargin: 50
 				anchors.rightMargin: 50
+				anchors.topMargin: 5
+				anchors.bottomMargin: 5
 
 				RowLayout {
 					anchors {
@@ -172,6 +174,8 @@ Scope {
 				anchors.fill: parent
 				anchors.leftMargin: 50
 				anchors.rightMargin: 50
+				anchors.topMargin: 5
+				anchors.bottomMargin: 5
 
 				RowLayout {
 					anchors {
