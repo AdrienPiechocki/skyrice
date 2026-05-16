@@ -56,11 +56,16 @@ LazyLoader {
                     spacing: 0
                     Rectangle {
                         Layout.fillWidth: true
+                        height: 10
+                        color: "transparent"
+                    }
+                    Rectangle {
+                        Layout.fillWidth: true
                         height: 50
                         color: "transparent"
                         Text {
                             x: parent.width/2 - contentWidth/2
-                            y: 0
+                            y: -5
                             color: "white"
                             text: "Volume: " + Math.round(Pipewire.defaultAudioSink.audio.volume*100) + "%"
                             font.family: futuraFont.name
@@ -118,7 +123,7 @@ LazyLoader {
 
                         Text {
                             x: parent.width/2 - contentWidth/2
-                            y: 0
+                            y: -5
                             color: "white"
                             text: "Brightness: " + brightness.brightness + "%"
                             font.family: futuraFont.name
