@@ -1,6 +1,7 @@
 import QtQuick
 import QtQuick.Layouts
 import Quickshell
+import Quickshell.Io
 import Quickshell.Services.Notifications
 import Quickshell.Wayland
 import Quickshell.Niri
@@ -9,10 +10,11 @@ import qs.Commons
 Item {
     id: root
     property var notifs: []
+    property var history: []
     signal changed
     function remove(id) {
         if (id !== -1) {
-            root.notifs.splice(id, 1)
+            root.notifs = root.notifs.filter((_, i) => i !== id)
             root.changed()
         }
     }
@@ -22,7 +24,8 @@ Item {
         actionsSupported: true
         onNotification: notification => {
             const data = createData(notification)
-            root.notifs.push(data)
+            root.notifs = [...root.notifs, data]
+            root.history = [...root.history, data]
             root.changed()
         }
         function createData(n) {
@@ -47,6 +50,30 @@ Item {
             return icon;
         }
     }
+    FileView {
+        id: configFile
+        path: Qt.resolvedUrl(Quickshell.shellDir + "/Config/history.json")
+        watchChanges: true
+
+        property bool loading: false
+
+        onFileChanged: {
+            if (!loading) reload()
+        }
+        onLoaded: {
+            loading = true
+            root.history = JSON.parse(configFile.text()).notifications ?? []
+            loading = false
+        }
+        onAdapterUpdated: {
+            if (!loading) writeAdapter()
+        }
+
+        JsonAdapter {
+            property var notifications: root.history.slice()
+        }
+    }
+
     Variants {
         model: Quickshell.screens
         PanelWindow {
@@ -90,16 +117,17 @@ Item {
                         }
                         ColumnLayout {
                             anchors.fill: parent
+                            spacing: 0
                             Rectangle {
                                 Layout.fillWidth: true
-                                Layout.fillHeight: true
+                                Layout.topMargin: 15
+                                height: 30
                                 color: "transparent"
                                 RowLayout {
                                     anchors.fill: parent
                                     Rectangle {
                                         width: 60
-                                        anchors.left: parent.left
-                                        anchors.leftMargin: 40
+                                        Layout.leftMargin: 40
                                         Layout.fillHeight: true
                                         color: "transparent"
                                         Text {
@@ -117,7 +145,7 @@ Item {
                                         }
                                     }
                                     Rectangle {
-                                        anchors.centerIn: parent
+                                        Layout.alignment: Qt.AlignHCenter
                                         width: 150
                                         Layout.fillHeight: true
                                         color: "transparent"
@@ -137,8 +165,7 @@ Item {
                                     }
                                     Rectangle {
                                         width: 60
-                                        anchors.right: parent.right
-                                        anchors.rightMargin: 40
+                                        Layout.rightMargin: 40
                                         Layout.fillHeight: true
                                         color: "transparent"
                                         Text {
@@ -159,11 +186,9 @@ Item {
                             }
                             Rectangle {
                                 width: 220
-                                Layout.fillHeight: true
-                                anchors.bottom: parent.bottom
-                                anchors.bottomMargin: 20
-                                anchors.left: parent.left
-                                anchors.leftMargin: 75
+                                height: 60
+                                Layout.bottomMargin: 20
+                                Layout.leftMargin: 75
                                 color: "transparent"
                                 clip: true
                                 Text {
@@ -180,7 +205,7 @@ Item {
                                     Component.onCompleted: {
                                         elide = contentHeight > parent.height || contentWidth > parent.width ? Text.ElideRight : Text.ElideNone
                                         popup.textWidth = text.contentWidth
-                                        if(modelData.expireTimeout){
+                                        if(modelData.expireTimeout > 0){
                                             cooldown.interval = modelData.expireTimeout
                                         }
                                         else {

@@ -1,0 +1,14 @@
+{
+    "notifications": [
+        {
+            "appName": "notify-send",
+            "body": "",
+            "expireTimeout": -1,
+            "id": 62,
+            "image": "",
+            "summary": "test",
+            "timestamp": "01:20",
+            "urgency": 1
+        }
+    ]
+}
