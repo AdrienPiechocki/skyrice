@@ -127,6 +127,14 @@ Capsule {
                 font.family: futuraFont.name
                 font.pointSize: 12
             }
+            MouseArea {
+                anchors.fill: parent
+                onClicked: {
+                    var screenPos = parent.mapToGlobal(0, 0);
+                    root.updatePos(screenPos.x - root.screenX, screenPos.y + root.height);
+                    settingsMenu.active = !settingsMenu.active;
+                }
+            }
         }
         Capsule{
             id: battery
@@ -155,7 +163,7 @@ Capsule {
                     if (isLow && !isCharging) {
                         return "orange";
                     }
-                    return '#9eb1b8';
+                    return 'lightblue';
                 })()
                 font.family: futuraFont.name
                 font.bold: true
@@ -185,7 +193,7 @@ Capsule {
                 id: icon
                 anchors.centerIn: parent
                 size: 24
-                iconColor: '#9d9d9d'
+                iconColor: 'gray'
             }
             MouseArea {
                 anchors.fill: parent
@@ -198,5 +206,6 @@ Capsule {
         }
     }
     Resources{ id: resourcesMenu; popupX: root.posX; popupY: root.posY; }
+    Settings{ id: settingsMenu; popupX: root.posX; popupY: root.posY; }
     Power{ id: batteryMenu; popupX: root.posX; popupY: root.posY; }
 }
