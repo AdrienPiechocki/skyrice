@@ -11,6 +11,12 @@ from gi.repository import ECal, EDataServer, ICalGLib
 start_time = int(sys.argv[1])
 end_time = int(sys.argv[2])
 
+# now = datetime.now()
+# start_date = now - timedelta(days=18)
+# end_date = now - timedelta(days=17)
+# start_time = int(start_date.timestamp())
+# end_time = int(end_date.timestamp())
+
 print(f"Starting with time range: {start_time} to {end_time}", file=sys.stderr)
 
 all_events = []
@@ -79,7 +85,7 @@ for source in sources:
 
         query = f'(occur-in-time-range? (make-time "{start_str}") (make-time "{end_str}"))'
         success, raw_events = client.get_object_list_sync(query, None)
-        
+
         if not success or not raw_events:
             continue
 
@@ -129,17 +135,17 @@ for source in sources:
                 rrule_prop = comp.get_first_property(73)  # ICAL_RRULE_PROPERTY
                 if rrule_prop:
                     rrule_value = rrule_prop.get_value()  # ICalGLib.Value
-                    
+
                     try:
                         recurrence = rrule_value.get_recur()  # -> ICalGLib.Recurrence
-                        
+
                     except AttributeError:
                         rrule_str = str(rrule_value)
                         recurrence = ICalGLib.Recurrence.new_from_string(rrule_str)
 
                     if recurrence:
                         freq = recurrence.get_freq()
-                        
+
             rdates = getattr(comp, "get_rdate_list", lambda: [])()
             exdates = getattr(comp, "get_exdate_list", lambda: [])()
 
@@ -184,7 +190,7 @@ for source in sources:
                             occurrences.append((current_ts, current_ts + (end_ts - start_ts)))
                             current_ts += int(delta.total_seconds())
                             added += 1
-                            
+
                     case 2: #HOURLY
                         delta = timedelta(hours=interval)
                         while (current_ts <= until_ts) and (not count or added < count):
@@ -199,12 +205,19 @@ for source in sources:
                             current_ts += int(delta.total_seconds())
                             added += 1
 
-                    case 4:  # WEEKLY
-                        delta = timedelta(weeks=interval)
-                        while (current_ts <= until_ts) and (not count or added < count):
-                            occurrences.append((current_ts, current_ts + (end_ts - start_ts)))
-                            current_ts += int(delta.total_seconds())
-                            added += 1
+                    case 4:  # WEEKLY (or Monday to Friday)
+                        if until_ts - current_ts > 432000: # WEEKLY
+                            delta = timedelta(weeks=interval)
+                            while (current_ts <= until_ts) and (not count or added < count):
+                                occurrences.append((current_ts, current_ts + (end_ts - start_ts)))
+                                current_ts += int(delta.total_seconds())
+                                added += 1
+                        else: # (Monday to Friday)
+                            delta = timedelta(days=interval)
+                            while (current_ts <= until_ts) and (not count or added < count):
+                                occurrences.append((current_ts, current_ts + (end_ts - start_ts)))
+                                current_ts += int(delta.total_seconds())
+                                added += 1
 
                     case 5:  # MONTHLY
                         from dateutil.relativedelta import relativedelta
@@ -229,8 +242,13 @@ for source in sources:
 
                 # --- add occurences to all_events ---
                 for occ_start, occ_end in occurrences:
-                    add_event(summary, calendar_name, occ_start, occ_end, location, description,
-                              calendar_uid=source.get_uid(), uid=comp.get_uid() or "")
+                    flag = True
+                    for event in all_events:
+                        if comp.get_uid() == event["uid"] and occ_start == event["start"] and occ_end == event["end"]:
+                            flag = False
+                    if flag:
+                        add_event(summary, calendar_name, occ_start, occ_end, location, description,
+                                  calendar_uid=source.get_uid(), uid=comp.get_uid() or "")
 
 
     except Exception as e:
