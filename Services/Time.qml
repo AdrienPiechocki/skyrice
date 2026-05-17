@@ -19,7 +19,7 @@ Singleton {
   readonly property int timestamp: {
     return Math.floor(root.now / 1000);
   }
-  readonly property list<string> days: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
+  readonly property list<string> days: ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
   readonly property list<string> months: ["January", "February", "March", "April", "May", "June", "Jully", "August", "September", "October", "November", "December"]
 
   // Timer state (for countdown/stopwatch)
@@ -94,7 +94,7 @@ Singleton {
     // getMonth() is zero-based, so we add 1
     const month = root.months[date.getMonth()];
     const day = String(date.getDate()).padStart(2, '0');
-    const m_day = root.days[date.getDay()-1];
+    const m_day = root.days[date.getDay()];
 
     const hours = String(date.getHours()).padStart(2, '0');
     const minutes = String(date.getMinutes()).padStart(2, '0');

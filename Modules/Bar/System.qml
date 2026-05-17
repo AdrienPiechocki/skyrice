@@ -16,7 +16,7 @@ Capsule {
     readonly property real percentage: Battery.percentage
     readonly property bool isLow: percentage <= 25 / 100
     readonly property bool isCritical: percentage <= 10 / 100
-
+    property var notification
     property int posX: 0
     property int posY: 0
     property int screenX: 0
@@ -31,7 +31,7 @@ Capsule {
         source: "../../Assets/Fonts/Futura Condensed Medium.ttf"
     }
     _color: "#67000000" 
-    width: 150
+    width: 180
     RowLayout{
         anchors.fill: parent
         spacing: 0
@@ -132,6 +132,36 @@ Capsule {
                     var screenPos = parent.mapToGlobal(0, 0);
                     root.updatePos(screenPos.x - root.screenX, screenPos.y + root.height);
                     settingsMenu.active = !settingsMenu.active;
+                }
+            }
+        }
+        Capsule {
+            id: notifications
+            active: false
+            color: notificationsHoverHandler.hovered ? "#67cecece" : "#67000000"
+            HoverHandler { id: notificationsHoverHandler; }
+            Layout.maximumWidth: 35
+            Layout.maximumHeight: 22
+            Layout.alignment: Qt.AlignHCenter
+            Text {
+                anchors.centerIn: parent
+                color: "#cecece"
+                text: notification.dnd ? "" : ""
+                font.family: futuraFont.name
+                font.pointSize: 12
+            }
+            MouseArea {
+                anchors.fill: parent
+                acceptedButtons: Qt.LeftButton | Qt.RightButton
+                onClicked: (mouse)=> {
+                    if (mouse.button == Qt.RightButton) {
+                        notification.dnd = !notification.dnd
+                    }
+                    else {
+                        var screenPos = parent.mapToGlobal(0, 0);
+                        root.updatePos(screenPos.x - root.screenX, screenPos.y + root.height);
+                        historyMenu.active = !historyMenu.active;
+                    }
                 }
             }
         }
@@ -248,4 +278,5 @@ Capsule {
     Resources{ id: resourcesMenu; popupX: root.posX; popupY: root.posY; }
     Settings{ id: settingsMenu; popupX: root.posX; popupY: root.posY; }
     Power{ id: batteryMenu; popupX: root.posX; popupY: root.posY; }
+    History{ id: historyMenu; popupX: root.posX; popupY: root.posY; }
 }

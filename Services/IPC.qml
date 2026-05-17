@@ -10,6 +10,7 @@ Item {
     property int brightness: 0
     property int maxBrightness: 0
     property int modifier: 0
+    property real volume: 0.0
     Component.onCompleted: print(Bluetooth.devices.values, Networking.devices.values[0].networks)
 
     Process {
@@ -64,11 +65,21 @@ Item {
         target: "brightness"
         function add(x: int) { root.modifier = x; getMaxBrightness.running = true }
         function dim(x: int) { root.modifier = -x; getMaxBrightness.running = true }
+        function set(x: int) { root.brightness = x; setBrightness.running = true }
     }
 
     IpcHandler {
         target: "volume"
         function up(x: int) { Pipewire.defaultAudioSink.audio.volume += x/100 }
         function down(x: int) { Pipewire.defaultAudioSink.audio.volume -= x/100 }
+        function set(x: int) { Pipewire.defaultAudioSink.audio.volume = x/100 }
+        function toggle() { if(Pipewire.defaultAudioSink.audio.volume > 0) {
+                                root.volume = Pipewire.defaultAudioSink.audio.volume
+                                Pipewire.defaultAudioSink.audio.volume = 0
+                            } 
+                            else {
+                                Pipewire.defaultAudioSink.audio.volume = root.volume
+                            }
+                        }
     }
 }

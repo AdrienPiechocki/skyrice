@@ -9,6 +9,7 @@ import qs.Commons
 
 Item {
     id: root
+    property bool dnd: false
     property var notifs: []
     property var history: []
     signal changed
@@ -23,10 +24,16 @@ Item {
         imageSupported: true
         actionsSupported: true
         onNotification: notification => {
-            const data = createData(notification)
-            root.notifs = [...root.notifs, data]
-            root.history = [...root.history, data]
-            root.changed()
+            if (!root.dnd) {
+                const data = createData(notification)
+                root.notifs = [...root.notifs, data]
+                root.history = [...root.history, data]
+                root.changed()
+            }
+            else {
+                const data = createData(notification)
+                root.history = [...root.history, data]
+            }
         }
         function createData(n) {
             const time = Qt.formatDateTime(new Date(), "HH:mm")
@@ -229,7 +236,6 @@ Item {
                             Image {
                                 fillMode: Image.PreserveAspectFit
                                 anchors.fill: parent
-                                height: 50
                                 source: modelData.image
                             }
                         }
@@ -247,6 +253,8 @@ Item {
                             anchors.fill: parent
                             onClicked: {
                                 const idx = root.notifs.findIndex(n => n.id === modelData.id)
+                                const idx_history = root.history.findIndex(n => n.id === modelData.id)
+                                root.history = root.history.filter((_, i) => i !== idx_history)
                                 root.remove(idx)
                             }
                         }

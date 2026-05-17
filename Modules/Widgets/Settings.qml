@@ -85,6 +85,8 @@ LazyLoader {
                             to: 1
                             stepSize: 0.01
                             snapMode: Slider.SnapAlways
+                            property var volume: Pipewire.defaultAudioSink.audio.volume
+                            onVolumeChanged: value = Pipewire.defaultAudioSink.audio.volume
                             Component.onCompleted: value = Pipewire.defaultAudioSink.audio.volume
                             onValueChanged: Pipewire.defaultAudioSink.audio.volume = value
                         }
@@ -97,6 +99,12 @@ LazyLoader {
                         property int brightness: 0
                         property int max: 0
                         property bool flag: false
+                        Timer {
+                            running: true
+                            interval: 250
+                            repeat: true
+                            onTriggered: {getMaxBrightness.running = true}
+                        }
                         Process {
                             id: getMaxBrightness
                             running: true

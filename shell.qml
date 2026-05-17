@@ -6,8 +6,8 @@ import qs.Services
 
 ShellRoot {
     Wallpaper{}
-    Bar{}
-    Notification{}
+    Bar{ notification: notification}
+    Notification{ id: notification; }
     WeatherBackend{}
     Idle{}
     IPC{}

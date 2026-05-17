@@ -4,7 +4,9 @@ import QtQuick.Layouts
 import qs.Modules.Bar
 
 Variants {
-  model: Quickshell.screens
+    id: root
+    property var notification
+    model: Quickshell.screens
     PanelWindow {
         property var modelData
         screen: modelData
@@ -34,7 +36,7 @@ Variants {
             Item{ Layout.fillWidth: true }
             Tray{ Layout.maximumWidth: items?.values.length * 30 || 30; screenX:modelData.x }
             Item{}
-            System{ screenX:modelData.x }
+            System{ screenX:modelData.x; notification: root.notification}
             Item{}
             Clock{}
             Item{}
