@@ -2,7 +2,6 @@ import Quickshell
 import Quickshell.Wayland
 import Quickshell.Io
 import QtQuick
-import qs.Modules
 
 Item {
     id: root
@@ -47,21 +46,4 @@ Item {
         running: false
         command: ["sh", "-c", "systemctl suspend"]
     }
-
-    LockContext {
-        id: lockContext
-        onUnlocked: {
-            lockscreen.locked = false;
-        }
-    }
-
-    IpcHandler {
-        target: "lockscreen"
-        function lock() { 
-            lockscreen.locked = true
-            lockscreen.active = true
-        }
-    }
-    LockScreen{ id: lockscreen; context: lockContext; onLockedChanged: lockscreen.active = false }
-
 }

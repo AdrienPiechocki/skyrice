@@ -4,6 +4,7 @@ import Quickshell.Services.Pipewire
 import Quickshell.Networking
 import Quickshell.Bluetooth
 import QtQuick
+import qs.Modules
 
 Item {
     id: root
@@ -82,4 +83,20 @@ Item {
                             }
                         }
     }
+
+    LockContext {
+        id: lockContext
+        onUnlocked: {
+            lockscreen.locked = false;
+        }
+    }
+
+    IpcHandler {
+        target: "lockscreen"
+        function lock() { 
+            lockscreen.locked = true
+            lockscreen.active = true
+        }
+    }
+    LockScreen{ id: lockscreen; context: lockContext; onLockedChanged: lockscreen.active = false }
 }
