@@ -64,10 +64,8 @@ Capsule {
                     anchors.centerIn: parent
                     height: 20
                     width: 40
-                    color: tapHandler.pressed ? '#b6ffffff' : hoverHandler.hovered ? "#67cecece" : "#67000000" 
+                    color: "#67000000" 
                     active: false
-                    TapHandler { id: tapHandler; onTapped: root.switchToWorkspace(index + 1)}
-                    HoverHandler { id: hoverHandler }
                     Text {
                         id: wsText
                         anchors.centerIn: parent
@@ -82,6 +80,11 @@ Capsule {
                     }
                     MouseArea {
                         anchors.fill: parent
+                        onPressed: {root.switchToWorkspace(index + 1); capsule.color = '#b6ffffff'}
+                        onReleased: capsule.color = "#67cecece" 
+                        hoverEnabled: true
+                        onEntered: capsule.color ="#67cecece"
+                        onExited: capsule.color ="#67000000"
                         onWheel: (event)=> {
                             if(event.angleDelta.y > 0) {
                                 Niri.dispatch(["focus-column-left"]);

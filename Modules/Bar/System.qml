@@ -38,8 +38,7 @@ Capsule {
         Capsule {
             id: update
             active: false
-            color: updateHoverHandler.hovered ? "#67cecece" : "#67000000"
-            HoverHandler { id: updateHoverHandler; }
+            color:"#67000000"
             Layout.maximumWidth: 35
             Layout.maximumHeight: 22
             Layout.alignment: Qt.AlignHCenter
@@ -78,17 +77,17 @@ Capsule {
             }
             MouseArea {
                 anchors.fill: parent
-                onClicked: Updates.run = true
+                onPressed: { Updates.run = true; parent.color = '#b6ffffff' }
+                onReleased: parent.color = "#67cecece" 
                 hoverEnabled: true
-                onEntered: count.visible = true
-                onExited: count.visible = Updates.count > 0
+                onEntered: {count.visible = true; parent.color ="#67cecece" }
+                onExited: {count.visible = Updates.count > 0; parent.color ="#67000000" }
             }
         }
         Capsule {
             id: resources
             active: false
-            color: resourcesHoverHandler.hovered ? "#67cecece" : "#67000000"
-            HoverHandler { id: resourcesHoverHandler; }
+            color: "#67000000"
             Layout.maximumWidth: 35
             Layout.maximumHeight: 22
             Layout.alignment: Qt.AlignHCenter
@@ -109,6 +108,11 @@ Capsule {
                     root.updatePos(screenPos.x - root.screenX, screenPos.y + root.height);
                     resourcesMenu.active = !resourcesMenu.active;
                 }
+                onPressed: parent.color = '#b6ffffff'
+                onReleased: parent.color = "#67cecece"
+                hoverEnabled: true
+                onEntered: parent.color ="#67cecece"
+                onExited: parent.color ="#67000000"
             }
         }
         Capsule {
@@ -133,6 +137,11 @@ Capsule {
                     root.updatePos(screenPos.x - root.screenX, screenPos.y + root.height);
                     settingsMenu.active = !settingsMenu.active;
                 }
+                onPressed: parent.color = '#b6ffffff'
+                onReleased: parent.color = "#67cecece"
+                hoverEnabled: true
+                onEntered: parent.color ="#67cecece"
+                onExited: parent.color ="#67000000"
             }
         }
         Capsule {
@@ -163,6 +172,11 @@ Capsule {
                         historyMenu.active = !historyMenu.active;
                     }
                 }
+                onPressed: parent.color = '#b6ffffff'
+                onReleased: parent.color = "#67cecece"
+                hoverEnabled: true
+                onEntered: parent.color ="#67cecece"
+                onExited: parent.color ="#67000000"
             }
         }
         Capsule{
@@ -231,6 +245,11 @@ Capsule {
                     root.updatePos(screenPos.x - root.screenX, screenPos.y + root.height);
                     batteryMenu.active = !batteryMenu.active;
                 }
+                onPressed: parent.color = '#b6ffffff'
+                onReleased: parent.color = "#67cecece"
+                hoverEnabled: true
+                onEntered: parent.color ="#67cecece"
+                onExited: parent.color ="#67000000"
             }
         }
     }
