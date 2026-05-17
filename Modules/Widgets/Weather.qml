@@ -9,7 +9,6 @@ import qs.Services
 LazyLoader {
     id: root
     active: false
-    readonly property var weatherScriptPath: Quickshell.shellDir + "/Scripts/weather.py" 
     readonly property var configFile: Quickshell.shellDir + "/Config/weather.json" 
     PanelWindow {
         id: menu

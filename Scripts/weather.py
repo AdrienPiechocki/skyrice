@@ -344,16 +344,25 @@ class OpenMeteoClient:
 
 
 def weather_code_to_text(code):
-    mapping = {
-        0: 10,
-        3: 0,
-        45: 4,
-        51: 7,
-        71: 8,
-        80: 7,
-        95: 6
-    }
-    return mapping.get(code, 0)
+    if (code == 0):
+      return 10
+    if (code == 1):
+      return 10
+    if (code == 2):
+      return 0
+    if (code == 3):
+      return 0
+    if (code == 45 or code == 48):
+      return 4
+    if (code >= 51 and code <= 67):
+      return 7
+    if (code >= 71 and code <= 77):
+      return 8
+    if (code >= 80 and code <= 82):
+      return 7
+    if (code >= 95 and code <= 99):
+      return 6
+    return 10
 
 
 # =========================

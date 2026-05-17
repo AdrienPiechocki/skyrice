@@ -15,7 +15,7 @@ Item {
             if(!data["last-update"]) {
                 weatherProc.running = true
             }
-            else if(Date.parse(new Date()) - Date.parse(data["last-update"]) > 3600000) {
+            else if(Date.parse(new Date()) - Date.parse(data["last-update"]) > 20000) {
                 weatherProc.running = true
             }
 
@@ -28,7 +28,7 @@ Item {
     }
     Timer {
         running: true
-        interval: 3600000
+        interval: 20000
         repeat: true
         onTriggered: weatherProc.running = true
     }

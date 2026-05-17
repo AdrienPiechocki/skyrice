@@ -114,7 +114,7 @@ LazyLoader {
                             font.pixelSize: 18
                             text: ""
                             onTextChanged: {
-                                inventory.focusedAppIndex = -1
+                                inventory.focusedAppIndex = 0
                                 inventory.sortApps(inventory.currentCategory)
                             }
                             Keys.onEscapePressed: root.active = false
