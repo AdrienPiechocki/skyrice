@@ -13,6 +13,7 @@ LazyLoader {
     property int popupY: 0
     readonly property var gpuUsagePath: Quickshell.shellDir + "/Scripts/gpu_usage.sh" 
     property int gpuUsage: 0
+    property int diskUsage: 0
     PanelWindow {
         id: menu
 
@@ -32,7 +33,7 @@ LazyLoader {
             margins.top: root.popupY
             exclusionMode: ExclusionMode.Ignore
             WlrLayershell.layer: WlrLayer.Overlay
-            implicitHeight: 225
+            implicitHeight: 300
             implicitWidth: 225
             color: "transparent"
             
@@ -47,6 +48,17 @@ LazyLoader {
                     }
                 }
             }
+            Process {
+                id: diskUsage
+                running: true
+                command: [ "sh", "-c", "df -h | grep '/$' | awk '{print $5}' | tr -d '%'" ]
+                stdout: StdioCollector {
+                    onStreamFinished: {
+                        diskText.usage = text
+                        root.diskUsage = text
+                    }
+                }
+            }
             Timer {
                 running: true
                 interval: 2500
@@ -54,6 +66,7 @@ LazyLoader {
                 triggeredOnStart: true
                 onTriggered: {
                     gpuUsage.running = true
+                    diskUsage.running = true
                 }
             }
             
@@ -192,6 +205,48 @@ LazyLoader {
                                         color: '#16476f'
                                         border.width: 2
                                         border.color: "#6713314a"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    Rectangle {
+                        Layout.fillWidth: true
+                        Layout.fillHeight: true
+                        color: "transparent"
+                        ColumnLayout {
+                            anchors.fill: parent
+                            spacing: -5
+                            Rectangle {
+                                Layout.fillWidth: true
+                                Layout.fillHeight: true
+                                color: "transparent"
+                                Text {
+                                    id: diskText
+                                    anchors.centerIn: parent
+                                    property int usage: 0
+                                    text: `Disk - ${diskText.usage}%`
+                                    color: "white"
+                                    font.family: futuraFont.name
+                                    font.pointSize: 14
+                                    style: Text.Outline
+                                }
+                            }
+                            Rectangle {
+                                Layout.fillWidth: true
+                                Layout.fillHeight: true
+                                color: "transparent"
+                                Capsule {
+                                    anchors.centerIn: parent
+                                    _color: '#67474a13' 
+                                    height: 16
+                                    Rectangle {
+                                        anchors.centerIn: parent
+                                        height: parent.height
+                                        width: parent.width - diskText.usage
+                                        color: '#6f6c16'
+                                        border.width: 2
+                                        border.color: '#67484a13'
                                     }
                                 }
                             }
