@@ -237,22 +237,24 @@ Capsule {
 
 
     IpcHandler {
-        target: "resources"
-        function toggle() { 
-            batteryMenu.active = false
-            settingsMenu.active = false
-            var screenPos = resources.mapToGlobal(0, 0);
-            root.updatePos(screenPos.x - root.screenX, screenPos.y + root.height);
-            resourcesMenu.active = !resourcesMenu.active
-        }
-    }
-    IpcHandler {
         target: "update"
         function run() {
             resourcesMenu.active = false
             batteryMenu.active = false
             settingsMenu.active = false
+            historyMenu.active = false
             Updates.run = true
+        }
+    }
+    IpcHandler {
+        target: "resources"
+        function toggle() { 
+            batteryMenu.active = false
+            settingsMenu.active = false
+            historyMenu.active = false
+            var screenPos = resources.mapToGlobal(0, 0);
+            root.updatePos(screenPos.x - root.screenX, screenPos.y + root.height);
+            resourcesMenu.active = !resourcesMenu.active
         }
     }
     IpcHandler {
@@ -260,9 +262,24 @@ Capsule {
         function toggle() {
             resourcesMenu.active = false
             batteryMenu.active = false
+            historyMenu.active = false
             var screenPos = settings.mapToGlobal(0, 0);
             root.updatePos(screenPos.x - root.screenX, screenPos.y + root.height);
             settingsMenu.active = !settingsMenu.active
+        }
+    }
+    IpcHandler {
+        target: "notifications"
+        function toggle() {
+            resourcesMenu.active = false
+            settingsMenu.active = false
+            batteryMenu.active = false
+            var screenPos = battery.mapToGlobal(0, 0);
+            root.updatePos(screenPos.x - root.screenX, screenPos.y + root.height);
+            historyMenu.active = !historyMenu.active
+        }
+        function dnd() {
+            notification.dnd = !notification.dnd
         }
     }
     IpcHandler {
@@ -270,6 +287,7 @@ Capsule {
         function toggle() {
             resourcesMenu.active = false
             settingsMenu.active = false
+            historyMenu.active = false
             var screenPos = battery.mapToGlobal(0, 0);
             root.updatePos(screenPos.x - root.screenX, screenPos.y + root.height);
             batteryMenu.active = !batteryMenu.active
