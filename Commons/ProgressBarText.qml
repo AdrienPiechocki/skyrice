@@ -11,7 +11,7 @@ ProgressBar {
     property real valueBarWidth: 2
     property real valueBarHeight: 1
     property color highlightColor: "gray"
-    property color trackColor: "red"
+    property color trackColor: '#446671'
     property color textColor: "white"
     property var textOutline: Text.Outline
     property string text
