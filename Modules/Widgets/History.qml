@@ -131,15 +131,55 @@ LazyLoader {
                     spacing: 0
                     Rectangle {
                         Layout.fillWidth: true
-                        Layout.preferredHeight: 20
+                        Layout.preferredHeight: 30
                         color: "transparent"
-                        Text{
-                            anchors.centerIn: parent
-                            horizontalAlignment: Text.AlignHCenter
-                            text: "Notifications History"
-                            color: "white"
-                            font.family: futuraFont.name
-                            font.pointSize: 18
+                        RowLayout {
+                            anchors.fill: parent
+                            Rectangle {
+                                Layout.fillWidth: true
+                                Layout.fillHeight: true
+                                color: "transparent"
+                                Text{
+                                    anchors.right: parent.right
+                                    horizontalAlignment: Text.AlignHCenter
+                                    text: "Notifications History"
+                                    color: "white"
+                                    font.family: futuraFont.name
+                                    font.pointSize: 18
+                                }
+                            }
+                            Rectangle {
+                                Layout.fillWidth: true
+                                Layout.fillHeight: true
+                                Layout.maximumWidth: 150
+                                color: "transparent"
+                                Capsule {
+                                    anchors.centerIn: parent
+                                    height: 30
+                                    width: 40
+                                    color: '#67676767'
+                                    active: false
+                                    Text {
+                                        anchors.centerIn: parent
+                                        text: ""
+                                        color: "white"
+                                        font.family: futuraFont.name
+                                        font.pointSize: 14
+                                    }
+                                    MouseArea {
+                                        anchors.fill: parent
+                                        onClicked: {
+                                            window.history = []
+                                            window.changed()
+                                        }
+                                        onPressed: parent.color = "#86ffffff"
+                                        onReleased: parent.color = containsMouse ? "#67ffffff" : "#67676767"
+                                        hoverEnabled: true
+                                        onEntered: parent.color = "#67ffffff"
+                                        onExited: parent.color = "#67676767"
+                                    }
+                                }
+                            }
                         }
                     }
                     Rectangle {

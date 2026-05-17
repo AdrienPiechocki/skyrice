@@ -78,7 +78,7 @@ Capsule {
             MouseArea {
                 anchors.fill: parent
                 onPressed: { Updates.run = true; parent.color = '#b6ffffff' }
-                onReleased: parent.color = "#67cecece" 
+                onReleased: parent.color = containsMouse ? "#67cecece" : "#67000000"
                 hoverEnabled: true
                 onEntered: {count.visible = true; parent.color ="#67cecece" }
                 onExited: {count.visible = Updates.count > 0; parent.color ="#67000000" }
@@ -110,7 +110,7 @@ Capsule {
                     resourcesMenu.active = !resourcesMenu.active;
                 }
                 onPressed: parent.color = '#b6ffffff'
-                onReleased: parent.color = "#67cecece"
+                onReleased: parent.color = containsMouse ? "#67cecece" : "#67000000"
                 hoverEnabled: true
                 onEntered: parent.color ="#67cecece"
                 onExited: parent.color ="#67000000"
@@ -139,7 +139,7 @@ Capsule {
                     settingsMenu.active = !settingsMenu.active;
                 }
                 onPressed: parent.color = '#b6ffffff'
-                onReleased: parent.color = "#67cecece"
+                onReleased: parent.color = containsMouse ? "#67cecece" : "#67000000"
                 hoverEnabled: true
                 onEntered: parent.color ="#67cecece"
                 onExited: parent.color ="#67000000"
@@ -174,7 +174,7 @@ Capsule {
                     }
                 }
                 onPressed: parent.color = '#b6ffffff'
-                onReleased: parent.color = "#67cecece"
+                onReleased: parent.color = containsMouse ? "#67cecece" : "#67000000"
                 hoverEnabled: true
                 onEntered: parent.color ="#67cecece"
                 onExited: parent.color ="#67000000"
@@ -247,7 +247,7 @@ Capsule {
                     batteryMenu.active = !batteryMenu.active;
                 }
                 onPressed: parent.color = '#b6ffffff'
-                onReleased: parent.color = "#67cecece"
+                onReleased: parent.color = containsMouse ? "#67cecece" : "#67000000"
                 hoverEnabled: true
                 onEntered: parent.color ="#67cecece"
                 onExited: parent.color ="#67000000"

@@ -92,7 +92,7 @@ Item {
             anchors.right: true
             margins.right: 25
             implicitWidth: 350
-            implicitHeight: 125 * root.notifs.length
+            implicitHeight: root.notifs.length > 8 ? 1000 : 125 * root.notifs.length
             color: "transparent"
             exclusionMode: ExclusionMode.Ignore
             WlrLayershell.layer: WlrLayer.Overlay
@@ -100,7 +100,7 @@ Item {
             Connections {
                 target: root
                 function onChanged() {
-                    panel.implicitHeight = 125 * root.notifs.length
+                    panel.implicitHeight = root.notifs.length > 8 ? 1000 : 125 * root.notifs.length
                     repeater.model = root.notifs
                 }
             }
