@@ -14,6 +14,7 @@ Capsule {
     property MprisPlayer player: players.length > 0 ? players[playerIndex % players.length] : null
     property bool changed: false
     property int pos: changed ? 0 : player?.position || 0
+    property real trackLength: 100.0
     Timer {
         running: true
         interval: 500
@@ -41,7 +42,10 @@ Capsule {
         repeat: true
         onTriggered: {
             if (player && player.length > 0) {
-                img.progress = root.pos * 100 / player.length;
+                if (player.lengthSupported) {
+                    root.trackLength = player.length
+                }
+                img.progress = root.pos * 100 / root.trackLength;
             } else {
                 img.progress = 0;
             }
