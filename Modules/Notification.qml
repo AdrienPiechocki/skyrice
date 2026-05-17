@@ -253,8 +253,6 @@ Item {
                             anchors.fill: parent
                             onClicked: {
                                 const idx = root.notifs.findIndex(n => n.id === modelData.id)
-                                const idx_history = root.history.findIndex(n => n.id === modelData.id)
-                                root.history = root.history.filter((_, i) => i !== idx_history)
                                 root.remove(idx)
                             }
                         }
