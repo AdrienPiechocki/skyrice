@@ -11,7 +11,7 @@ Capsule {
     property int posX: 0
     property int posY: 0
     property int screenX: 0
-    width: SystemTray.items.length * 20
+    
     function updatePos(x, y) {
         posX = x
         posY = y

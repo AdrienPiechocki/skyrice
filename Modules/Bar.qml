@@ -34,7 +34,7 @@ Variants {
             Item{}
             Audio{}
             Item{ Layout.fillWidth: true }
-            Tray{ Layout.maximumWidth: items?.values.length * 30 || 30; screenX:modelData.x }
+            Tray{ Layout.maximumWidth: items?.values.length * 40 || 40; screenX:modelData.x }
             Item{}
             System{ screenX:modelData.x; notification: root.notification}
             Item{}
