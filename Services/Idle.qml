@@ -58,7 +58,8 @@ Item {
     IpcHandler {
         target: "lockscreen"
         function lock() { 
-            lockscreen.active = !lockscreen.active
+            lockscreen.locked = true
+            lockscreen.active = true
         }
     }
     LockScreen{ id: lockscreen; context: lockContext; onLockedChanged: lockscreen.active = false }
