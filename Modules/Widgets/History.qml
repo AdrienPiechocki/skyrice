@@ -95,7 +95,7 @@ LazyLoader {
                 width: 20
                 height: 20
                 x: window.width - 42.5
-                y: 43.5
+                y: 53.5
                 color: "transparent"
                 Image {
                     anchors.centerIn: parent
