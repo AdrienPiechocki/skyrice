@@ -20,6 +20,18 @@ Singleton {
     // Load average values (1-min, 5-min, 15-min)
     property var loadAvg: []
 
+    property real temperature: 0.0
+
+    Process {
+        id: tempProc        
+        command: ["sh", "-c", "sensors 2>/dev/null | grep -E 'Core 0:|Tctl:|Tdie:|temp1:' | head -n1 | grep -oP '\d+\.\d+(?=°C)' | head -n1"]
+        stdout: StdioCollector {
+            onStreamFinished: {
+                temperature = text
+            }
+        }
+    }
+
     Process {
         id: psProc
         command: ["sh", "-c", "ps -eo pid,comm,%cpu --sort=-%cpu --no-headers"]
@@ -76,6 +88,7 @@ Singleton {
             updateCpuUsage()
             psProc.running = true
             loadAvgProc.running = true
+            tempProc.running = true
         }
     }
 

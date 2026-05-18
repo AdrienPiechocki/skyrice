@@ -15,6 +15,7 @@ This Rice was made with Niri and Arch Linux in mind. It probably won't work on s
 You might also need: 
 - quickshell
 - brightnessctl (for brightness managment)
+- lm_sensors (for cpu temperature)
 - multiple python packages (requests, geopandas, numpy, PyGObject)
 - kitty (to launch the update script)
 - An AMD GPU (if you want GPU resource monitoring)

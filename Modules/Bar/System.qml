@@ -92,12 +92,8 @@ Capsule {
             Layout.maximumHeight: 22
             Layout.alignment: Qt.AlignHCenter
             Text {
-                property var cpuUsage: Math.round(CPU.overallUsage * 100)
-                property var gpuUsage: resourcesMenu.gpuUsage
-                property var ramUsage: (Math.round(RAM.used / RAM.total * 100)||0)
-                property var diskUsage: resourcesMenu.diskUsage
                 anchors.centerIn: parent
-                color: (cpuUsage > 80 || gpuUsage > 80 || ramUsage > 80 || diskUsage > 90) ? "red" : (cpuUsage > 60 || gpuUsage > 60 || ramUsage > 60 || diskUsage > 80)  ? "orange" : "#cecece"
+                color: (CPU.temperature > 85.0) ? "red" : (CPU.temperature > 55.0)  ? "orange" : "#cecece"
                 text: ""
                 font.family: futuraFont.name
                 font.pointSize: 12
