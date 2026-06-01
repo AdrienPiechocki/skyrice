@@ -16,6 +16,7 @@ Item {
         timeout: 220
         onIsIdleChanged: {
             if (isIdle) {
+                getMaxBrightness.running = true
                 root.brightness = 10
             }
             else {
@@ -23,13 +24,6 @@ Item {
             }
             fade.running = true
         }
-    }
-
-    Timer {
-        running: true
-        interval: 250
-        repeat: true
-        onTriggered: {getMaxBrightness.running = true}
     }
 
     Process {
