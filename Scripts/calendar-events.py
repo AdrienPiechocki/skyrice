@@ -12,14 +12,38 @@ start_time = int(sys.argv[1])
 end_time = int(sys.argv[2])
 
 # now = datetime.now()
-# start_date = now - timedelta(days=18)
-# end_date = now - timedelta(days=17)
+# start_date = now - timedelta(days=14)
+# end_date = now + timedelta(days=31)
 # start_time = int(start_date.timestamp())
 # end_time = int(end_date.timestamp())
 
 print(f"Starting with time range: {start_time} to {end_time}", file=sys.stderr)
 
 all_events = []
+
+def get_by_day_list(recurrence):
+    """
+    Extrait les valeurs BYDAY en convertissant la récurrence en chaîne.
+    C'est la méthode la plus fiable avec ICalGLib.
+    """
+    by_day_list = []
+    # Convertit l'objet récurrence en format RRULE (ex: "FREQ=WEEKLY;BYDAY=MO,TU")
+    rrule_prop = comp.get_first_property(ICalGLib.PropertyKind.RRULE_PROPERTY)
+    if rrule_prop:
+        # Get the value object
+        rrule_value = rrule_prop.get_value()
+        
+        # Try to get the string representation from the value object itself
+        # rather than the recurrence object
+        rrule_str = rrule_value.as_ical_string() # This is the valid method
+    
+    # Analyse manuelle simple de la chaîne pour extraire BYDAY
+    if 'BYDAY=' in rrule_str:
+        part = rrule_str.split('BYDAY=')[1].split(';')[0]
+        # part contient "MO,TU,WE..."
+        by_day_list = part.split(',')
+        
+    return by_day_list
 
 def safe_get_time(ical_time):
     if not ical_time:
@@ -206,14 +230,18 @@ for source in sources:
                             added += 1
 
                     case 4:  # WEEKLY (or Monday to Friday)
-                        if until_ts - current_ts > 432000: # WEEKLY
-                            delta = timedelta(weeks=interval)
+                        is_mon_to_fri = get_by_day_list(recurrence) == ['MO', 'TU', 'WE', 'TH', 'FR']
+                        if is_mon_to_fri:
+                            dt = datetime.fromtimestamp(current_ts)
+                            duration = end_ts - start_ts
                             while (current_ts <= until_ts) and (not count or added < count):
-                                occurrences.append((current_ts, current_ts + (end_ts - start_ts)))
-                                current_ts += int(delta.total_seconds())
-                                added += 1
-                        else: # (Monday to Friday)
-                            delta = timedelta(days=interval)
+                                if dt.weekday() < 5:  # Mon=0 … Fri=4
+                                    occurrences.append((current_ts, current_ts + duration))
+                                    added += 1
+                                dt += timedelta(days=1)
+                                current_ts = int(dt.timestamp())
+                        else:
+                            delta = timedelta(weeks=interval)
                             while (current_ts <= until_ts) and (not count or added < count):
                                 occurrences.append((current_ts, current_ts + (end_ts - start_ts)))
                                 current_ts += int(delta.total_seconds())
