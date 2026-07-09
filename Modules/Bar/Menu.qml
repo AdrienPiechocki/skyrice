@@ -8,7 +8,7 @@ Capsule {
     id: root
     width: 15
     property int screenX: 0
-    _color: tapHandler.pressed || rightTapHandler.pressed ? '#b6ffffff' : hoverHandler.hovered ? "#67cecece" : "#67000000" 
+    _color: tapHandler.pressed ? '#b6ffffff' : hoverHandler.hovered ? "#67cecece" : "#67000000" 
     Image {
         id: logo
         fillMode: Image.PreserveAspectFit
@@ -18,14 +18,9 @@ Capsule {
     }
     TapHandler { 
         id: tapHandler; 
-        onTapped: inventory.active = true
+        onTapped: tween.active = true
     }
     
-    TapHandler {
-        id: rightTapHandler; 
-        acceptedButtons: Qt.RightButton
-        onTapped: logout.active = true
-    }
     HoverHandler { id: hoverHandler }
 
     IpcHandler {
@@ -39,4 +34,6 @@ Capsule {
 
     Launcher{ id: inventory; screenX: root.screenX; _width:Screen.width/3; _height:Screen.height}
     Logout{ id: logout; }
+
+    TweenMenu{ id: tween; width:Screen.width/2; height:Screen.height/2; screenX: root.screenX; inventory:inventory; logout:logout }
 }
