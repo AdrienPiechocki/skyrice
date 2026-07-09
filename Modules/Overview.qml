@@ -12,7 +12,7 @@ PanelWindow {
     // Image background with GPU-based blur
     Image {
         anchors.fill: parent
-        source: "/home/adrien/Dots/Wallpapers/skyrim.jpeg"
+        source: "../Assets/Wallpaper.jpeg"
         layer.enabled: true
         layer.effect: MultiEffect {
             blurEnabled: true
