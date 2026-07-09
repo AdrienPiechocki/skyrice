@@ -1,11 +1,12 @@
 import Quickshell
-import Quickshell.Niri
+import Niri
 import QtQuick
 import QtQuick.Layouts
 import qs.Commons
 
 Capsule {
     id: root
+    property var _niri
     width: 100
     _color: hoverHandler.hovered ? "#67cecece" : "#67000000" 
     HoverHandler { id: hoverHandler }
@@ -28,8 +29,8 @@ Capsule {
             Layout.fillHeight: true
             fillMode: Image.PreserveAspectFit
             Layout.maximumWidth: 20 * opacity 
-            opacity: Niri.focusedWindow ? DesktopEntries.applications.values.filter(a => a.name.toLowerCase().match(Niri.focusedWindow ? Niri.focusedWindow?.appId.toLowerCase():""))[0]?.icon ? 1 : 0 : 0
-            source: Quickshell.iconPath(DesktopEntries.applications.values.filter(a => a.name.toLowerCase().match(Niri.focusedWindow ? Niri.focusedWindow?.appId.toLowerCase():""))[0]?.icon) || undefined
+            opacity: _niri.focusedWindow ? DesktopEntries.applications.values.filter(a => a.name.toLowerCase().match(_niri.focusedWindow ? _niri.focusedWindow?.appId.toLowerCase():""))[0]?.icon ? 1 : 0 : 0
+            source: Quickshell.iconPath(DesktopEntries.applications.values.filter(a => a.name.toLowerCase().match(_niri.focusedWindow ? _niri.focusedWindow?.appId.toLowerCase():""))[0]?.icon) || undefined
         }
         Rectangle{
             Layout.fillWidth: true
@@ -53,7 +54,7 @@ Capsule {
                 width: parent.width
                 x: 0
                 y: 2.5
-                text: Niri.focusedWindow?.title || ""
+                text: niri.focusedWindow?.title || ""
                 SequentialAnimation on x {
                     id: scrollAnim
                     running: hoverHandler.hovered ? window.contentWidth > window.width : false
@@ -68,9 +69,9 @@ Capsule {
     }
     
     Connections {
-        target: Niri
+        target: _niri
         function onWindowsUpdated() {
-            window.text = Niri.focusedWindow?.title || ""
+            window.text = _niri.focusedWindow?.title || ""
         }
     }
     Connections {

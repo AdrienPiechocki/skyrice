@@ -65,7 +65,7 @@ Capsule {
             anchors.fill: parent
             active: true
             asynchronous: true
-            sourceComponent: AudioVisualizer{y: 3; visible: root.active}
+            sourceComponent: AudioVisualizer{visible: root.active}
         }
         Track{ id: img; visible: root.active; anchors.bottom: parent.bottom; anchors.bottomMargin: 5; anchors.left: parent.left; anchors.leftMargin: 15; }
         FontLoader {

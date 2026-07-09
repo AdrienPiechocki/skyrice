@@ -13,7 +13,8 @@ I also borrowed code from [noctalia-shell](https://github.com/noctalia-dev/nocta
 This Rice was made with Niri and Arch Linux in mind. It probably won't work on something else.
 
 You might also need: 
-- quickshell (noctalia-qs, specifically)
+- quickshell
+- qml-niri (for niri integration with quickshell)
 - brightnessctl (for brightness managment)
 - lm_sensors (for cpu temperature)
 - multiple python packages (requests, geopandas, numpy, PyGObject)

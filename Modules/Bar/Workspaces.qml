@@ -1,6 +1,7 @@
 import Quickshell
 import Quickshell.Wayland
-import Quickshell.Niri
+import Quickshell.Io
+import Niri
 import QtQuick
 import QtQuick.Layouts
 import QtQuick.Shapes
@@ -9,17 +10,28 @@ import qs.Commons
 Capsule {
     id: root
     property var screen: null
+    property var _niri
 
-    // Workspaces filtrés pour CET écran uniquement
-    property var screenWorkspaces: Niri.workspaces.values.filter(w => w.output === screen)
-    property var currentWorkspaceIndex: screenWorkspaces.filter(w => w.active)[0].idx
+    Process {
+        id: focusColumnLeft
+        running: false
+        command: ["niri", "msg", "action", "focus-column-left"]
+    }
+    Process {
+        id: focusColumnRight
+        running: false
+        command: ["niri", "msg", "action", "focus-column-right"]
+    }
 
-    function switchToWorkspace(ws) {
-        try {
-            Niri.dispatch(["focus-workspace", ws]);
-        } catch (e) {
-            print("Niri Failed to switch workspace:", e);
-        }
+    Process {
+        id: focusWorkspaceUp
+        running: false
+        command: ["niri", "msg", "action", "focus-workspace-up"]
+    }
+    Process {
+        id: focusWorkspaceDown
+        running: false
+        command: ["niri", "msg", "action", "focus-workspace-down"]
     }
     width: 500
     _color: "#67000000"
@@ -27,10 +39,10 @@ Capsule {
         anchors.fill: parent; 
         onWheel: (event)=> {
             if(event.angleDelta.y > 0) {
-                root.switchToWorkspace(root.currentWorkspaceIndex-1)
+                focusWorkspaceUp.running = true;
             }
             else {
-                root.switchToWorkspace(root.currentWorkspaceIndex+1)
+                focusWorkspaceDown.running = true;
             }
         }
     }
@@ -47,17 +59,17 @@ Capsule {
 
         Repeater {
             // model est directement le tableau filtré — chaque item reçoit modelData
-            model: screenWorkspaces
+            model: _niri.workspaces
 
             Rectangle {
+                visible: model.output == root.screen
                 Layout.fillWidth: true
                 Layout.fillHeight: true
                 
                 color: "transparent"
 
                 // modelData = le workspace de cet item
-                property var ws: modelData
-                property bool isActive: modelData.active
+                property bool isActive: model.isActive
                 
                 Capsule {
                     id: capsule
@@ -69,7 +81,7 @@ Capsule {
                     Text {
                         id: wsText
                         anchors.centerIn: parent
-                        text: index + 1
+                        text: index
                         color: isActive ? '#ffffff' : '#cecece'
                         style: Text.Outline
                         font {
@@ -80,17 +92,17 @@ Capsule {
                     }
                     MouseArea {
                         anchors.fill: parent
-                        onPressed: {root.switchToWorkspace(index + 1); capsule.color = '#b6ffffff'}
+                        onPressed: {niri.focusWorkspace(index); capsule.color = '#b6ffffff'}
                         onReleased: capsule.color = "#67cecece" 
                         hoverEnabled: true
                         onEntered: capsule.color ="#67cecece"
                         onExited: capsule.color ="#67000000"
                         onWheel: (event)=> {
                             if(event.angleDelta.y > 0) {
-                                Niri.dispatch(["focus-column-left"]);
+                                focusColumnLeft.running = true;
                             }
                             else {
-                                Niri.dispatch(["focus-column-right"]);
+                                focusColumnRight.running = true;
                             }
                         }
                     }

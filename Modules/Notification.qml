@@ -4,7 +4,6 @@ import Quickshell
 import Quickshell.Io
 import Quickshell.Services.Notifications
 import Quickshell.Wayland
-import Quickshell.Niri
 import qs.Commons
 
 Item {
