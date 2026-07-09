@@ -5,6 +5,7 @@ import qs.Modules
 import qs.Services
 
 ShellRoot {
+    Overview{}
     Wallpaper{}
     Bar{ notification: notification}
     Notification{ id: notification; }
