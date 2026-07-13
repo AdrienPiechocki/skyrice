@@ -26,7 +26,15 @@ LazyLoader {
         exclusionMode: ExclusionMode.Ignore
         WlrLayershell.keyboardFocus: WlrKeyboardFocus.Exclusive
         color: "transparent"
-
+        Rectangle {
+            anchors.fill: parent
+            color: '#42424242'
+            layer.enabled: true
+            layer.effect: MultiEffect {
+                blurEnabled: true
+                blur: 1
+            }
+        }
         FontLoader {
             id: futuraFont
             source: "../../Assets/Fonts/Futura Condensed Medium.ttf"
@@ -177,11 +185,11 @@ LazyLoader {
         }
 
         Text {
-            id: agenda
+            id: aichat
             anchors.horizontalCenter: parent.horizontalCenter
             anchors.bottom: parent.bottom
             anchors.bottomMargin: Screen.width/10
-            text: "Agenda"
+            text: "Paarthurnax"
             color: "white"
             font.family: futuraFont.name
             style: Text.Outline
@@ -269,8 +277,8 @@ LazyLoader {
             anchors.fill: parent
             containmentMask: down
             hoverEnabled: true
-            onEntered: { root.hover = true; downArrow.visible = true; agenda.layer.enabled = true }
-            onExited: { root.hover = false; downArrow.visible = false; agenda.layer.enabled = false }
+            onEntered: { root.hover = true; downArrow.visible = true; aichat.layer.enabled = true }
+            onExited: { root.hover = false; downArrow.visible = false; aichat.layer.enabled = false }
             onClicked: { root.active = false }
         }
         Shape {
